@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Hospitality — WC 2026 Artist Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08090C;--surface:#0F1118;--card:#15182200;--border:#1E2230;--hover:#1A1D2A;
+  --text:#EEF0F8;--soft:#8A94B0;--muted:#4A5270;
+  --gold:#C9A84C;--gold2:#E8C96A;--goldDim:rgba(201,168,76,.15);
+  --blue:#3A7BD5;--green:#22C55E;--red:#E05252;--purple:#A855F7;--orange:#F59E0B;
+  --f:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--f);font-size:13px}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-bar{width:4px;height:28px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.brand-text{font-size:13px;font-weight:600;letter-spacing:.5px;color:var(--text)}
+.brand-text span{color:var(--gold)}
+.topbar-center{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.tbtn{padding:5px 14px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--soft);font-family:var(--f);font-size:11px;cursor:pointer;transition:.15s}
+.tbtn:hover{background:var(--hover);color:var(--text)}
+.tbtn.gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+.tbtn.gold:hover{background:var(--gold2)}
+.tr{display:flex;gap:6px;align-items:center}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 52px)}
+
+/* SIDEBAR */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:10px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.nav-sec{font-size:9px;letter-spacing:3px;color:var(--muted);padding:10px 14px 4px;text-transform:uppercase}
+.nav{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--soft);font-size:12px;border-left:2px solid transparent;transition:.12s}
+.nav:hover{background:var(--hover);color:var(--text)}
+.nav.on{background:rgba(201,168,76,.08);color:var(--gold);border-left-color:var(--gold)}
+.nav-badge{margin-left:auto;font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(201,168,76,.2);color:var(--gold)}
+
+/* MAIN */
+.main{overflow-y:auto;padding:20px}
+
+/* VIEWS */
+.view{display:none}.view.on{display:block}
+
+/* MATCH CALENDAR HERO */
+.matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:24px}
+.match-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;cursor:pointer;transition:.15s}
+.match-card:hover{border-color:var(--gold);background:var(--goldDim)}
+.match-card.final{border-color:var(--gold);background:var(--goldDim)}
+.match-date{font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:.5px}
+.match-teams{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.match-type-pill{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600;display:inline-block}
+.tGroup{background:rgba(34,197,94,.12);color:#4ade80}
+.tKnock{background:rgba(58,123,213,.15);color:#74B2E0}
+.tFinal{background:rgba(201,168,76,.2);color:var(--gold)}
+.match-demand{font-size:10px;color:var(--soft);margin-top:6px}
+.match-artist-count{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* ARTIST CARDS */
+.artists-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.acard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;transition:.15s}
+.acard:hover{border-color:var(--border);background:var(--hover)}
+.acard-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.acard-name{font-size:14px;font-weight:600;color:var(--text)}
+.acard-genre{font-size:10px;color:var(--muted);margin-top:2px}
+.tier-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0}
+.t1{background:rgba(201,168,76,.2);color:var(--gold)}
+.t2{background:rgba(58,123,213,.15);color:#74B2E0}
+.t3{background:rgba(34,197,94,.12);color:#4ade80}
+.acard-why{font-size:11px;color:var(--soft);line-height:1.55;margin-bottom:10px}
+.acard-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.meta-item{background:rgba(255,255,255,.03);border-radius:4px;padding:5px 8px}
+.meta-label{font-size:9px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
+.meta-value{font-size:11px;color:var(--text);font-weight:500}
+.meta-value.gold{color:var(--gold)}
+.meta-value.green{color:var(--green)}
+.acard-status{display:flex;align-items:center;justify-content:space-between}
+.status-pill{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600}
+.sNew{background:rgba(74,82,112,.3);color:var(--soft)}
+.sOutreach{background:rgba(245,158,11,.12);color:var(--orange)}
+.sReplied{background:rgba(58,123,213,.15);color:#74B2E0}
+.sNeg{background:rgba(168,85,247,.15);color:#c084fc}
+.sConfirmed{background:rgba(34,197,94,.15);color:var(--green)}
+.sDead{background:rgba(224,82,82,.12);color:var(--red)}
+.acard-actions{display:flex;gap:4px;margin-top:8px}
+.abtn{font-size:10px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--soft);cursor:pointer;font-family:var(--f);transition:.12s}
+.abtn:hover{background:var(--goldDim);color:var(--gold);border-color:var(--gold)}
+.abtn.primary{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+.abtn.primary:hover{background:var(--gold2)}
+
+/* TOOLBAR */
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.search{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:7px 12px;color:var(--text);font-family:var(--f);font-size:12px;outline:none;width:260px}
+.search:focus{border-color:var(--gold)}
+.fsel{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 10px;color:var(--text);font-family:var(--f);font-size:11px;cursor:pointer;outline:none}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 14px}
+.kpi-l{font-size:9px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.kpi-v{font-size:24px;font-weight:600;font-family:var(--fm);color:var(--text)}
+.kpi-v.gold{color:var(--gold)}.kpi-v.green{color:var(--green)}.kpi-v.blue{color:var(--blue)}
+.kpi-s{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* SECTION HEADERS */
+.sec-hdr{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+/* AI PANEL */
+.ai-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:20px}
+.ai-msgs{max-height:120px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:5px}
+.msg{padding:7px 10px;border-radius:4px;font-size:11px;line-height:1.55;white-space:pre-wrap}
+.msg.bot{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text)}
+.msg.user{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold2);text-align:right}
+.ai-row{display:flex;gap:6px}
+.ai-in{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:6px 10px;color:var(--text);font-family:var(--f);font-size:11px;outline:none}
+.ai-in:focus{border-color:var(--gold)}
+.think{display:none;align-items:center;gap:5px;font-size:10px;color:var(--muted);margin-bottom:5px}
+.think.on{display:flex}
+.dots span{width:3px;height:3px;border-radius:50%;background:var(--gold);display:inline-block;margin:0 1px;animation:d .6s infinite}
+.dots span:nth-child(2){animation-delay:.1s}.dots span:nth-child(3){animation-delay:.2s}
+@keyframes d{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:#13151E;border:1px solid var(--border);border-radius:10px;width:600px;max-height:85vh;overflow-y:auto;padding:22px}
+.modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--text)}
+.mfield{margin-bottom:12px}
+.mfield label{font-size:10px;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.minput{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:8px 10px;color:var(--text);font-family:var(--f);font-size:12px;outline:none}
+.minput:focus{border-color:var(--gold)}
+textarea.minput{resize:vertical;min-height:140px;line-height:1.55}
+.modal-actions{display:flex;gap:8px;margin-top:14px}
+.agent-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:14px}
+.agent-label{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.agent-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.agent-key{color:var(--muted)}.agent-val{color:var(--text);font-weight:500}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:#13151E;border:1px solid var(--border);border-radius:6px;padding:10px 16px;font-size:12px;color:var(--text);z-index:300;display:none;transition:.2s}
+.toast.show{display:block}
+.toast.ok{border-color:var(--green);color:var(--green)}
+.toast.err{border-color:var(--red);color:var(--red)}
+.toast.info{border-color:var(--gold);color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-bar"></div>
+    <div class="brand-text">Dream <span>Hospitality</span> — WC 2026 Booking</div>
+  </div>
+  <div class="topbar-center">
+    <div class="pulse"></div>
+    <span id="aiStatus">Claude AI active — 41 artists loaded</span>
+  </div>
+  <div class="tr">
+    <button class="tbtn" onclick="analyzeAll()">AI analyze pipeline</button>
+    <button class="tbtn gold" onclick="nav('calendar')">Match calendar</button>
+  </div>
+</div>
+
+<div class="layout">
+<div class="sidebar">
+  <div class="nav-sec">Views</div>
+  <div class="nav on" id="n-calendar" onclick="nav('calendar')">Match calendar</div>
+  <div class="nav" id="n-artists" onclick="nav('artists')">All artists <span class="nav-badge" id="nb-artists">41</span></div>
+  <div class="nav" id="n-pipeline" onclick="nav('pipeline')">Booking pipeline</div>
+  <div class="nav" id="n-venues" onclick="nav('venues')">Venue programming</div>
+  <div class="nav" id="n-ask" onclick="nav('ask')">Ask Claude</div>
+  <div class="nav-sec">Filter by match</div>
+  <div class="nav" onclick="filterByMatch('Jun 13')">Jun 13 Brazil vs Morocco</div>
+  <div class="nav" onclick="filterByMatch('Jun 16')">Jun 16 France vs Senegal</div>
+  <div class="nav" onclick="filterByMatch('Jun 22')">Jun 22 Norway vs Senegal</div>
+  <div class="nav" onclick="filterByMatch('Jun 25')">Jun 25 Ecuador vs Germany</div>
+  <div class="nav" onclick="filterByMatch('Jun 27')">Jun 27 Panama vs England</div>
+  <div class="nav" onclick="filterByMatch('Jun 30')">Jun 30 Round of 32</div>
+  <div class="nav" onclick="filterByMatch('Jul 5')">Jul 5 Round of 16</div>
+  <div class="nav" onclick="filterByMatch('Jul 19')">Jul 19 FINAL</div>
+</div>
+
+<div class="main">
+
+<!-- CALENDAR VIEW -->
+<div class="view on" id="view-calendar">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-l">Match nights</div><div class="kpi-v">8</div><div class="kpi-s">at MetLife</div></div>
+    <div class="kpi"><div class="kpi-l">Artists loaded</div><div class="kpi-v blue" id="k-total">41</div><div class="kpi-s">in database</div></div>
+    <div class="kpi"><div class="kpi-l">Confirmed</div><div class="kpi-v green" id="k-confirmed">0</div><div class="kpi-s">bookings</div></div>
+    <div class="kpi"><div class="kpi-l">Budget est.</div><div class="kpi-v gold">$1.8M</div><div class="kpi-s">full run target</div></div>
+    <div class="kpi"><div class="kpi-l">Final night</div><div class="kpi-v gold">Jul 19</div><div class="kpi-s">Bad Bunny target</div></div>
+  </div>
+  <div class="sec-hdr">NY/NJ match schedule — click any match to see artists</div>
+  <div class="matches-grid" id="matchesGrid"></div>
+</div>
+
+<!-- ARTISTS VIEW -->
+<div class="view" id="view-artists">
+  <div class="ai-panel">
+    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:8px">Claude AI — Artist Intelligence</div>
+    <div class="think" id="think1"><span class="dots"><span></span><span></span><span></span></span> Claude is thinking...</div>
+    <div class="ai-msgs" id="msgs1">
+      <div class="msg bot">Artist database loaded. 41 artists mapped to all 8 NY/NJ match nights. Ask me anything — best artist for a specific night, who to book first, how to approach an agent, what to say in the email.</div>
+    </div>
+    <div class="ai-row">
+      <input class="ai-in" id="ai1" placeholder="Who should we book for the England match night?" onkeydown="if(event.key==='Enter')sendAI()">
+      <button class="tbtn gold" onclick="sendAI()">Ask ↗</button>
+    </div>
+  </div>
+  <div class="toolbar">
+    <input class="search" id="srch" placeholder="Search artist, genre, country..." oninput="loadArtists()">
+    <select class="fsel" id="fTier" onchange="loadArtists()">
+      <option value="">All tiers</option>
+      <option value="1">Tier 1 — Book now</option>
+      <option value="2">Tier 2 — Strong fits</option>
+      <option value="3">Tier 3 — Supporting</option>
+    </select>
+    <select class="fsel" id="fStatus" onchange="loadArtists()">
+      <option value="">All statuses</option>
+      <option>New</option><option>Outreach Sent</option><option>Replied</option>
+      <option>Negotiating</option><option>Confirmed</option><option>Dead</option>
+    </select>
+    <select class="fsel" id="fVenue" onchange="loadArtists()">
+      <option value="">All venues</option>
+      <option>Nebula</option><option>Harbor NYC</option><option>Musica NYC</option>
+      <option>Stafford Room</option><option>Whisper Room</option><option>PHD Rooftop</option>
+      <option>Petite</option><option>Sei Less Restaurant</option><option>Tucci NYC Restaurant</option><option>Pappas NY Restaurant</option>
+    </select>
+  </div>
+  <div class="artists-grid" id="artistsGrid"></div>
+</div>
+
+<!-- PIPELINE VIEW -->
+<div class="view" id="view-pipeline">
+  <div class="sec-hdr">Booking pipeline — all artists by status</div>
+  <div id="pipelineBoard"></div>
+</div>
+
+<!-- VENUES VIEW -->
+<div class="view" id="view-venues">
+  <div class="sec-hdr">Venue programming — all 10 Dream venues</div>
+  <div id="venuesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px"></div>
+</div>
+
+<!-- ASK CLAUDE VIEW -->
+<div class="view" id="view-ask">
+  <div style="max-width:700px">
+    <div class="sec-hdr">Ask Claude — full booking intelligence</div>
+    <div id="askMsgs" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:500px;overflow-y:auto">
+      <div class="msg bot">Hi. I am Claude, your Dream Hospitality World Cup 2026 booking assistant.\n\nI have the full artist database — 41 artists mapped to every NY/NJ match night, with agent contacts, fees, and why each artist fits each night.\n\nAsk me anything. Who to book first. How to approach WME. What to say to get Bad Bunny's team on the phone. Draft a booking email. Analyze your pipeline. Anything.</div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="abtn" onclick="qAsk('Who are the top 3 artists I need to book immediately before someone else takes them?')">Top 3 to book now?</button>
+      <button class="abtn" onclick="qAsk('What is the best approach to get Bad Bunny for the Final night?')">How to get Bad Bunny?</button>
+      <button class="abtn" onclick="qAsk('What gaps are there in the programming across all 10 venues?')">Programming gaps?</button>
+      <button class="abtn" onclick="qAsk('How do I approach WME about multiple artists at once?')">Approaching WME?</button>
+      <button class="abtn" onclick="qAsk('What is the total budget if I book all Tier 1 artists?')">Total Tier 1 budget?</button>
+    </div>
+    <div class="think" id="askThink" style="margin-bottom:8px"><span class="dots"><span></span><span></span><span></span></span> Claude is thinking...</div>
+    <div class="ai-row">
+      <input class="ai-in" style="padding:9px 12px;font-size:12px" id="askIn" placeholder="Ask anything about your booking strategy..." onkeydown="if(event.key==='Enter')sendAsk()">
+      <button class="tbtn gold" onclick="sendAsk()">Send ↗</button>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ARTIST MODAL -->
+<div class="modal-bg" id="artistModal">
+  <div class="modal">
+    <div class="modal-title">
+      <span id="m-name">Artist Name</span>
+      <button class="modal-close" onclick="closeModal()">x</button>
+    </div>
+    <div class="agent-box">
+      <div class="agent-label">Agent / Management</div>
+      <div class="agent-row"><span class="agent-key">Agency</span><span class="agent-val" id="m-agent"></span></div>
+      <div class="agent-row"><span class="agent-key">Email</span><span class="agent-val" style="color:var(--blue)" id="m-email"></span></div>
+      <div class="agent-row"><span class="agent-key">Phone</span><span class="agent-val" id="m-phone"></span></div>
+      <div class="agent-row"><span class="agent-key">Instagram</span><span class="agent-val" id="m-ig"></span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+      <div class="meta-item"><div class="meta-label">Match night</div><div class="meta-value" id="m-match" style="font-size:10px"></div></div>
+      <div class="meta-item"><div class="meta-label">Venue</div><div class="meta-value" id="m-venue" style="font-size:10px"></div></div>
+      <div class="meta-item"><div class="meta-label">Fee range</div><div class="meta-value gold" id="m-fee"></div></div>
+    </div>
+    <div class="mfield"><label>Why this artist</label><div id="m-why" style="font-size:12px;color:var(--soft);line-height:1.6;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:10px"></div></div>
+    <div class="mfield"><label>Status</label>
+      <select class="minput" id="m-status" onchange="updateStatus()">
+        <option>New</option><option>Outreach Sent</option><option>Replied</option>
+        <option>Negotiating</option><option>Confirmed</option><option>Dead</option>
+      </select>
+    </div>
+    <div class="mfield"><label>Notes</label><textarea class="minput" id="m-notes" rows="2" placeholder="Add notes about this booking..."></textarea></div>
+    <div class="mfield"><label>Draft email</label>
+      <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:6px" id="draftSubject"></div>
+      <textarea class="minput" id="draftBody" rows="8" placeholder="Click 'AI Draft' to generate a personalized booking email..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="tbtn gold" onclick="aiDraft()" id="draftBtn">AI Draft email</button>
+      <button class="tbtn" onclick="sendBookingEmail()" id="sendBtn">Send to agent</button>
+      <button class="tbtn" onclick="closeModal()">Close</button>
+    </div>
+    <div id="modalMsg" style="font-size:11px;color:var(--green);margin-top:8px;display:none"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = window.location.hostname === 'localhost' ? 'http://localhost:3001/.netlify/functions' : '/.netlify/functions';
+
+let allArtists = [];
+let activeArtistId = null;
+
+const MATCHES = [
+  {date:"Jun 13",day:"Saturday",time:"6:00 PM",teams:"Brazil vs Morocco",group:"Group C",type:"Group Stage",demand:"Very High",emoji:"🇧🇷"},
+  {date:"Jun 16",day:"Tuesday",time:"3:00 PM",teams:"France vs Senegal",group:"Group I",type:"Group Stage",demand:"High",emoji:"🇫🇷"},
+  {date:"Jun 22",day:"Monday",time:"8:00 PM",teams:"Norway vs Senegal",group:"Group I",type:"Group Stage",demand:"Medium",emoji:"🇳🇴"},
+  {date:"Jun 25",day:"Thursday",time:"4:00 PM",teams:"Ecuador vs Germany",group:"Group E",type:"Group Stage",demand:"Medium",emoji:"🇩🇪"},
+  {date:"Jun 27",day:"Saturday",time:"5:00 PM",teams:"Panama vs England",group:"Group L",type:"Group Stage",demand:"Very High",emoji:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {date:"Jun 30",day:"Tuesday",time:"5:00 PM",teams:"Round of 32",group:"Knockout",type:"Round of 32",demand:"High",emoji:"⚽"},
+  {date:"Jul 5",day:"Sunday",time:"4:00 PM",teams:"Round of 16",group:"Knockout",type:"Round of 16",demand:"Very High",emoji:"⚽"},
+  {date:"Jul 19",day:"Sunday",time:"3:00 PM",teams:"WORLD CUP FINAL",group:"FINAL",type:"Final",demand:"PEAK",emoji:"🏆"},
+];
+
+const VENUES = [
+  {name:"Nebula",type:"Nightclub",cap:1500,hood:"Times Square",best:"Biggest headline acts"},
+  {name:"Harbor NYC",type:"Nightclub",cap:1000,hood:"Midtown West",best:"Brazil / USA / corporate buyouts"},
+  {name:"Musica NYC",type:"Nightclub",cap:1000,hood:"Hell's Kitchen",best:"EDM, house, France, Germany"},
+  {name:"Stafford Room",type:"Sub-venue",cap:400,hood:"Midtown",best:"UK rap, drill, afternoon sets"},
+  {name:"Whisper Room",type:"Lounge",cap:300,hood:"Midtown",best:"Intimate headline, 5PM pre-game"},
+  {name:"PHD Rooftop",type:"Rooftop",cap:500,hood:"Dream Midtown Hotel",best:"Afternoon 2PM, DJ sets"},
+  {name:"Petite",type:"Lounge",cap:200,hood:"Midtown",best:"Ultra VIP, agent dinners"},
+  {name:"Sei Less",type:"Restaurant",cap:200,hood:"Midtown East",best:"Athlete dinners, celebrity VIP"},
+  {name:"Tucci NYC",type:"Restaurant",cap:180,hood:"NoHo",best:"Italy / Spain / European nights"},
+  {name:"Pappas NY",type:"Restaurant",cap:160,hood:"Greenwich Village",best:"Greek / Mediterranean nights"},
+];
+
+const SC = {New:"sNew","Outreach Sent":"sOutreach",Replied:"sReplied",Negotiating:"sNeg",Confirmed:"sConfirmed",Dead:"sDead"};
+const TC = {1:"t1",2:"t2",3:"t3"};
+
+async function loadArtists(){
+  const q = document.getElementById('srch')?.value || '';
+  const tier = document.getElementById('fTier')?.value || '';
+  const status = document.getElementById('fStatus')?.value || '';
+  const venue = document.getElementById('fVenue')?.value || '';
+
+  const params = new URLSearchParams({action:'search',message:q});
+  if(venue) params.set('venue',venue);
+
+  try {
+    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'search',message:q,venue,status})});
+    let data = await res.json();
+    if(!Array.isArray(data)) data = allArtists;
+    else allArtists = data;
+
+    let filtered = data;
+    if(tier) filtered = filtered.filter(a=>a.tier===parseInt(tier));
+    if(status) filtered = filtered.filter(a=>a.status===status);
+
+    document.getElementById('nb-artists').textContent = filtered.length;
+    document.getElementById('k-total').textContent = allArtists.length;
+    document.getElementById('k-confirmed').textContent = allArtists.filter(a=>a.status==='Confirmed').length;
+
+    document.getElementById('artistsGrid').innerHTML = filtered.map(renderArtistCard).join('');
+  } catch(e){
+    document.getElementById('artistsGrid').innerHTML = '<div style="color:var(--muted);padding:20px">Connect to backend to load artists</div>';
+  }
+}
+
+function renderArtistCard(a){
+  const fee = `$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K`;
+  return `<div class="acard">
+    <div class="acard-top">
+      <div><div class="acard-name">${a.name}</div><div class="acard-genre">${a.genre}</div></div>
+      <span class="tier-badge ${TC[a.tier]||'t3'}">Tier ${a.tier}</span>
+    </div>
+    <div class="acard-why">${a.why}</div>
+    <div class="acard-meta">
+      <div class="meta-item"><div class="meta-label">Match night</div><div class="meta-value" style="font-size:9px">${a.matchNight}</div></div>
+      <div class="meta-item"><div class="meta-label">Venue</div><div class="meta-value" style="font-size:9px">${a.venue}</div></div>
+      <div class="meta-item"><div class="meta-label">Fee est.</div><div class="meta-value gold">${fee}</div></div>
+      <div class="meta-item"><div class="meta-label">Agent</div><div class="meta-value" style="font-size:9px">${a.agent}</div></div>
+    </div>
+    <div class="acard-status"><span class="status-pill ${SC[a.status]||'sNew'}">${a.status}</span></div>
+    <div class="acard-actions">
+      <button class="abtn" onclick="openArtist(${a.id})">View + Email</button>
+      <button class="abtn" onclick="quickDraft(${a.id})">AI draft ↗</button>
+    </div>
+  </div>`;
+}
+
+function renderMatches(){
+  const typeClass = {Final:'tFinal','Round of 32':'tKnock','Round of 16':'tKnock','Group Stage':'tGroup'};
+  document.getElementById('matchesGrid').innerHTML = MATCHES.map(m=>`
+    <div class="match-card ${m.type==='Final'?'final':''}" onclick="filterByMatch(m.date)" style="cursor:pointer" onclick="filterByMatch('${m.date}')">
+      <div class="match-date">${m.day.toUpperCase()} ${m.date} · ${m.time} ET</div>
+      <div class="match-teams">${m.emoji} ${m.teams}</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+        <span class="match-type-pill ${typeClass[m.type]||'tGroup'}">${m.type}</span>
+        <span style="font-size:10px;color:var(--muted)">${m.group}</span>
+      </div>
+      <div class="match-demand" style="margin-top:8px;color:${m.demand==='PEAK'?'var(--gold)':m.demand==='Very High'?'var(--green)':'var(--soft)'}">Fan demand: ${m.demand}</div>
+      <button class="abtn" style="margin-top:10px;width:100%" onclick="event.stopPropagation();filterByMatch('${m.date}')">See artists for this night</button>
+    </div>`).join('');
+}
+
+function renderVenues(){
+  document.getElementById('venuesGrid').innerHTML = VENUES.map(v=>`
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:600;color:var(--text)">${v.name}</div>
+        <span style="font-size:9px;padding:2px 8px;border-radius:10px;background:rgba(201,168,76,.15);color:var(--gold)">${v.type}</span>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">${v.hood} · Cap: ${v.cap.toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--soft);line-height:1.5">${v.best}</div>
+      <button class="abtn" style="margin-top:10px;width:100%" onclick="filterByVenue('${v.name}')">See artists for ${v.name}</button>
+    </div>`).join('');
+}
+
+function renderPipeline(){
+  const statuses = ['New','Outreach Sent','Replied','Negotiating','Confirmed','Dead'];
+  const html = statuses.map(st=>{
+    const arts = allArtists.filter(a=>a.status===st);
+    if(arts.length===0) return '';
+    return `<div style="margin-bottom:20px">
+      <div style="font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">${st} (${arts.length})</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        ${arts.map(a=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text)">${a.name}</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:1px">${a.matchNight} · ${a.venue}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:10px;color:var(--gold)">$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K</span>
+            <button class="abtn" onclick="openArtist(${a.id})">Open</button>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('pipelineBoard').innerHTML = html || '<div style="color:var(--muted);padding:20px">No artists in pipeline yet.</div>';
+}
+
+function filterByMatch(date){
+  nav('artists');
+  document.getElementById('srch').value = date;
+  loadArtists();
+}
+function filterByVenue(venue){
+  nav('artists');
+  document.getElementById('fVenue').value = venue;
+  loadArtists();
+}
+
+async function openArtist(id){
+  const a = allArtists.find(x=>x.id===id);
+  if(!a) return;
+  activeArtistId = id;
+  document.getElementById('m-name').textContent = `${a.name} — ${a.genre}`;
+  document.getElementById('m-agent').textContent = a.agent;
+  document.getElementById('m-email').textContent = a.agentEmail;
+  document.getElementById('m-phone').textContent = a.agentPhone || 'Not listed';
+  document.getElementById('m-ig').textContent = a.instagram || 'Not listed';
+  document.getElementById('m-match').textContent = a.matchNight;
+  document.getElementById('m-venue').textContent = a.venue;
+  document.getElementById('m-fee').textContent = `$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K`;
+  document.getElementById('m-why').textContent = a.why;
+  document.getElementById('m-status').value = a.status;
+  document.getElementById('m-notes').value = a.notes || '';
+  document.getElementById('draftSubject').textContent = '';
+  document.getElementById('draftBody').value = '';
+  document.getElementById('modalMsg').style.display = 'none';
+  document.getElementById('artistModal').classList.add('open');
+}
+
+function closeModal(){ document.getElementById('artistModal').classList.remove('open'); }
+
+function updateStatus(){
+  if(!activeArtistId) return;
+  const a = allArtists.find(x=>x.id===activeArtistId);
+  if(a) { a.status = document.getElementById('m-status').value; a.notes = document.getElementById('m-notes').value; }
+  renderPipeline();
+  loadArtists();
+}
+
+async function aiDraft(){
+  if(!activeArtistId) return;
+  const btn = document.getElementById('draftBtn');
+  btn.textContent = 'Drafting...';
+  try {
+    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'draft-email',artistId:activeArtistId})});
+    const data = await res.json();
+    document.getElementById('draftSubject').textContent = data.subject || '';
+    document.getElementById('draftBody').value = data.body || '';
+    toast('Email drafted by Claude','info');
+  } catch(e){ toast('Draft failed — check API connection','err'); }
+  btn.textContent = 'AI Draft email';
+}
+
+async function quickDraft(id){
+  activeArtistId = id;
+  await aiDraft();
+  openArtist(id);
+}
+
+async function sendBookingEmail(){
+  const a = allArtists.find(x=>x.id===activeArtistId);
+  if(!a) return;
+  const subject = document.getElementById('draftSubject').textContent;
+  const body = document.getElementById('draftBody').value;
+  if(!subject || !body){ toast('Draft the email first','err'); return; }
+
+  const btn = document.getElementById('sendBtn');
+  btn.textContent = 'Sending...';
+  try {
+    const res = await fetch(`${API}/send-email`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:a.agentEmail,subject,body,artistName:a.name})});
+    const data = await res.json();
+    if(data.ok){
+      a.status = 'Outreach Sent';
+      document.getElementById('m-status').value = 'Outreach Sent';
+      const msg = document.getElementById('modalMsg');
+      msg.textContent = `Email sent to ${a.agentEmail}`;
+      msg.style.display = 'block';
+      toast(`Booking inquiry sent to ${a.agent}`,'ok');
+      loadArtists();
+    } else {
+      toast(data.error || 'Send failed','err');
+    }
+  } catch(e){ toast('Send failed — check email config','err'); }
+  btn.textContent = 'Send to agent';
+}
+
+async function sendAI(){
+  const el = document.getElementById('ai1');
+  const q = el.value.trim(); if(!q) return;
+  addMsg('msgs1', q, 'user'); el.value = '';
+  document.getElementById('think1').classList.add('on');
+  try {
+    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'chat',message:q})});
+    const data = await res.json();
+    addMsg('msgs1', data.reply || data.error, 'bot');
+  } catch(e){ addMsg('msgs1','Connection error — is the server running?','bot'); }
+  document.getElementById('think1').classList.remove('on');
+}
+
+async function sendAsk(){
+  const el = document.getElementById('askIn');
+  const q = el.value.trim(); if(!q) return;
+  const m = document.getElementById('askMsgs');
+  const d = document.createElement('div'); d.className='msg user'; d.textContent=q; m.appendChild(d);
+  el.value = '';
+  document.getElementById('askThink').classList.add('on');
+  try {
+    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'chat',message:q})});
+    const data = await res.json();
+    const r = document.createElement('div'); r.className='msg bot'; r.textContent=data.reply||data.error; m.appendChild(r);
+    m.scrollTop = m.scrollHeight;
+  } catch(e){ const r=document.createElement('div'); r.className='msg bot'; r.textContent='Connection error'; m.appendChild(r); }
+  document.getElementById('askThink').classList.remove('on');
+}
+
+function qAsk(q){ document.getElementById('askIn').value=q; sendAsk(); }
+
+async function analyzeAll(){
+  nav('ask');
+  document.getElementById('askIn').value = 'Analyze my full booking pipeline. What should I prioritize this week?';
+  await sendAsk();
+}
+
+function addMsg(id, text, type){
+  const el = document.getElementById(id);
+  const d = document.createElement('div'); d.className=`msg ${type}`; d.textContent=text;
+  el.appendChild(d); el.scrollTop=el.scrollHeight;
+}
+
+function nav(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.querySelectorAll('.nav').forEach(n=>n.classList.remove('on'));
+  document.getElementById('view-'+name).classList.add('on');
+  const nb = document.getElementById('n-'+name);
+  if(nb) nb.classList.add('on');
+  if(name==='artists') loadArtists();
+  if(name==='pipeline') renderPipeline();
+  if(name==='venues') renderVenues();
+}
+
+function toast(msg, type=''){
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className=`toast show ${type}`;
+  setTimeout(()=>el.className='toast',3000);
+}
+
+// INIT
+renderMatches();
+renderVenues();
+// Pre-load artists from data module for offline use
+fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'search',message:''})})
+  .then(r=>r.json()).then(data=>{ if(Array.isArray(data)) allArtists=data; })
+  .catch(()=>{});
+</script>
+</body>
+</html>
