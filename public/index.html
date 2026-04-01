@@ -3,613 +3,1569 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dream Hospitality — WC 2026 Artist Booking</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Dream Hospitality — World Cup 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#08090C;--surface:#0F1118;--card:#15182200;--border:#1E2230;--hover:#1A1D2A;
-  --text:#EEF0F8;--soft:#8A94B0;--muted:#4A5270;
-  --gold:#C9A84C;--gold2:#E8C96A;--goldDim:rgba(201,168,76,.15);
-  --blue:#3A7BD5;--green:#22C55E;--red:#E05252;--purple:#A855F7;--orange:#F59E0B;
-  --f:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #FFFFFF;
+  --off: #FAFAF8;
+  --surface: #F5F4F0;
+  --surface2: #EEEDE8;
+  --border: #E0DED8;
+  --border2: #D0CEC8;
+  --text: #1A1916;
+  --text2: #4A4844;
+  --text3: #8A8880;
+  --gold: #9A7B2E;
+  --gold-light: #F5EDD6;
+  --gold-mid: #C9A84C;
+  --green: #1A5C38;
+  --green-light: #E8F5EE;
+  --red: #8B1A1A;
+  --red-light: #FAEAEA;
+  --blue: #1A3A6B;
+  --blue-light: #E8EEFA;
+  --orange: #7A3D0A;
+  --orange-light: #FDF0E5;
+  --f: 'DM Sans', sans-serif;
+  --fs: 'DM Serif Display', serif;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  --shadow-lg: 0 2px 8px rgba(0,0,0,.08), 0 12px 40px rgba(0,0,0,.08);
 }
-html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--f);font-size:13px}
 
-/* TOPBAR */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-bar{width:4px;height:28px;background:var(--gold);border-radius:2px;flex-shrink:0}
-.brand-text{font-size:13px;font-weight:600;letter-spacing:.5px;color:var(--text)}
-.brand-text span{color:var(--gold)}
-.topbar-center{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
-.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;flex-shrink:0}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.tbtn{padding:5px 14px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--soft);font-family:var(--f);font-size:11px;cursor:pointer;transition:.15s}
-.tbtn:hover{background:var(--hover);color:var(--text)}
-.tbtn.gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
-.tbtn.gold:hover{background:var(--gold2)}
-.tr{display:flex;gap:6px;align-items:center}
+html, body {
+  min-height: 100%;
+  background: var(--off);
+  color: var(--text);
+  font-family: var(--f);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* LAYOUT */
-.layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 52px)}
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,250,248,.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 0;
+}
 
-/* SIDEBAR */
-.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:10px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
-.nav-sec{font-size:9px;letter-spacing:3px;color:var(--muted);padding:10px 14px 4px;text-transform:uppercase}
-.nav{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--soft);font-size:12px;border-left:2px solid transparent;transition:.12s}
-.nav:hover{background:var(--hover);color:var(--text)}
-.nav.on{background:rgba(201,168,76,.08);color:var(--gold);border-left-color:var(--gold)}
-.nav-badge{margin-left:auto;font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(201,168,76,.2);color:var(--gold)}
+.nav-brand {
+  font-family: var(--fs);
+  font-size: 17px;
+  color: var(--text);
+  letter-spacing: -.2px;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+.nav-brand span { color: var(--gold); }
 
-/* MAIN */
-.main{overflow-y:auto;padding:20px}
+.nav-links {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+}
 
-/* VIEWS */
-.view{display:none}.view.on{display:block}
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .15s;
+  border: none;
+  background: none;
+  font-family: var(--f);
+  white-space: nowrap;
+}
+.nav-link:hover { background: var(--surface); color: var(--text2); }
+.nav-link.active { background: var(--surface); color: var(--text); font-weight: 500; }
 
-/* MATCH CALENDAR HERO */
-.matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:24px}
-.match-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;cursor:pointer;transition:.15s}
-.match-card:hover{border-color:var(--gold);background:var(--goldDim)}
-.match-card.final{border-color:var(--gold);background:var(--goldDim)}
-.match-date{font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:.5px}
-.match-teams{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
-.match-type-pill{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600;display:inline-block}
-.tGroup{background:rgba(34,197,94,.12);color:#4ade80}
-.tKnock{background:rgba(58,123,213,.15);color:#74B2E0}
-.tFinal{background:rgba(201,168,76,.2);color:var(--gold)}
-.match-demand{font-size:10px;color:var(--soft);margin-top:6px}
-.match-artist-count{font-size:10px;color:var(--muted);margin-top:2px}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
 
-/* ARTIST CARDS */
-.artists-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.acard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;transition:.15s}
-.acard:hover{border-color:var(--border);background:var(--hover)}
-.acard-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
-.acard-name{font-size:14px;font-weight:600;color:var(--text)}
-.acard-genre{font-size:10px;color:var(--muted);margin-top:2px}
-.tier-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0}
-.t1{background:rgba(201,168,76,.2);color:var(--gold)}
-.t2{background:rgba(58,123,213,.15);color:#74B2E0}
-.t3{background:rgba(34,197,94,.12);color:#4ade80}
-.acard-why{font-size:11px;color:var(--soft);line-height:1.55;margin-bottom:10px}
-.acard-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
-.meta-item{background:rgba(255,255,255,.03);border-radius:4px;padding:5px 8px}
-.meta-label{font-size:9px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
-.meta-value{font-size:11px;color:var(--text);font-weight:500}
-.meta-value.gold{color:var(--gold)}
-.meta-value.green{color:var(--green)}
-.acard-status{display:flex;align-items:center;justify-content:space-between}
-.status-pill{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600}
-.sNew{background:rgba(74,82,112,.3);color:var(--soft)}
-.sOutreach{background:rgba(245,158,11,.12);color:var(--orange)}
-.sReplied{background:rgba(58,123,213,.15);color:#74B2E0}
-.sNeg{background:rgba(168,85,247,.15);color:#c084fc}
-.sConfirmed{background:rgba(34,197,94,.15);color:var(--green)}
-.sDead{background:rgba(224,82,82,.12);color:var(--red)}
-.acard-actions{display:flex;gap:4px;margin-top:8px}
-.abtn{font-size:10px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--soft);cursor:pointer;font-family:var(--f);transition:.12s}
-.abtn:hover{background:var(--goldDim);color:var(--gold);border-color:var(--gold)}
-.abtn.primary{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
-.abtn.primary:hover{background:var(--gold2)}
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text3);
+  background: var(--surface);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34C759;
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
 
-/* TOOLBAR */
-.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-.search{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:7px 12px;color:var(--text);font-family:var(--f);font-size:12px;outline:none;width:260px}
-.search:focus{border-color:var(--gold)}
-.fsel{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 10px;color:var(--text);font-family:var(--f);font-size:11px;cursor:pointer;outline:none}
+.btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--f);
+  border: 1px solid var(--border2);
+  background: var(--white);
+  color: var(--text);
+}
+.btn:hover { background: var(--surface); }
+.btn-primary {
+  background: var(--text);
+  color: var(--white);
+  border-color: var(--text);
+}
+.btn-primary:hover { opacity: .85; }
+.btn-gold {
+  background: var(--gold-light);
+  color: var(--gold);
+  border-color: #D4B86A;
+}
+.btn-gold:hover { background: #EDE3C4; }
 
-/* KPI ROW */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 14px}
-.kpi-l{font-size:9px;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
-.kpi-v{font-size:24px;font-weight:600;font-family:var(--fm);color:var(--text)}
-.kpi-v.gold{color:var(--gold)}.kpi-v.green{color:var(--green)}.kpi-v.blue{color:var(--blue)}
-.kpi-s{font-size:10px;color:var(--muted);margin-top:2px}
+/* ── LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 56px);
+}
 
-/* SECTION HEADERS */
-.sec-hdr{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
 
-/* AI PANEL */
-.ai-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:20px}
-.ai-msgs{max-height:120px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:5px}
-.msg{padding:7px 10px;border-radius:4px;font-size:11px;line-height:1.55;white-space:pre-wrap}
-.msg.bot{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text)}
-.msg.user{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold2);text-align:right}
-.ai-row{display:flex;gap:6px}
-.ai-in{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:6px 10px;color:var(--text);font-family:var(--f);font-size:11px;outline:none}
-.ai-in:focus{border-color:var(--gold)}
-.think{display:none;align-items:center;gap:5px;font-size:10px;color:var(--muted);margin-bottom:5px}
-.think.on{display:flex}
-.dots span{width:3px;height:3px;border-radius:50%;background:var(--gold);display:inline-block;margin:0 1px;animation:d .6s infinite}
-.dots span:nth-child(2){animation-delay:.1s}.dots span:nth-child(3){animation-delay:.2s}
-@keyframes d{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.sb-section {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 12px 18px 6px;
+}
 
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
-.modal-bg.open{display:flex}
-.modal{background:#13151E;border:1px solid var(--border);border-radius:10px;width:600px;max-height:85vh;overflow-y:auto;padding:22px}
-.modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
-.modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1}
-.modal-close:hover{color:var(--text)}
-.mfield{margin-bottom:12px}
-.mfield label{font-size:10px;color:var(--muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.minput{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:8px 10px;color:var(--text);font-family:var(--f);font-size:12px;outline:none}
-.minput:focus{border-color:var(--gold)}
-textarea.minput{resize:vertical;min-height:140px;line-height:1.55}
-.modal-actions{display:flex;gap:8px;margin-top:14px}
-.agent-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:14px}
-.agent-label{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
-.agent-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
-.agent-key{color:var(--muted)}.agent-val{color:var(--text);font-weight:500}
+.sb-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .12s;
+  border-left: 2px solid transparent;
+}
+.sb-item:hover { background: var(--off); color: var(--text); }
+.sb-item.active {
+  background: var(--gold-light);
+  color: var(--gold);
+  border-left-color: var(--gold-mid);
+  font-weight: 500;
+}
 
-/* TOAST */
-.toast{position:fixed;bottom:20px;right:20px;background:#13151E;border:1px solid var(--border);border-radius:6px;padding:10px 16px;font-size:12px;color:var(--text);z-index:300;display:none;transition:.2s}
-.toast.show{display:block}
-.toast.ok{border-color:var(--green);color:var(--green)}
-.toast.err{border-color:var(--red);color:var(--red)}
-.toast.info{border-color:var(--gold);color:var(--gold)}
+.sb-count {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text3);
+}
+.sb-item.active .sb-count { background: rgba(154,123,46,.15); color: var(--gold); }
+
+.sb-divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+.sb-match {
+  padding: 6px 18px;
+  font-size: 12px;
+  color: var(--text3);
+  cursor: pointer;
+  transition: .12s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sb-match:hover { background: var(--off); color: var(--text2); }
+.sb-match.peak { color: var(--gold); font-weight: 500; }
+
+/* ── MAIN ── */
+.main { overflow-y: auto; }
+.view { display: none; padding: 32px 32px; }
+.view.active { display: block; }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 28px; }
+.page-title {
+  font-family: var(--fs);
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -.5px;
+  margin-bottom: 4px;
+}
+.page-sub { font-size: 14px; color: var(--text3); font-weight: 300; }
+
+/* ── KPI STRIP ── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+.kpi {
+  background: var(--white);
+  padding: 18px 20px;
+}
+.kpi-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; letter-spacing: .02em; }
+.kpi-value { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -.5px; line-height: 1; }
+.kpi-value.gold { color: var(--gold); }
+.kpi-value.green { color: var(--green); }
+.kpi-value.blue { color: var(--blue); }
+.kpi-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-title { font-size: 17px; font-weight: 500; color: var(--text); letter-spacing: -.2px; }
+.section-action { font-size: 13px; color: var(--blue); cursor: pointer; }
+.section-action:hover { text-decoration: underline; }
+
+/* ── MATCH GRID ── */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.match-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: var(--shadow);
+}
+.match-card:hover {
+  border-color: var(--border2);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.match-card.final {
+  background: var(--gold-light);
+  border-color: #D4B86A;
+}
+.match-card.knockout { background: var(--blue-light); border-color: #B8C8E8; }
+
+.mc-date { font-size: 10px; color: var(--text3); margin-bottom: 6px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+.mc-teams { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+
+.mc-pill {
+  font-size: 10px;
+  padding: 2px 9px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-block;
+}
+.pill-group { background: var(--green-light); color: var(--green); }
+.pill-knockout { background: var(--blue-light); color: var(--blue); }
+.pill-final { background: var(--gold-light); color: var(--gold); border: 1px solid #D4B86A; }
+
+.mc-headline { font-size: 12px; color: var(--text2); margin-top: 10px; font-weight: 400; }
+.mc-headline strong { font-weight: 600; color: var(--text); }
+.mc-venue { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.mc-cta {
+  width: 100%;
+  margin-top: 12px;
+  padding: 7px 0;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--f);
+  transition: .15s;
+}
+.mc-cta:hover { background: var(--surface); color: var(--text); }
+.match-card.final .mc-cta { border-color: #D4B86A; color: var(--gold); }
+.match-card.final .mc-cta:hover { background: rgba(201,168,76,.1); }
+
+/* ── ARTIST TABLE ── */
+.table-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: var(--text);
+  font-family: var(--f);
+  font-size: 13px;
+  outline: none;
+  width: 260px;
+  box-shadow: var(--shadow);
+}
+.search-input:focus { border-color: var(--border2); }
+
+.filter-select {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: var(--text2);
+  font-family: var(--f);
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow);
+}
+.filter-select:focus { border-color: var(--border2); }
+
+.table-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border2);
+  font-size: 13px;
+  vertical-align: middle;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--off); }
+
+.artist-name { font-weight: 500; color: var(--text); }
+.artist-genre { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+.tier-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tier-1 { background: var(--gold-light); color: var(--gold); }
+.tier-2 { background: var(--blue-light); color: var(--blue); }
+.tier-3 { background: var(--green-light); color: var(--green); }
+
+.status-badge-sm {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.s-new { background: var(--surface); color: var(--text3); }
+.s-outreach { background: var(--orange-light); color: var(--orange); }
+.s-replied { background: var(--blue-light); color: var(--blue); }
+.s-negotiating { background: #F0E8FA; color: #5A2080; }
+.s-confirmed { background: var(--green-light); color: var(--green); }
+.s-dead { background: var(--red-light); color: var(--red); }
+
+.fee-text { font-size: 12px; font-weight: 500; color: var(--text2); }
+.agent-text { font-size: 11px; color: var(--text3); }
+
+.row-actions { display: flex; gap: 5px; }
+.row-btn {
+  font-size: 11px;
+  padding: 4px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: var(--f);
+  font-weight: 500;
+  transition: .12s;
+  white-space: nowrap;
+}
+.row-btn:hover { background: var(--surface); color: var(--text); }
+.row-btn.primary { background: var(--text); color: var(--white); border-color: var(--text); }
+.row-btn.primary:hover { opacity: .85; }
+.row-btn.gold-btn { background: var(--gold-light); color: var(--gold); border-color: #D4B86A; }
+.row-btn.gold-btn:hover { background: #EDE3C4; }
+
+/* ── VENUE GRID ── */
+.venue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.venue-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: .2s;
+}
+.venue-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+.venue-card.restaurant { border-left: 3px solid var(--gold-mid); }
+.venue-card.nightclub { border-left: 3px solid var(--blue); }
+.venue-card.rooftop { border-left: 3px solid var(--green); }
+.venue-card.lounge { border-left: 3px solid var(--border2); }
+
+.vc-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.vc-type { font-size: 11px; color: var(--text3); margin-bottom: 14px; }
+.vc-stat { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+.vc-stat-label { color: var(--text3); }
+.vc-stat-value { font-weight: 500; color: var(--text); }
+.vc-divider { height: 1px; background: var(--border2); margin: 12px 0; }
+.vc-best { font-size: 12px; color: var(--text2); line-height: 1.55; }
+.vc-artists { font-size: 11px; color: var(--text3); margin-top: 8px; }
+
+/* ── PIPELINE ── */
+.pipeline-cols {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.pcol { }
+.pcol-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 8px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pcol-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  padding: 1px 8px;
+  border-radius: 10px;
+}
+
+.pipeline-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: .15s;
+  box-shadow: var(--shadow);
+}
+.pipeline-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+.pi-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.pi-match { font-size: 11px; color: var(--text3); margin-bottom: 1px; }
+.pi-venue { font-size: 11px; color: var(--text3); }
+.pi-fee { font-size: 12px; font-weight: 500; color: var(--gold); margin-top: 6px; }
+
+/* ── INTELLIGENCE ── */
+.intel-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+}
+
+.intel-chat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.chat-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chat-msg {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-width: 85%;
+}
+.chat-msg.system {
+  background: var(--surface);
+  color: var(--text2);
+  align-self: flex-start;
+}
+.chat-msg.user {
+  background: var(--text);
+  color: var(--white);
+  align-self: flex-end;
+}
+.chat-msg.response {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  align-self: flex-start;
+}
+.thinking {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text3);
+  padding: 4px 0;
+}
+.thinking.show { display: flex; }
+.dot-pulse span {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--text3); display: inline-block; margin: 0 1px;
+  animation: dp .6s infinite;
+}
+.dot-pulse span:nth-child(2){animation-delay:.1s}
+.dot-pulse span:nth-child(3){animation-delay:.2s}
+@keyframes dp{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+.chat-footer {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+}
+.chat-input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 9px 16px;
+  color: var(--text);
+  font-family: var(--f);
+  font-size: 13px;
+  outline: none;
+}
+.chat-input:focus { border-color: var(--border2); background: var(--white); }
+
+.intel-sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+.quick-actions {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.qa-title { font-size: 12px; font-weight: 600; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.qa-btn {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--f);
+  text-align: left;
+  margin-bottom: 6px;
+  transition: .15s;
+  line-height: 1.4;
+}
+.qa-btn:hover { background: var(--gold-light); color: var(--gold); border-color: #D4B86A; }
+.qa-btn:last-child { margin-bottom: 0; }
+
+.priority-list {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.pl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border2);
+}
+.pl-item:last-child { border-bottom: none; padding-bottom: 0; }
+.pl-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pl-content { flex: 1; }
+.pl-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.pl-reason { font-size: 11px; color: var(--text3); line-height: 1.4; }
+
+/* ── EMAIL MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: 14px;
+  width: 580px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,.15), 0 2px 8px rgba(0,0,0,.08);
+}
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.modal-title { font-size: 17px; font-weight: 600; color: var(--text); }
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text3);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  margin-top: -2px;
+}
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 20px 24px; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.detail-item {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.detail-label { font-size: 10px; color: var(--text3); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 3px; }
+.detail-value { font-size: 12px; font-weight: 500; color: var(--text); }
+.detail-value.gold { color: var(--gold); }
+
+.agent-info {
+  background: var(--gold-light);
+  border: 1px solid #D4B86A;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.agent-info-title { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+.agent-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+.agent-row:last-child { margin-bottom: 0; }
+.agent-key { color: var(--text3); }
+.agent-val { font-weight: 500; color: var(--text); }
+.agent-val.email { color: var(--blue); }
+
+.form-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+.form-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: var(--f);
+  font-size: 13px;
+  outline: none;
+  margin-bottom: 12px;
+}
+.form-input:focus { border-color: var(--border2); background: var(--white); }
+textarea.form-input { resize: vertical; min-height: 160px; line-height: 1.6; }
+
+.modal-footer {
+  padding: 14px 24px 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.success-msg {
+  font-size: 12px;
+  color: var(--green);
+  background: var(--green-light);
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: none;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text);
+  color: var(--white);
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 300;
+  display: none;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .2s ease;
+}
+.toast.show { display: block; }
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+@keyframes slideUp { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">
-    <div class="brand-bar"></div>
-    <div class="brand-text">Dream <span>Hospitality</span> — WC 2026 Booking</div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-brand">Dream <span>Hospitality</span></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showView('calendar')">Calendar</button>
+    <button class="nav-link" onclick="showView('artists')">Artists</button>
+    <button class="nav-link" onclick="showView('pipeline')">Pipeline</button>
+    <button class="nav-link" onclick="showView('venues')">Venues</button>
+    <button class="nav-link" onclick="showView('intelligence')">Intelligence</button>
   </div>
-  <div class="topbar-center">
-    <div class="pulse"></div>
-    <span id="aiStatus">Claude AI active — 41 artists loaded</span>
+  <div class="nav-right">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      System active
+    </div>
+    <button class="btn btn-primary" onclick="openAddArtist()">Add artist</button>
   </div>
-  <div class="tr">
-    <button class="tbtn" onclick="analyzeAll()">AI analyze pipeline</button>
-    <button class="tbtn gold" onclick="nav('calendar')">Match calendar</button>
-  </div>
-</div>
+</nav>
 
 <div class="layout">
-<div class="sidebar">
-  <div class="nav-sec">Views</div>
-  <div class="nav on" id="n-calendar" onclick="nav('calendar')">Match calendar</div>
-  <div class="nav" id="n-artists" onclick="nav('artists')">All artists <span class="nav-badge" id="nb-artists">41</span></div>
-  <div class="nav" id="n-pipeline" onclick="nav('pipeline')">Booking pipeline</div>
-  <div class="nav" id="n-venues" onclick="nav('venues')">Venue programming</div>
-  <div class="nav" id="n-ask" onclick="nav('ask')">Ask Claude</div>
-  <div class="nav-sec">Filter by match</div>
-  <div class="nav" onclick="filterByMatch('Jun 13')">Jun 13 Brazil vs Morocco</div>
-  <div class="nav" onclick="filterByMatch('Jun 16')">Jun 16 France vs Senegal</div>
-  <div class="nav" onclick="filterByMatch('Jun 22')">Jun 22 Norway vs Senegal</div>
-  <div class="nav" onclick="filterByMatch('Jun 25')">Jun 25 Ecuador vs Germany</div>
-  <div class="nav" onclick="filterByMatch('Jun 27')">Jun 27 Panama vs England</div>
-  <div class="nav" onclick="filterByMatch('Jun 30')">Jun 30 Round of 32</div>
-  <div class="nav" onclick="filterByMatch('Jul 5')">Jul 5 Round of 16</div>
-  <div class="nav" onclick="filterByMatch('Jul 19')">Jul 19 FINAL</div>
-</div>
 
-<div class="main">
-
-<!-- CALENDAR VIEW -->
-<div class="view on" id="view-calendar">
-  <div class="kpi-row">
-    <div class="kpi"><div class="kpi-l">Match nights</div><div class="kpi-v">8</div><div class="kpi-s">at MetLife</div></div>
-    <div class="kpi"><div class="kpi-l">Artists loaded</div><div class="kpi-v blue" id="k-total">41</div><div class="kpi-s">in database</div></div>
-    <div class="kpi"><div class="kpi-l">Confirmed</div><div class="kpi-v green" id="k-confirmed">0</div><div class="kpi-s">bookings</div></div>
-    <div class="kpi"><div class="kpi-l">Budget est.</div><div class="kpi-v gold">$1.8M</div><div class="kpi-s">full run target</div></div>
-    <div class="kpi"><div class="kpi-l">Final night</div><div class="kpi-v gold">Jul 19</div><div class="kpi-s">Bad Bunny target</div></div>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-section">Overview</div>
+  <div class="sb-item active" onclick="showView('calendar')" id="sb-calendar">
+    Match calendar <span class="sb-count">8</span>
   </div>
-  <div class="sec-hdr">NY/NJ match schedule — click any match to see artists</div>
-  <div class="matches-grid" id="matchesGrid"></div>
+  <div class="sb-item" onclick="showView('artists')" id="sb-artists">
+    All artists <span class="sb-count" id="nb-total">41</span>
+  </div>
+  <div class="sb-item" onclick="showView('pipeline')" id="sb-pipeline">
+    Booking pipeline
+  </div>
+  <div class="sb-item" onclick="showView('venues')" id="sb-venues">
+    Venues <span class="sb-count">10</span>
+  </div>
+  <div class="sb-item" onclick="showView('intelligence')" id="sb-intelligence">
+    Intelligence
+  </div>
+
+  <div class="sb-divider"></div>
+  <div class="sb-section">Match nights</div>
+  <div class="sb-match" onclick="filterMatch('Brazil')">🇧🇷 Jun 13 Brazil</div>
+  <div class="sb-match" onclick="filterMatch('France')">🇫🇷 Jun 16 France</div>
+  <div class="sb-match" onclick="filterMatch('Norway')">🇳🇴 Jun 22 Norway</div>
+  <div class="sb-match" onclick="filterMatch('Germany')">🇩🇪 Jun 25 Germany</div>
+  <div class="sb-match" onclick="filterMatch('England')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Jun 27 England</div>
+  <div class="sb-match" onclick="filterMatch('Round of 32')">⚽ Jun 30 R32</div>
+  <div class="sb-match" onclick="filterMatch('Round of 16')">⚽ Jul 5 R16</div>
+  <div class="sb-match peak" onclick="filterMatch('FINAL')">🏆 Jul 19 Final</div>
+
+  <div class="sb-divider"></div>
+  <div class="sb-section">Venues</div>
+  <div class="sb-match" onclick="filterVenue('Nebula')">Nebula</div>
+  <div class="sb-match" onclick="filterVenue('Harbor')">Harbor NYC</div>
+  <div class="sb-match" onclick="filterVenue('Musica')">Musica NYC</div>
+  <div class="sb-match" onclick="filterVenue('Sei Less')">Sei Less</div>
+  <div class="sb-match" onclick="filterVenue('PHD')">PHD Rooftop</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ── CALENDAR VIEW ── -->
+<div class="view active" id="view-calendar">
+  <div class="page-header">
+    <div class="page-title">World Cup 2026</div>
+    <div class="page-sub">8 match nights at MetLife Stadium. June 13 through July 19.</div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-label">Match nights</div>
+      <div class="kpi-value">8</div>
+      <div class="kpi-sub">at MetLife Stadium</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Artists in database</div>
+      <div class="kpi-value blue" id="k-total">41</div>
+      <div class="kpi-sub">across all nights</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Outreach sent</div>
+      <div class="kpi-value" id="k-outreach" style="color:var(--orange)">3</div>
+      <div class="kpi-sub">awaiting reply</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Confirmed</div>
+      <div class="kpi-value green" id="k-confirmed">2</div>
+      <div class="kpi-sub">bookings locked</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Total fee est.</div>
+      <div class="kpi-value gold">$2.1M</div>
+      <div class="kpi-sub">all 8 nights base case</div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Match schedule</div>
+    <span class="section-action" onclick="showView('artists')">View all artists</span>
+  </div>
+
+  <div class="match-grid">
+    <div class="match-card" onclick="filterMatch('Brazil')">
+      <div class="mc-date">Sat Jun 13 · 6:00 PM ET</div>
+      <div class="mc-teams">🇧🇷 Brazil vs Morocco 🇲🇦</div>
+      <span class="mc-pill pill-group">Group C</span>
+      <div class="mc-headline"><strong>Anitta</strong> · Harbor NYC</div>
+      <div class="mc-venue">WME Latin · $175K-225K · Fan demand: Very High</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Brazil')">4 artists mapped</button>
+    </div>
+    <div class="match-card" onclick="filterMatch('France')">
+      <div class="mc-date">Tue Jun 16 · 3:00 PM ET</div>
+      <div class="mc-teams">🇫🇷 France vs Senegal 🇸🇳</div>
+      <span class="mc-pill pill-group">Group I</span>
+      <div class="mc-headline"><strong>David Guetta</strong> · Musica NYC</div>
+      <div class="mc-venue">CAA · $175K-225K · Fan demand: High</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('France')">4 artists mapped</button>
+    </div>
+    <div class="match-card" onclick="filterMatch('Norway')">
+      <div class="mc-date">Mon Jun 22 · 8:00 PM ET</div>
+      <div class="mc-teams">🇳🇴 Norway vs Senegal 🇸🇳</div>
+      <span class="mc-pill pill-group">Group I</span>
+      <div class="mc-headline"><strong>Alan Walker</strong> · Musica NYC</div>
+      <div class="mc-venue">CAA · $100K-150K · Fan demand: Medium</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Norway')">2 artists mapped</button>
+    </div>
+    <div class="match-card" onclick="filterMatch('Germany')">
+      <div class="mc-date">Thu Jun 25 · 4:00 PM ET</div>
+      <div class="mc-teams">🇪🇨 Ecuador vs Germany 🇩🇪</div>
+      <span class="mc-pill pill-group">Group E</span>
+      <div class="mc-headline"><strong>Bizarrap</strong> · Musica NYC</div>
+      <div class="mc-venue">Range Media · $120K-175K · Fan demand: Medium</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Germany')">3 artists mapped</button>
+    </div>
+    <div class="match-card" onclick="filterMatch('England')">
+      <div class="mc-date">Sat Jun 27 · 5:00 PM ET</div>
+      <div class="mc-teams">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Panama vs England 🇵🇦</div>
+      <span class="mc-pill pill-group">Group L</span>
+      <div class="mc-headline"><strong>Stormzy</strong> · Nebula</div>
+      <div class="mc-venue">CAA London · $150K-200K · Fan demand: Very High</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('England')">4 artists mapped</button>
+    </div>
+    <div class="match-card knockout" onclick="filterMatch('Round of 32')">
+      <div class="mc-date">Tue Jun 30 · 5:00 PM ET</div>
+      <div class="mc-teams">⚽ Round of 32</div>
+      <span class="mc-pill pill-knockout">Knockout</span>
+      <div class="mc-headline"><strong>DJ Khaled</strong> · Harbor NYC</div>
+      <div class="mc-venue">CAA · $150K-200K · Fan demand: High</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Round of 32')">2 artists mapped</button>
+    </div>
+    <div class="match-card knockout" onclick="filterMatch('Round of 16')">
+      <div class="mc-date">Sun Jul 5 · 4:00 PM ET</div>
+      <div class="mc-teams">⚽ Round of 16</div>
+      <span class="mc-pill pill-knockout">Knockout</span>
+      <div class="mc-headline"><strong>J Balvin</strong> · Nebula</div>
+      <div class="mc-venue">WME · $225K-275K · Fan demand: Very High</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Round of 16')">2 artists mapped</button>
+    </div>
+    <div class="match-card final" onclick="filterMatch('FINAL')">
+      <div class="mc-date" style="color:var(--gold)">Sun Jul 19 · 3:00 PM ET</div>
+      <div class="mc-teams">🏆 World Cup Final</div>
+      <span class="mc-pill pill-final">The Final</span>
+      <div class="mc-headline"><strong>Bad Bunny</strong> · Nebula</div>
+      <div class="mc-venue" style="color:var(--gold)">WME · $400K-600K · Fan demand: Peak</div>
+      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('FINAL')">5 artists mapped</button>
+    </div>
+  </div>
 </div>
 
-<!-- ARTISTS VIEW -->
+<!-- ── ARTISTS VIEW ── -->
 <div class="view" id="view-artists">
-  <div class="ai-panel">
-    <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:8px">Claude AI — Artist Intelligence</div>
-    <div class="think" id="think1"><span class="dots"><span></span><span></span><span></span></span> Claude is thinking...</div>
-    <div class="ai-msgs" id="msgs1">
-      <div class="msg bot">Artist database loaded. 41 artists mapped to all 8 NY/NJ match nights. Ask me anything — best artist for a specific night, who to book first, how to approach an agent, what to say in the email.</div>
-    </div>
-    <div class="ai-row">
-      <input class="ai-in" id="ai1" placeholder="Who should we book for the England match night?" onkeydown="if(event.key==='Enter')sendAI()">
-      <button class="tbtn gold" onclick="sendAI()">Ask ↗</button>
-    </div>
+  <div class="page-header">
+    <div class="page-title">Artist database</div>
+    <div class="page-sub">41 artists mapped to all 8 NY/NJ match nights across all 10 venues.</div>
   </div>
-  <div class="toolbar">
-    <input class="search" id="srch" placeholder="Search artist, genre, country..." oninput="loadArtists()">
-    <select class="fsel" id="fTier" onchange="loadArtists()">
+
+  <div class="table-toolbar">
+    <input class="search-input" id="srch" placeholder="Search artist, genre, country..." oninput="renderTable()">
+    <select class="filter-select" id="fTier" onchange="renderTable()">
       <option value="">All tiers</option>
-      <option value="1">Tier 1 — Book now</option>
-      <option value="2">Tier 2 — Strong fits</option>
-      <option value="3">Tier 3 — Supporting</option>
+      <option value="1">Tier 1</option>
+      <option value="2">Tier 2</option>
+      <option value="3">Tier 3</option>
     </select>
-    <select class="fsel" id="fStatus" onchange="loadArtists()">
+    <select class="filter-select" id="fStatus" onchange="renderTable()">
       <option value="">All statuses</option>
-      <option>New</option><option>Outreach Sent</option><option>Replied</option>
-      <option>Negotiating</option><option>Confirmed</option><option>Dead</option>
+      <option>New</option>
+      <option>Outreach Sent</option>
+      <option>Replied</option>
+      <option>Negotiating</option>
+      <option>Confirmed</option>
+      <option>Dead</option>
     </select>
-    <select class="fsel" id="fVenue" onchange="loadArtists()">
-      <option value="">All venues</option>
-      <option>Nebula</option><option>Harbor NYC</option><option>Musica NYC</option>
-      <option>Stafford Room</option><option>Whisper Room</option><option>PHD Rooftop</option>
-      <option>Petite</option><option>Sei Less Restaurant</option><option>Tucci NYC Restaurant</option><option>Pappas NY Restaurant</option>
+    <select class="filter-select" id="fMatch" onchange="renderTable()">
+      <option value="">All match nights</option>
+      <option>Brazil</option>
+      <option>France</option>
+      <option>Norway</option>
+      <option>Germany</option>
+      <option>England</option>
+      <option>Round of 32</option>
+      <option>Round of 16</option>
+      <option>FINAL</option>
     </select>
   </div>
-  <div class="artists-grid" id="artistsGrid"></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Artist</th>
+          <th>Match night</th>
+          <th>Venue</th>
+          <th>Slot</th>
+          <th>Tier</th>
+          <th>Fee range</th>
+          <th>Agent</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="artistRows"></tbody>
+    </table>
+  </div>
 </div>
 
-<!-- PIPELINE VIEW -->
+<!-- ── PIPELINE VIEW ── -->
 <div class="view" id="view-pipeline">
-  <div class="sec-hdr">Booking pipeline — all artists by status</div>
-  <div id="pipelineBoard"></div>
+  <div class="page-header">
+    <div class="page-title">Booking pipeline</div>
+    <div class="page-sub">Track every artist from first outreach through confirmed booking.</div>
+  </div>
+  <div class="pipeline-cols" id="pipelineCols"></div>
 </div>
 
-<!-- VENUES VIEW -->
+<!-- ── VENUES VIEW ── -->
 <div class="view" id="view-venues">
-  <div class="sec-hdr">Venue programming — all 10 Dream venues</div>
-  <div id="venuesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px"></div>
+  <div class="page-header">
+    <div class="page-title">Venue programming</div>
+    <div class="page-sub">All 10 Dream Hospitality venues mapped to World Cup 2026.</div>
+  </div>
+  <div class="venue-grid" id="venueGrid"></div>
 </div>
 
-<!-- ASK CLAUDE VIEW -->
-<div class="view" id="view-ask">
-  <div style="max-width:700px">
-    <div class="sec-hdr">Ask Claude — full booking intelligence</div>
-    <div id="askMsgs" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:500px;overflow-y:auto">
-      <div class="msg bot">Hi. I am Claude, your Dream Hospitality World Cup 2026 booking assistant.\n\nI have the full artist database — 41 artists mapped to every NY/NJ match night, with agent contacts, fees, and why each artist fits each night.\n\nAsk me anything. Who to book first. How to approach WME. What to say to get Bad Bunny's team on the phone. Draft a booking email. Analyze your pipeline. Anything.</div>
+<!-- ── INTELLIGENCE VIEW ── -->
+<div class="view" id="view-intelligence">
+  <div class="page-header">
+    <div class="page-title">Booking intelligence</div>
+    <div class="page-sub">Research artists, draft outreach, and get recommendations.</div>
+  </div>
+  <div class="intel-layout">
+    <div class="intel-chat">
+      <div class="chat-header">Booking research and outreach drafting</div>
+      <div class="chat-messages" id="chatMsgs">
+        <div class="chat-msg system">Welcome to Dream Hospitality booking intelligence. I have full context on all 41 artists, every match night, agent contacts, fee ranges, and availability windows. What do you want to work on?</div>
+      </div>
+      <div class="thinking" id="chatThinking">
+        <span class="dot-pulse"><span></span><span></span><span></span></span>
+        Working on it...
+      </div>
+      <div class="chat-footer">
+        <input class="chat-input" id="chatInput" placeholder="Research an artist, draft a booking email, get a recommendation..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="btn btn-primary" onclick="sendChat()">Send</button>
+      </div>
     </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <button class="abtn" onclick="qAsk('Who are the top 3 artists I need to book immediately before someone else takes them?')">Top 3 to book now?</button>
-      <button class="abtn" onclick="qAsk('What is the best approach to get Bad Bunny for the Final night?')">How to get Bad Bunny?</button>
-      <button class="abtn" onclick="qAsk('What gaps are there in the programming across all 10 venues?')">Programming gaps?</button>
-      <button class="abtn" onclick="qAsk('How do I approach WME about multiple artists at once?')">Approaching WME?</button>
-      <button class="abtn" onclick="qAsk('What is the total budget if I book all Tier 1 artists?')">Total Tier 1 budget?</button>
-    </div>
-    <div class="think" id="askThink" style="margin-bottom:8px"><span class="dots"><span></span><span></span><span></span></span> Claude is thinking...</div>
-    <div class="ai-row">
-      <input class="ai-in" style="padding:9px 12px;font-size:12px" id="askIn" placeholder="Ask anything about your booking strategy..." onkeydown="if(event.key==='Enter')sendAsk()">
-      <button class="tbtn gold" onclick="sendAsk()">Send ↗</button>
+    <div class="intel-sidebar">
+      <div class="quick-actions">
+        <div class="qa-title">Quick actions</div>
+        <button class="qa-btn" onclick="qa('Who should we book first before availability closes? Give me the top 3 with reasoning.')">Who to book first?</button>
+        <button class="qa-btn" onclick="qa('What is the best approach to reach WME about Bad Bunny for the Final night at Nebula?')">How to approach WME?</button>
+        <button class="qa-btn" onclick="qa('What is our total estimated budget if we book all Tier 1 artists across all 8 nights?')">Total Tier 1 budget?</button>
+        <button class="qa-btn" onclick="qa('Which match nights have programming gaps we need to fill urgently?')">Programming gaps?</button>
+        <button class="qa-btn" onclick="qa('Draft a booking inquiry email for Stormzy for the England match night at Nebula on June 27.')">Draft Stormzy email</button>
+        <button class="qa-btn" onclick="qa('What artists work for the Final weekend across all 10 venues simultaneously?')">Final weekend coverage?</button>
+      </div>
+      <div class="priority-list">
+        <div class="qa-title" style="margin-bottom:12px">Book immediately</div>
+        <div class="pl-item">
+          <div class="pl-num">1</div>
+          <div class="pl-content">
+            <div class="pl-name">Bad Bunny via WME</div>
+            <div class="pl-reason">Final night. Super Bowl 2026 performer. On world tour. This closes first.</div>
+          </div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-num">2</div>
+          <div class="pl-content">
+            <div class="pl-name">Stormzy via CAA London</div>
+            <div class="pl-reason">England match Jun 27. Nebula sells out in hours. No alternative.</div>
+          </div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-num">3</div>
+          <div class="pl-content">
+            <div class="pl-name">J Balvin via WME</div>
+            <div class="pl-reason">Already performed at MetLife FIFA 2025. Warmest relationship in the deck.</div>
+          </div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-num">4</div>
+          <div class="pl-content">
+            <div class="pl-name">Anitta via WME Latin</div>
+            <div class="pl-reason">Brazil match Jun 13. 70M followers. On The Weeknd's 2026 tour.</div>
+          </div>
+        </div>
+        <div class="pl-item">
+          <div class="pl-num">5</div>
+          <div class="pl-content">
+            <div class="pl-name">Karol G via WME Latin</div>
+            <div class="pl-reason">Final weekend Harbor. Coachella headliner 2026. Closes fast.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-</div>
+</main>
 </div>
 
 <!-- ARTIST MODAL -->
-<div class="modal-bg" id="artistModal">
+<div class="modal-overlay" id="artistModal">
   <div class="modal">
-    <div class="modal-title">
-      <span id="m-name">Artist Name</span>
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-name">Artist Name</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:2px" id="modal-genre">Genre</div>
+      </div>
       <button class="modal-close" onclick="closeModal()">x</button>
     </div>
-    <div class="agent-box">
-      <div class="agent-label">Agent / Management</div>
-      <div class="agent-row"><span class="agent-key">Agency</span><span class="agent-val" id="m-agent"></span></div>
-      <div class="agent-row"><span class="agent-key">Email</span><span class="agent-val" style="color:var(--blue)" id="m-email"></span></div>
-      <div class="agent-row"><span class="agent-key">Phone</span><span class="agent-val" id="m-phone"></span></div>
-      <div class="agent-row"><span class="agent-key">Instagram</span><span class="agent-val" id="m-ig"></span></div>
+    <div class="modal-body">
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Match night</div>
+          <div class="detail-value" id="modal-match" style="font-size:11px"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Venue</div>
+          <div class="detail-value" id="modal-venue"></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Fee range</div>
+          <div class="detail-value gold" id="modal-fee"></div>
+        </div>
+      </div>
+
+      <div class="detail-item" style="margin-bottom:16px;padding:12px">
+        <div class="detail-label">Why this artist</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-top:4px" id="modal-why"></div>
+      </div>
+
+      <div class="agent-info">
+        <div class="agent-info-title">Agent / Management</div>
+        <div class="agent-row"><span class="agent-key">Agency</span><span class="agent-val" id="modal-agent"></span></div>
+        <div class="agent-row"><span class="agent-key">Email</span><span class="agent-val email" id="modal-email"></span></div>
+        <div class="agent-row"><span class="agent-key">Phone</span><span class="agent-val" id="modal-phone"></span></div>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label class="form-label">Status</label>
+        <select class="form-input" id="modal-status" style="margin-bottom:0" onchange="updateArtistStatus()">
+          <option>New</option>
+          <option>Outreach Sent</option>
+          <option>Replied</option>
+          <option>Negotiating</option>
+          <option>Confirmed</option>
+          <option>Dead</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label class="form-label">Notes</label>
+        <textarea class="form-input" id="modal-notes" rows="2" placeholder="Add notes..."></textarea>
+      </div>
+
+      <div>
+        <label class="form-label">Booking email draft</label>
+        <input class="form-input" id="draft-subject" placeholder="Subject line will appear here..." style="font-weight:500">
+        <textarea class="form-input" id="draft-body" rows="8" placeholder="Click 'Draft email' to generate a personalized booking inquiry..."></textarea>
+      </div>
+
+      <div class="success-msg" id="modal-success"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-      <div class="meta-item"><div class="meta-label">Match night</div><div class="meta-value" id="m-match" style="font-size:10px"></div></div>
-      <div class="meta-item"><div class="meta-label">Venue</div><div class="meta-value" id="m-venue" style="font-size:10px"></div></div>
-      <div class="meta-item"><div class="meta-label">Fee range</div><div class="meta-value gold" id="m-fee"></div></div>
+    <div class="modal-footer">
+      <button class="btn btn-gold" onclick="draftEmail()" id="draft-btn">Draft email</button>
+      <button class="btn btn-primary" onclick="sendEmail()" id="send-btn">Send to agent</button>
+      <button class="btn" onclick="closeModal()">Close</button>
     </div>
-    <div class="mfield"><label>Why this artist</label><div id="m-why" style="font-size:12px;color:var(--soft);line-height:1.6;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:10px"></div></div>
-    <div class="mfield"><label>Status</label>
-      <select class="minput" id="m-status" onchange="updateStatus()">
-        <option>New</option><option>Outreach Sent</option><option>Replied</option>
-        <option>Negotiating</option><option>Confirmed</option><option>Dead</option>
-      </select>
-    </div>
-    <div class="mfield"><label>Notes</label><textarea class="minput" id="m-notes" rows="2" placeholder="Add notes about this booking..."></textarea></div>
-    <div class="mfield"><label>Draft email</label>
-      <div style="font-size:11px;font-weight:600;color:var(--gold);margin-bottom:6px" id="draftSubject"></div>
-      <textarea class="minput" id="draftBody" rows="8" placeholder="Click 'AI Draft' to generate a personalized booking email..."></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="tbtn gold" onclick="aiDraft()" id="draftBtn">AI Draft email</button>
-      <button class="tbtn" onclick="sendBookingEmail()" id="sendBtn">Send to agent</button>
-      <button class="tbtn" onclick="closeModal()">Close</button>
-    </div>
-    <div id="modalMsg" style="font-size:11px;color:var(--green);margin-top:8px;display:none"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const API = window.location.hostname === 'localhost' ? 'http://localhost:3001/.netlify/functions' : '/.netlify/functions';
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001/.netlify/functions'
+  : '/.netlify/functions';
 
-let allArtists = [];
-let activeArtistId = null;
-
-const MATCHES = [
-  {date:"Jun 13",day:"Saturday",time:"6:00 PM",teams:"Brazil vs Morocco",group:"Group C",type:"Group Stage",demand:"Very High",emoji:"🇧🇷"},
-  {date:"Jun 16",day:"Tuesday",time:"3:00 PM",teams:"France vs Senegal",group:"Group I",type:"Group Stage",demand:"High",emoji:"🇫🇷"},
-  {date:"Jun 22",day:"Monday",time:"8:00 PM",teams:"Norway vs Senegal",group:"Group I",type:"Group Stage",demand:"Medium",emoji:"🇳🇴"},
-  {date:"Jun 25",day:"Thursday",time:"4:00 PM",teams:"Ecuador vs Germany",group:"Group E",type:"Group Stage",demand:"Medium",emoji:"🇩🇪"},
-  {date:"Jun 27",day:"Saturday",time:"5:00 PM",teams:"Panama vs England",group:"Group L",type:"Group Stage",demand:"Very High",emoji:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {date:"Jun 30",day:"Tuesday",time:"5:00 PM",teams:"Round of 32",group:"Knockout",type:"Round of 32",demand:"High",emoji:"⚽"},
-  {date:"Jul 5",day:"Sunday",time:"4:00 PM",teams:"Round of 16",group:"Knockout",type:"Round of 16",demand:"Very High",emoji:"⚽"},
-  {date:"Jul 19",day:"Sunday",time:"3:00 PM",teams:"WORLD CUP FINAL",group:"FINAL",type:"Final",demand:"PEAK",emoji:"🏆"},
+let ARTISTS = [
+  {id:1,name:"Anitta",genre:"Brazilian Funk / Pop",match:"Jun 13 - Brazil vs Morocco",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:175,feeMax:225,status:"Confirmed",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Brazilian icon. 70M Instagram. On The Weeknd 2026 world tour. NYC Brazilian community is 300K+. This is her night.",notes:"Confirmed for Jun 13. Contract sent."},
+  {id:2,name:"Alok",genre:"Brazilian EDM / House",match:"Jun 13 - Brazil vs Morocco",venue:"PHD Rooftop",slot:"5PM Pre-Game",tier:2,feeMin:80,feeMax:120,status:"Outreach Sent",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Brazil's biggest DJ. Rooftop pre-game energy. Brazilian crowd buys bottles early.",notes:"Email sent to WME Latin 3 days ago. Follow up needed."},
+  {id:3,name:"Ludmilla",genre:"Brazilian Funk",match:"Jun 13 - Brazil vs Morocco",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:40,feeMax:65,status:"New",agent:"Traffic Sports Brazil",agentEmail:"contato@trafficbrasil.com.br",agentPhone:"+55 11 3094 5000",why:"Brazil's female funk queen. Huge NYC following. Works as Anitta support or standalone 5PM slot.",notes:""},
+  {id:4,name:"Vintage Culture",genre:"Brazilian House",match:"Jun 13 - Brazil vs Morocco",venue:"Musica NYC",slot:"2AM Late Night",tier:2,feeMin:40,feeMax:75,status:"New",agent:"Direct",agentEmail:"booking@vintageculture.com.br",agentPhone:"",why:"Brazilian house export. Late set bridges Anitta headline crowd into an after-party at Musica.",notes:""},
+  {id:5,name:"David Guetta",genre:"French EDM / House",match:"Jun 16 - France vs Senegal",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:175,feeMax:225,status:"Outreach Sent",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"French EDM legend. France is his country. Musica NYC is built for his sound. Automatic sell-out.",notes:"Contacted CAA NYC office. Awaiting response."},
+  {id:6,name:"Burna Boy",genre:"Afrobeats / Afro-fusion",match:"Jun 16 - France vs Senegal",venue:"Harbor NYC",slot:"10PM Headline Alt",tier:1,feeMin:200,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"African Giant. Bridges Senegal and West African diaspora in NYC. Cultural power for this match night.",notes:""},
+  {id:7,name:"DJ Snake",genre:"French EDM / Trap",match:"Jun 16 - France vs Senegal",venue:"Nebula",slot:"5PM Pre-Game",tier:2,feeMin:100,feeMax:150,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"French-Algerian producer. North African bridge to Senegal crowd. Pre-game Nebula set.",notes:""},
+  {id:8,name:"Tems",genre:"Afrobeats / R&B",match:"Jun 16 - France vs Senegal",venue:"Sei Less",slot:"Private Dinner",tier:2,feeMin:80,feeMax:120,status:"Outreach Sent",agent:"UTA",agentEmail:"music@unitedtalent.com",agentPhone:"+1 310 273 6700",why:"Already performed FIFA Club WC Final at MetLife 2025. Sei Less private dinner activation.",notes:"UTA contacted. Positive initial response."},
+  {id:9,name:"Alan Walker",genre:"EDM / Electronic",match:"Jun 22 - Norway vs Senegal",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:150,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"Norwegian producer. Norway match night is made for him. Musica NYC is the perfect electronic room.",notes:""},
+  {id:10,name:"Bizarrap",genre:"Latin Electronic / Trap",match:"Jun 25 - Ecuador vs Germany",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:120,feeMax:175,status:"New",agent:"Range Media Partners",agentEmail:"info@rangemediapartners.com",agentPhone:"+1 310 954 9333",why:"Argentina producer with global Latin electronic sound. Bridges Ecuador fans and broader Latin crowd.",notes:""},
+  {id:11,name:"Boris Brejcha",genre:"High-Tech Minimal / Techno",match:"Jun 25 - Ecuador vs Germany",venue:"Musica NYC",slot:"10PM Alt",tier:2,feeMin:80,feeMax:120,status:"New",agent:"FCKNG SERIOUS",agentEmail:"booking@fckngserious.com",agentPhone:"+49 30 12345678",why:"Germany's biggest underground DJ. NYC German expat community for this match night.",notes:""},
+  {id:12,name:"Nicki Nicole",genre:"Trap Latino / Urban",match:"Jun 25 - Ecuador vs Germany",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:3,feeMin:40,feeMax:70,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Argentine-Ecuadorian crossover. Pre-game slot Harbor pulls the Latin crowd before Germany fans arrive.",notes:""},
+  {id:13,name:"Stormzy",genre:"UK Grime / Hip-Hop",match:"Jun 27 - Panama vs England",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"Confirmed",agent:"CAA London",agentEmail:"london.music@caa.com",agentPhone:"+44 20 3214 0800",why:"UK's biggest artist. England match night. Nebula 1,500 cap sells out in hours. Must-book for Jun 27.",notes:"Confirmed. Deposit received. Contract signed."},
+  {id:14,name:"Central Cee",genre:"UK Rap / Drill",match:"Jun 27 - Panama vs England",venue:"Stafford Room",slot:"2PM Build-Up",tier:2,feeMin:60,feeMax:90,status:"New",agent:"CAA London",agentEmail:"london.music@caa.com",agentPhone:"+44 20 3214 0800",why:"Younger UK crowd. Afternoon build-up. Cheaper than Stormzy, same cultural energy.",notes:""},
+  {id:15,name:"Headie One",genre:"UK Drill",match:"Jun 27 - Panama vs England",venue:"Whisper Room",slot:"2PM Build-Up",tier:3,feeMin:25,feeMax:45,status:"New",agent:"0207 Def Jam",agentEmail:"booking@0207defjam.com",agentPhone:"+44 20 7432 1000",why:"UK drill pioneer. Cost effective option for the 2PM Whisper Room slot on England night.",notes:""},
+  {id:16,name:"Jorja Smith",genre:"UK R&B / Soul",match:"Jun 27 - Panama vs England",venue:"Sei Less",slot:"Private Dinner",tier:2,feeMin:60,feeMax:100,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"English soul. Sei Less private dining performance for corporate England night. Intimate and premium.",notes:""},
+  {id:17,name:"DJ Khaled",genre:"Hip-Hop / Open Format",match:"Jun 30 - Round of 32",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"NYC native. Works any knockout night regardless of teams. Widest possible audience. Another one.",notes:""},
+  {id:18,name:"Diplo",genre:"Electronic / Open Format",match:"Jun 30 - Round of 32",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:150,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Global sound. Works every country. Knockout nights need a universal artist.",notes:""},
+  {id:19,name:"J Balvin",genre:"Reggaeton / Urban Latino",match:"Jul 5 - Round of 16",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:225,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Already performed FIFA Club WC Final at MetLife July 2025. Warmest FIFA relationship of any artist.",notes:""},
+  {id:20,name:"Maluma",genre:"Reggaeton / Latin Pop",match:"Jul 5 - Round of 16",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:100,feeMax:150,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Colombian reggaeton. Round of 16 pre-game. Harbor fills before J Balvin at Nebula.",notes:""},
+  {id:21,name:"Bad Bunny",genre:"Reggaeton / Trap Latino",match:"Jul 19 - WORLD CUP FINAL",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:400,feeMax:600,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Super Bowl halftime 2026. Biggest Latin artist alive. On world tour. Final night at Nebula. Non-negotiable.",notes:""},
+  {id:22,name:"Karol G",genre:"Reggaeton / Urban Latina",match:"Jul 19 - WORLD CUP FINAL",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:250,feeMax:350,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Coachella headliner 2026. Final weekend Harbor runs simultaneously with Bad Bunny at Nebula.",notes:""},
+  {id:23,name:"Peso Pluma",genre:"Regional Mexican / Corridos",match:"Jul 19 - WORLD CUP FINAL",venue:"PHD Rooftop",slot:"5PM Pre-Game",tier:1,feeMin:175,feeMax:250,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Mexico has 1M+ fans in NYC metro. PHD Rooftop pre-game Final night is the setup.",notes:""},
+  {id:24,name:"Shakira",genre:"Latin Pop / Dance",match:"Jul 19 - WORLD CUP FINAL",venue:"Sei Less",slot:"Private VIP Dinner",tier:1,feeMin:400,feeMax:600,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Copa America Final 2024 performer. World Cup royalty. Private Sei Less dinner on Final night.",notes:""},
+  {id:25,name:"Doja Cat",genre:"Pop / Hip-Hop / R&B",match:"Jul 19 - WORLD CUP FINAL",venue:"Nebula",slot:"10PM Alt",tier:1,feeMin:250,feeMax:350,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Already performed FIFA Club WC Final at MetLife 2025. Warm FIFA relationship. Final weekend option.",notes:""},
+  {id:26,name:"Martin Garrix",genre:"Progressive House / EDM",match:"Any knockout night",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"Dutch producer. Netherlands has passionate NYC fans. Musica is perfect. Works any knockout night.",notes:""},
+  {id:27,name:"Lil Baby",genre:"Hip-Hop / Trap",match:"Any USA match night",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:175,feeMax:250,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"USA match nights need a hip-hop anchor. Lil Baby pulls the NYC audience that does not follow soccer.",notes:""},
+  {id:28,name:"Cardi B",genre:"Hip-Hop / Trap",match:"Any USA match or Final weekend",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:200,feeMax:300,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Bronx native. Dominican roots. Crossover for Latin and hip-hop crowds. Page Six the next morning.",notes:""},
+  {id:29,name:"Fisher",genre:"Tech House",match:"Any night backup headliner",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:80,feeMax:130,status:"New",agent:"Paradigm Agency",agentEmail:"booking@paradigmagency.com",agentPhone:"+1 310 288 8000",why:"Tech house. Universal crowd. If any Tier 1 booking falls through Fisher fills Musica immediately.",notes:""},
+  {id:30,name:"Chris Lake",genre:"House / Tech House",match:"Any night",venue:"Musica NYC",slot:"10PM or 2AM",tier:2,feeMin:50,feeMax:90,status:"New",agent:"Paradigm Agency",agentEmail:"booking@paradigmagency.com",agentPhone:"+1 310 288 8000",why:"LA-based British house DJ. Huge in NYC. Cost-effective for mid-week nights.",notes:""},
+  {id:31,name:"Feid",genre:"Urbano / Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"10PM Headline",tier:2,feeMin:80,feeMax:130,status:"New",agent:"Universal Music Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Colombian urbano. Massive following. Harbor headline for any Latin match night.",notes:""},
+  {id:32,name:"Ozuna",genre:"Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:175,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"One of the most-streamed Latin artists ever. Flexible booking for any Latin match night.",notes:""},
+  {id:33,name:"Farruko",genre:"Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:60,feeMax:100,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Puerto Rican reggaeton. Bridges Bad Bunny crowd for pre-game slots on any Latin night.",notes:""},
+  {id:34,name:"Jhayco",genre:"Latin R&B / Reggaeton",match:"Any Latin match night",venue:"Stafford Room",slot:"10PM Headline",tier:2,feeMin:50,feeMax:85,status:"New",agent:"Republic / WME",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Romantic urban. Stafford Room intimate vibe for Latin match nights.",notes:""},
+  {id:35,name:"Sech",genre:"Reggaeton / Dancehall",match:"Jun 27 - Panama vs England",venue:"Whisper Room",slot:"5PM Pre-Game",tier:3,feeMin:25,feeMax:50,status:"New",agent:"Sony Latin / WME",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Panamanian star. Panama vs England night. Whisper Room pre-game for the Panamanian fan community.",notes:""},
+  {id:36,name:"Fivio Foreign",genre:"NYC Drill",match:"Any USA match night",venue:"Stafford Room",slot:"10PM Headline",tier:3,feeMin:30,feeMax:60,status:"New",agent:"Columbia Records",agentEmail:"contact@fivioforeign.com",agentPhone:"",why:"Brooklyn native. NYC drill. Cost effective headline for Stafford Room on USA match nights.",notes:""},
+  {id:37,name:"WC No Beat",genre:"Baile Funk / Electronic",match:"Jun 13 - Brazil vs Morocco",venue:"Musica NYC",slot:"2PM Build-Up",tier:3,feeMin:15,feeMax:30,status:"New",agent:"Direct",agentEmail:"booking@wcnobeat.com",agentPhone:"",why:"Baile funk build-up. Sets the Brazilian cultural tone before the main show.",notes:""},
+  {id:38,name:"Jazz Quartet",genre:"Jazz / Bossa Nova",match:"Jun 13 - Brazil vs Morocco",venue:"Sei Less",slot:"Dinner 7-10PM",tier:3,feeMin:3,feeMax:8,status:"New",agent:"Local NYC",agentEmail:"info@jazznewyork.com",agentPhone:"+1 212 555 0100",why:"Live bossa nova during Brazil match night dinner. Sei Less premium dining atmosphere.",notes:""},
+  {id:39,name:"Flamenco Guitar",genre:"Flamenco / Spanish Guitar",match:"Spain match nights",venue:"Tucci NYC",slot:"Dinner 7-10PM",tier:3,feeMin:2,feeMax:5,status:"New",agent:"Local NYC",agentEmail:"info@tuccinyc.com",agentPhone:"",why:"When Italy or Spain play, Tucci activates with Spanish guitar. Cultural touch for prix fixe premium.",notes:""},
+  {id:40,name:"Bouzouki Live",genre:"Greek Traditional",match:"Greek cultural nights",venue:"Pappas NY",slot:"Dinner 7-10PM",tier:3,feeMin:2,feeMax:5,status:"New",agent:"Local NYC",agentEmail:"info@pappasny.com",agentPhone:"",why:"Pappas is Greek-owned. Live bouzouki authenticity drives repeat traffic.",notes:""},
+  {id:41,name:"Burna Boy",genre:"Afrobeats",match:"Jun 22 - Norway vs Senegal",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:200,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"West African diaspora night. Senegal match. Bridges the entire West African NYC community.",notes:""},
 ];
 
-const VENUES = [
-  {name:"Nebula",type:"Nightclub",cap:1500,hood:"Times Square",best:"Biggest headline acts"},
-  {name:"Harbor NYC",type:"Nightclub",cap:1000,hood:"Midtown West",best:"Brazil / USA / corporate buyouts"},
-  {name:"Musica NYC",type:"Nightclub",cap:1000,hood:"Hell's Kitchen",best:"EDM, house, France, Germany"},
-  {name:"Stafford Room",type:"Sub-venue",cap:400,hood:"Midtown",best:"UK rap, drill, afternoon sets"},
-  {name:"Whisper Room",type:"Lounge",cap:300,hood:"Midtown",best:"Intimate headline, 5PM pre-game"},
-  {name:"PHD Rooftop",type:"Rooftop",cap:500,hood:"Dream Midtown Hotel",best:"Afternoon 2PM, DJ sets"},
-  {name:"Petite",type:"Lounge",cap:200,hood:"Midtown",best:"Ultra VIP, agent dinners"},
-  {name:"Sei Less",type:"Restaurant",cap:200,hood:"Midtown East",best:"Athlete dinners, celebrity VIP"},
-  {name:"Tucci NYC",type:"Restaurant",cap:180,hood:"NoHo",best:"Italy / Spain / European nights"},
-  {name:"Pappas NY",type:"Restaurant",cap:160,hood:"Greenwich Village",best:"Greek / Mediterranean nights"},
+const VENUES_DATA = [
+  {name:"Nebula",type:"nightclub",location:"Times Square",cap:1500,tableMin:"$4,000",nights:8,best:"Biggest headline acts. Final night. England, Brazil, and Latin match nights.",artists:["Bad Bunny","Stormzy","J Balvin","DJ Khaled","Cardi B","Lil Baby"]},
+  {name:"Harbor NYC",type:"nightclub",location:"Midtown West",cap:1000,tableMin:"$3,500",nights:8,best:"Brazil, USA, Afrobeats nights. Corporate buyouts. Rooftop connection.",artists:["Anitta","Burna Boy","DJ Khaled","Maluma","Karol G"]},
+  {name:"Musica NYC",type:"nightclub",location:"Hell's Kitchen",cap:1000,tableMin:"$3,000",nights:8,best:"EDM, house, electronic. France, Germany, Norway match nights.",artists:["David Guetta","Bizarrap","Alan Walker","Martin Garrix","Fisher","Chris Lake"]},
+  {name:"PHD Rooftop",type:"rooftop",location:"Dream Midtown Hotel",cap:500,tableMin:"$2,500",nights:6,best:"Afternoon 2PM sets. Pre-game DJ programming. Brazil and Mexico crowds.",artists:["Alok","Peso Pluma","Vintage Culture"]},
+  {name:"Stafford Room",type:"lounge",location:"Midtown",cap:400,tableMin:"$2,000",nights:5,best:"UK rap, drill, afternoon build-up sets. England match nights.",artists:["Central Cee","Fivio Foreign","Jhayco"]},
+  {name:"Whisper Room",type:"lounge",location:"Midtown",cap:300,tableMin:"$1,800",nights:4,best:"Intimate headline. 5PM pre-game. Private events.",artists:["Headie One","Sech","Nicki Nicole"]},
+  {name:"Petite",type:"lounge",location:"Midtown",cap:200,tableMin:"$1,500",nights:3,best:"Ultra VIP private. Agent dinners. Athlete after-parties.",artists:["Flex for any night"]},
+  {name:"Sei Less",type:"restaurant",location:"Midtown East",cap:200,tableMin:"$175/head",nights:8,best:"Athlete dinners. Celebrity VIP. Mbappe already visited.",artists:["Tems","Jorja Smith","Shakira","Jazz Quartet"]},
+  {name:"Tucci NYC",type:"restaurant",location:"NoHo",cap:180,tableMin:"$145/head",nights:6,best:"Italy and Spain match nights. Pre-theater to Musica.",artists:["Flamenco Guitar","Italian Wine Events"]},
+  {name:"Pappas NY",type:"restaurant",location:"Greenwich Village",cap:160,tableMin:"$95/head",nights:5,best:"Greek cultural nights. Mediterranean match programming.",artists:["Bouzouki Live","Mediterranean DJ"]},
 ];
 
-const SC = {New:"sNew","Outreach Sent":"sOutreach",Replied:"sReplied",Negotiating:"sNeg",Confirmed:"sConfirmed",Dead:"sDead"};
-const TC = {1:"t1",2:"t2",3:"t3"};
+const STATUSES = ['New','Outreach Sent','Replied','Negotiating','Confirmed','Dead'];
+const SC = {'New':'s-new','Outreach Sent':'s-outreach','Replied':'s-replied','Negotiating':'s-negotiating','Confirmed':'s-confirmed','Dead':'s-dead'};
+const TC = {1:'tier-1',2:'tier-2',3:'tier-3'};
 
-async function loadArtists(){
-  const q = document.getElementById('srch')?.value || '';
+let activeId = null;
+
+// ── RENDER TABLE ──
+function renderTable() {
+  const q = (document.getElementById('srch')?.value || '').toLowerCase();
   const tier = document.getElementById('fTier')?.value || '';
   const status = document.getElementById('fStatus')?.value || '';
-  const venue = document.getElementById('fVenue')?.value || '';
+  const match = document.getElementById('fMatch')?.value || '';
 
-  const params = new URLSearchParams({action:'search',message:q});
-  if(venue) params.set('venue',venue);
+  let list = ARTISTS.filter(a => {
+    const matchQ = !q || a.name.toLowerCase().includes(q) || a.genre.toLowerCase().includes(q) || a.match.toLowerCase().includes(q) || a.venue.toLowerCase().includes(q);
+    const matchTier = !tier || a.tier === parseInt(tier);
+    const matchStatus = !status || a.status === status;
+    const matchMatch = !match || a.match.toLowerCase().includes(match.toLowerCase());
+    return matchQ && matchTier && matchStatus && matchMatch;
+  });
 
-  try {
-    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'search',message:q,venue,status})});
-    let data = await res.json();
-    if(!Array.isArray(data)) data = allArtists;
-    else allArtists = data;
+  document.getElementById('artistRows').innerHTML = list.map(a => `
+    <tr>
+      <td>
+        <div class="artist-name">${a.name}</div>
+        <div class="artist-genre">${a.genre}</div>
+      </td>
+      <td style="font-size:12px;color:var(--text2);max-width:140px">${a.match}</td>
+      <td style="font-size:12px;color:var(--text2)">${a.venue}</td>
+      <td style="font-size:11px;color:var(--text3)">${a.slot}</td>
+      <td><span class="tier-badge ${TC[a.tier]||'tier-3'}">Tier ${a.tier}</span></td>
+      <td><span class="fee-text">$${a.feeMin}K - $${a.feeMax}K</span></td>
+      <td><span class="agent-text">${a.agent}</span></td>
+      <td><span class="status-badge-sm ${SC[a.status]||'s-new'}">${a.status}</span></td>
+      <td>
+        <div class="row-actions">
+          <button class="row-btn" onclick="openArtist(${a.id})">View</button>
+          <button class="row-btn primary" onclick="openAndDraft(${a.id})">Email agent</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
 
-    let filtered = data;
-    if(tier) filtered = filtered.filter(a=>a.tier===parseInt(tier));
-    if(status) filtered = filtered.filter(a=>a.status===status);
-
-    document.getElementById('nb-artists').textContent = filtered.length;
-    document.getElementById('k-total').textContent = allArtists.length;
-    document.getElementById('k-confirmed').textContent = allArtists.filter(a=>a.status==='Confirmed').length;
-
-    document.getElementById('artistsGrid').innerHTML = filtered.map(renderArtistCard).join('');
-  } catch(e){
-    document.getElementById('artistsGrid').innerHTML = '<div style="color:var(--muted);padding:20px">Connect to backend to load artists</div>';
-  }
+  updateKPIs();
 }
 
-function renderArtistCard(a){
-  const fee = `$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K`;
-  return `<div class="acard">
-    <div class="acard-top">
-      <div><div class="acard-name">${a.name}</div><div class="acard-genre">${a.genre}</div></div>
-      <span class="tier-badge ${TC[a.tier]||'t3'}">Tier ${a.tier}</span>
-    </div>
-    <div class="acard-why">${a.why}</div>
-    <div class="acard-meta">
-      <div class="meta-item"><div class="meta-label">Match night</div><div class="meta-value" style="font-size:9px">${a.matchNight}</div></div>
-      <div class="meta-item"><div class="meta-label">Venue</div><div class="meta-value" style="font-size:9px">${a.venue}</div></div>
-      <div class="meta-item"><div class="meta-label">Fee est.</div><div class="meta-value gold">${fee}</div></div>
-      <div class="meta-item"><div class="meta-label">Agent</div><div class="meta-value" style="font-size:9px">${a.agent}</div></div>
-    </div>
-    <div class="acard-status"><span class="status-pill ${SC[a.status]||'sNew'}">${a.status}</span></div>
-    <div class="acard-actions">
-      <button class="abtn" onclick="openArtist(${a.id})">View + Email</button>
-      <button class="abtn" onclick="quickDraft(${a.id})">AI draft ↗</button>
-    </div>
-  </div>`;
-}
-
-function renderMatches(){
-  const typeClass = {Final:'tFinal','Round of 32':'tKnock','Round of 16':'tKnock','Group Stage':'tGroup'};
-  document.getElementById('matchesGrid').innerHTML = MATCHES.map(m=>`
-    <div class="match-card ${m.type==='Final'?'final':''}" onclick="filterByMatch(m.date)" style="cursor:pointer" onclick="filterByMatch('${m.date}')">
-      <div class="match-date">${m.day.toUpperCase()} ${m.date} · ${m.time} ET</div>
-      <div class="match-teams">${m.emoji} ${m.teams}</div>
-      <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-        <span class="match-type-pill ${typeClass[m.type]||'tGroup'}">${m.type}</span>
-        <span style="font-size:10px;color:var(--muted)">${m.group}</span>
+// ── RENDER PIPELINE ──
+function renderPipeline() {
+  const cols = document.getElementById('pipelineCols');
+  if (!cols) return;
+  cols.innerHTML = STATUSES.map(st => {
+    const items = ARTISTS.filter(a => a.status === st);
+    return `
+      <div class="pcol">
+        <div class="pcol-header">
+          ${st}
+          <span class="pcol-count">${items.length}</span>
+        </div>
+        ${items.length === 0
+          ? `<div style="font-size:12px;color:var(--text3);padding:12px 0">None yet</div>`
+          : items.map(a => `
+            <div class="pipeline-item" onclick="openArtist(${a.id})">
+              <div class="pi-name">${a.name}</div>
+              <div class="pi-match">${a.match.substring(0,20)}...</div>
+              <div class="pi-venue">${a.venue}</div>
+              <div class="pi-fee">$${a.feeMin}K - $${a.feeMax}K</div>
+            </div>
+          `).join('')
+        }
       </div>
-      <div class="match-demand" style="margin-top:8px;color:${m.demand==='PEAK'?'var(--gold)':m.demand==='Very High'?'var(--green)':'var(--soft)'}">Fan demand: ${m.demand}</div>
-      <button class="abtn" style="margin-top:10px;width:100%" onclick="event.stopPropagation();filterByMatch('${m.date}')">See artists for this night</button>
-    </div>`).join('');
-}
-
-function renderVenues(){
-  document.getElementById('venuesGrid').innerHTML = VENUES.map(v=>`
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <div style="font-size:14px;font-weight:600;color:var(--text)">${v.name}</div>
-        <span style="font-size:9px;padding:2px 8px;border-radius:10px;background:rgba(201,168,76,.15);color:var(--gold)">${v.type}</span>
-      </div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">${v.hood} · Cap: ${v.cap.toLocaleString()}</div>
-      <div style="font-size:11px;color:var(--soft);line-height:1.5">${v.best}</div>
-      <button class="abtn" style="margin-top:10px;width:100%" onclick="filterByVenue('${v.name}')">See artists for ${v.name}</button>
-    </div>`).join('');
-}
-
-function renderPipeline(){
-  const statuses = ['New','Outreach Sent','Replied','Negotiating','Confirmed','Dead'];
-  const html = statuses.map(st=>{
-    const arts = allArtists.filter(a=>a.status===st);
-    if(arts.length===0) return '';
-    return `<div style="margin-bottom:20px">
-      <div style="font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">${st} (${arts.length})</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        ${arts.map(a=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between">
-          <div>
-            <div style="font-size:13px;font-weight:500;color:var(--text)">${a.name}</div>
-            <div style="font-size:10px;color:var(--muted);margin-top:1px">${a.matchNight} · ${a.venue}</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:6px">
-            <span style="font-size:10px;color:var(--gold)">$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K</span>
-            <button class="abtn" onclick="openArtist(${a.id})">Open</button>
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>`;
+    `;
   }).join('');
-  document.getElementById('pipelineBoard').innerHTML = html || '<div style="color:var(--muted);padding:20px">No artists in pipeline yet.</div>';
 }
 
-function filterByMatch(date){
-  nav('artists');
-  document.getElementById('srch').value = date;
-  loadArtists();
-}
-function filterByVenue(venue){
-  nav('artists');
-  document.getElementById('fVenue').value = venue;
-  loadArtists();
+// ── RENDER VENUES ──
+function renderVenues() {
+  const grid = document.getElementById('venueGrid');
+  if (!grid) return;
+  grid.innerHTML = VENUES_DATA.map(v => {
+    const typeClass = {nightclub:'nightclub',rooftop:'rooftop',lounge:'lounge',restaurant:'restaurant'}[v.type] || 'lounge';
+    return `
+      <div class="venue-card ${typeClass}">
+        <div class="vc-name">${v.name}</div>
+        <div class="vc-type">${v.type.charAt(0).toUpperCase()+v.type.slice(1)} · ${v.location}</div>
+        <div class="vc-stat"><span class="vc-stat-label">Capacity</span><span class="vc-stat-value">${v.cap.toLocaleString()}</span></div>
+        <div class="vc-stat"><span class="vc-stat-label">Min spend</span><span class="vc-stat-value">${v.tableMin}</span></div>
+        <div class="vc-stat"><span class="vc-stat-label">Active nights</span><span class="vc-stat-value">${v.nights}</span></div>
+        <div class="vc-divider"></div>
+        <div class="vc-best">${v.best}</div>
+        <div class="vc-artists">Artists: ${v.artists.slice(0,3).join(', ')}${v.artists.length > 3 ? ` +${v.artists.length-3} more` : ''}</div>
+      </div>
+    `;
+  }).join('');
 }
 
-async function openArtist(id){
-  const a = allArtists.find(x=>x.id===id);
-  if(!a) return;
-  activeArtistId = id;
-  document.getElementById('m-name').textContent = `${a.name} — ${a.genre}`;
-  document.getElementById('m-agent').textContent = a.agent;
-  document.getElementById('m-email').textContent = a.agentEmail;
-  document.getElementById('m-phone').textContent = a.agentPhone || 'Not listed';
-  document.getElementById('m-ig').textContent = a.instagram || 'Not listed';
-  document.getElementById('m-match').textContent = a.matchNight;
-  document.getElementById('m-venue').textContent = a.venue;
-  document.getElementById('m-fee').textContent = `$${(a.feeMin/1000).toFixed(0)}K–$${(a.feeMax/1000).toFixed(0)}K`;
-  document.getElementById('m-why').textContent = a.why;
-  document.getElementById('m-status').value = a.status;
-  document.getElementById('m-notes').value = a.notes || '';
-  document.getElementById('draftSubject').textContent = '';
-  document.getElementById('draftBody').value = '';
-  document.getElementById('modalMsg').style.display = 'none';
+// ── KPIs ──
+function updateKPIs() {
+  const confirmed = ARTISTS.filter(a => a.status === 'Confirmed').length;
+  const outreach = ARTISTS.filter(a => a.status === 'Outreach Sent').length;
+  if (document.getElementById('k-total')) document.getElementById('k-total').textContent = ARTISTS.length;
+  if (document.getElementById('k-confirmed')) document.getElementById('k-confirmed').textContent = confirmed;
+  if (document.getElementById('k-outreach')) document.getElementById('k-outreach').textContent = outreach;
+  if (document.getElementById('nb-total')) document.getElementById('nb-total').textContent = ARTISTS.length;
+}
+
+// ── NAVIGATION ──
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
+
+  const view = document.getElementById('view-' + name);
+  if (view) view.classList.add('active');
+
+  const navMap = {calendar:'Calendar',artists:'Artists',pipeline:'Pipeline',venues:'Venues',intelligence:'Intelligence'};
+  document.querySelectorAll('.nav-link').forEach(n => { if(n.textContent === navMap[name]) n.classList.add('active'); });
+
+  const sb = document.getElementById('sb-' + name);
+  if (sb) sb.classList.add('active');
+
+  if (name === 'artists') renderTable();
+  if (name === 'pipeline') renderPipeline();
+  if (name === 'venues') renderVenues();
+}
+
+function filterMatch(keyword) {
+  showView('artists');
+  document.getElementById('fMatch').value = keyword;
+  renderTable();
+}
+
+function filterVenue(keyword) {
+  showView('artists');
+  document.getElementById('srch').value = keyword;
+  renderTable();
+}
+
+// ── ARTIST MODAL ──
+function openArtist(id) {
+  const a = ARTISTS.find(x => x.id === id);
+  if (!a) return;
+  activeId = id;
+
+  document.getElementById('modal-name').textContent = a.name;
+  document.getElementById('modal-genre').textContent = a.genre;
+  document.getElementById('modal-match').textContent = a.match;
+  document.getElementById('modal-venue').textContent = a.venue;
+  document.getElementById('modal-fee').textContent = `$${a.feeMin}K - $${a.feeMax}K`;
+  document.getElementById('modal-why').textContent = a.why;
+  document.getElementById('modal-agent').textContent = a.agent;
+  document.getElementById('modal-email').textContent = a.agentEmail;
+  document.getElementById('modal-phone').textContent = a.agentPhone || 'Not listed';
+  document.getElementById('modal-status').value = a.status;
+  document.getElementById('modal-notes').value = a.notes || '';
+  document.getElementById('draft-subject').value = '';
+  document.getElementById('draft-body').value = '';
+  document.getElementById('modal-success').style.display = 'none';
   document.getElementById('artistModal').classList.add('open');
 }
 
-function closeModal(){ document.getElementById('artistModal').classList.remove('open'); }
-
-function updateStatus(){
-  if(!activeArtistId) return;
-  const a = allArtists.find(x=>x.id===activeArtistId);
-  if(a) { a.status = document.getElementById('m-status').value; a.notes = document.getElementById('m-notes').value; }
-  renderPipeline();
-  loadArtists();
-}
-
-async function aiDraft(){
-  if(!activeArtistId) return;
-  const btn = document.getElementById('draftBtn');
-  btn.textContent = 'Drafting...';
-  try {
-    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'draft-email',artistId:activeArtistId})});
-    const data = await res.json();
-    document.getElementById('draftSubject').textContent = data.subject || '';
-    document.getElementById('draftBody').value = data.body || '';
-    toast('Email drafted by Claude','info');
-  } catch(e){ toast('Draft failed — check API connection','err'); }
-  btn.textContent = 'AI Draft email';
-}
-
-async function quickDraft(id){
-  activeArtistId = id;
-  await aiDraft();
+async function openAndDraft(id) {
   openArtist(id);
+  setTimeout(() => draftEmail(), 300);
 }
 
-async function sendBookingEmail(){
-  const a = allArtists.find(x=>x.id===activeArtistId);
-  if(!a) return;
-  const subject = document.getElementById('draftSubject').textContent;
-  const body = document.getElementById('draftBody').value;
-  if(!subject || !body){ toast('Draft the email first','err'); return; }
+function closeModal() {
+  document.getElementById('artistModal').classList.remove('open');
+}
 
-  const btn = document.getElementById('sendBtn');
-  btn.textContent = 'Sending...';
+function updateArtistStatus() {
+  if (!activeId) return;
+  const a = ARTISTS.find(x => x.id === activeId);
+  if (a) {
+    a.status = document.getElementById('modal-status').value;
+    a.notes = document.getElementById('modal-notes').value;
+  }
+  renderPipeline();
+  updateKPIs();
+}
+
+async function draftEmail() {
+  if (!activeId) return;
+  const btn = document.getElementById('draft-btn');
+  btn.textContent = 'Drafting...';
+  btn.disabled = true;
+
   try {
-    const res = await fetch(`${API}/send-email`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:a.agentEmail,subject,body,artistName:a.name})});
+    const res = await fetch(`${API}/ai`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'draft-email', artistId: activeId })
+    });
     const data = await res.json();
-    if(data.ok){
+    if (data.subject) document.getElementById('draft-subject').value = data.subject;
+    if (data.body) document.getElementById('draft-body').value = data.body;
+    toast('Email draft ready', 'success');
+  } catch (e) {
+    toast('Unable to connect. Check deployment settings.', 'error');
+  }
+
+  btn.textContent = 'Draft email';
+  btn.disabled = false;
+}
+
+async function sendEmail() {
+  const a = ARTISTS.find(x => x.id === activeId);
+  if (!a) return;
+  const subject = document.getElementById('draft-subject').value;
+  const body = document.getElementById('draft-body').value;
+  if (!subject || !body) { toast('Draft the email first', 'error'); return; }
+
+  const btn = document.getElementById('send-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`${API}/send-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to: a.agentEmail, subject, body, artistName: a.name })
+    });
+    const data = await res.json();
+    if (data.ok) {
       a.status = 'Outreach Sent';
-      document.getElementById('m-status').value = 'Outreach Sent';
-      const msg = document.getElementById('modalMsg');
+      document.getElementById('modal-status').value = 'Outreach Sent';
+      const msg = document.getElementById('modal-success');
       msg.textContent = `Email sent to ${a.agentEmail}`;
       msg.style.display = 'block';
-      toast(`Booking inquiry sent to ${a.agent}`,'ok');
-      loadArtists();
+      toast(`Sent to ${a.agent}`, 'success');
+      renderPipeline();
+      updateKPIs();
     } else {
-      toast(data.error || 'Send failed','err');
+      toast(data.error || 'Send failed', 'error');
     }
-  } catch(e){ toast('Send failed — check email config','err'); }
+  } catch (e) {
+    toast('Send failed. Check email configuration.', 'error');
+  }
+
   btn.textContent = 'Send to agent';
+  btn.disabled = false;
 }
 
-async function sendAI(){
-  const el = document.getElementById('ai1');
-  const q = el.value.trim(); if(!q) return;
-  addMsg('msgs1', q, 'user'); el.value = '';
-  document.getElementById('think1').classList.add('on');
-  try {
-    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'chat',message:q})});
-    const data = await res.json();
-    addMsg('msgs1', data.reply || data.error, 'bot');
-  } catch(e){ addMsg('msgs1','Connection error — is the server running?','bot'); }
-  document.getElementById('think1').classList.remove('on');
+function openAddArtist() {
+  showView('artists');
+  toast('Use the table to manage artists. Add new via the artist modal.', '');
 }
 
-async function sendAsk(){
-  const el = document.getElementById('askIn');
-  const q = el.value.trim(); if(!q) return;
-  const m = document.getElementById('askMsgs');
-  const d = document.createElement('div'); d.className='msg user'; d.textContent=q; m.appendChild(d);
+// ── INTELLIGENCE / CHAT ──
+async function sendChat() {
+  const el = document.getElementById('chatInput');
+  const q = el.value.trim();
+  if (!q) return;
+
+  const msgs = document.getElementById('chatMsgs');
+  const userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg user';
+  userMsg.textContent = q;
+  msgs.appendChild(userMsg);
   el.value = '';
-  document.getElementById('askThink').classList.add('on');
+
+  document.getElementById('chatThinking').classList.add('show');
+
   try {
-    const res = await fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'chat',message:q})});
+    const res = await fetch(`${API}/ai`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'chat', message: q })
+    });
     const data = await res.json();
-    const r = document.createElement('div'); r.className='msg bot'; r.textContent=data.reply||data.error; m.appendChild(r);
-    m.scrollTop = m.scrollHeight;
-  } catch(e){ const r=document.createElement('div'); r.className='msg bot'; r.textContent='Connection error'; m.appendChild(r); }
-  document.getElementById('askThink').classList.remove('on');
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-msg response';
+    botMsg.textContent = data.reply || data.error || 'No response received.';
+    msgs.appendChild(botMsg);
+    msgs.scrollTop = msgs.scrollHeight;
+  } catch (e) {
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-msg response';
+    botMsg.textContent = 'Unable to connect to the backend. Ensure your Netlify deployment is live with all environment variables set.';
+    msgs.appendChild(botMsg);
+  }
+
+  document.getElementById('chatThinking').classList.remove('show');
+  msgs.scrollTop = msgs.scrollHeight;
 }
 
-function qAsk(q){ document.getElementById('askIn').value=q; sendAsk(); }
-
-async function analyzeAll(){
-  nav('ask');
-  document.getElementById('askIn').value = 'Analyze my full booking pipeline. What should I prioritize this week?';
-  await sendAsk();
+function qa(q) {
+  document.getElementById('chatInput').value = q;
+  sendChat();
 }
 
-function addMsg(id, text, type){
-  const el = document.getElementById(id);
-  const d = document.createElement('div'); d.className=`msg ${type}`; d.textContent=text;
-  el.appendChild(d); el.scrollTop=el.scrollHeight;
-}
-
-function nav(name){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
-  document.querySelectorAll('.nav').forEach(n=>n.classList.remove('on'));
-  document.getElementById('view-'+name).classList.add('on');
-  const nb = document.getElementById('n-'+name);
-  if(nb) nb.classList.add('on');
-  if(name==='artists') loadArtists();
-  if(name==='pipeline') renderPipeline();
-  if(name==='venues') renderVenues();
-}
-
-function toast(msg, type=''){
+// ── TOAST ──
+function toast(msg, type = '') {
   const el = document.getElementById('toast');
-  el.textContent = msg; el.className=`toast show ${type}`;
-  setTimeout(()=>el.className='toast',3000);
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(() => el.className = 'toast', 3000);
 }
 
-// INIT
-renderMatches();
-renderVenues();
-// Pre-load artists from data module for offline use
-fetch(`${API}/ai`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'search',message:''})})
-  .then(r=>r.json()).then(data=>{ if(Array.isArray(data)) allArtists=data; })
-  .catch(()=>{});
+// ── INIT ──
+updateKPIs();
 </script>
 </body>
 </html>
