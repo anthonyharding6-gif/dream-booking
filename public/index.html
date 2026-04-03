@@ -1,1571 +1,997 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dream Hospitality — World Cup 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Soccer Agent Intelligence — Dream Hospitality WC2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --white: #FFFFFF;
-  --off: #FAFAF8;
-  --surface: #F5F4F0;
-  --surface2: #EEEDE8;
-  --border: #E0DED8;
-  --border2: #D0CEC8;
-  --text: #1A1916;
-  --text2: #4A4844;
-  --text3: #8A8880;
-  --gold: #9A7B2E;
-  --gold-light: #F5EDD6;
-  --gold-mid: #C9A84C;
-  --green: #1A5C38;
-  --green-light: #E8F5EE;
-  --red: #8B1A1A;
-  --red-light: #FAEAEA;
-  --blue: #1A3A6B;
-  --blue-light: #E8EEFA;
-  --orange: #7A3D0A;
-  --orange-light: #FDF0E5;
-  --f: 'DM Sans', sans-serif;
-  --fs: 'DM Serif Display', serif;
-  --radius: 10px;
-  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
-  --shadow-lg: 0 2px 8px rgba(0,0,0,.08), 0 12px 40px rgba(0,0,0,.08);
+  --white: #ffffff;
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --border: #d2d2d7;
+  --border-light: #e8e8ed;
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #aeaeb2;
+  --gold: #b5893a;
+  --gold-light: #d4a85a;
+  --gold-bg: #fdf6ec;
+  --green: #34c759;
+  --green-bg: #f0fbf3;
+  --green-text: #1a7a34;
+  --red: #ff3b30;
+  --red-bg: #fff2f1;
+  --red-text: #c0392b;
+  --amber: #ff9500;
+  --amber-bg: #fff8f0;
+  --amber-text: #8a4f00;
+  --blue: #0071e3;
+  --blue-bg: #f0f7ff;
+  --blue-text: #004b99;
+  --purple: #8e44ad;
+  --purple-bg: #f8f2fc;
+  --purple-text: #6b2d8a;
 }
 
-html, body {
-  min-height: 100%;
-  background: var(--off);
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
   color: var(--text);
-  font-family: var(--f);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── NAVBAR ── */
-.navbar {
+/* ── PAGE HEADER ── */
+.page-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  padding: 40px 48px 32px;
+}
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.page-header h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 300;
+  max-width: 680px;
+  line-height: 1.6;
+}
+.header-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+}
+.hstat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.hstat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.hstat-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 0;
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(250,250,248,.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  height: 56px;
+  z-index: 50;
+  overflow-x: auto;
+}
+.filter-tab {
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+.filter-tab:hover { color: var(--text); }
+.filter-tab.active { color: var(--text); border-bottom-color: var(--text); }
+.filter-divider { width: 1px; height: 20px; background: var(--border-light); margin: 0 8px; flex-shrink: 0; }
+.filter-right {
+  margin-left: auto;
+  padding: 10px 0;
   display: flex;
   align-items: center;
-  padding: 0 28px;
-  gap: 0;
-}
-
-.nav-brand {
-  font-family: var(--fs);
-  font-size: 17px;
-  color: var(--text);
-  letter-spacing: -.2px;
-  margin-right: 40px;
+  gap: 12px;
   flex-shrink: 0;
 }
-.nav-brand span { color: var(--gold); }
-
-.nav-links {
-  display: flex;
-  gap: 2px;
-  flex: 1;
+.search-wrap {
+  position: relative;
 }
-
-.nav-link {
-  padding: 6px 14px;
-  border-radius: 8px;
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
   font-size: 13px;
-  font-weight: 400;
-  color: var(--text3);
-  cursor: pointer;
-  transition: all .15s;
-  border: none;
-  background: none;
-  font-family: var(--f);
+}
+.search-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 7px 12px 7px 30px;
+  font-size: 13px;
+  width: 220px;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.15s;
+}
+.search-box:focus { border-color: var(--blue); background: var(--white); }
+.count-chip {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 4px 12px;
   white-space: nowrap;
 }
-.nav-link:hover { background: var(--surface); color: var(--text2); }
-.nav-link.active { background: var(--surface); color: var(--text); font-weight: 500; }
 
-.nav-right {
+/* ── GRID ── */
+.grid-wrap {
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── AGENCY CARD ── */
+.agency-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.agency-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  border-color: var(--border);
+}
+
+/* Card header */
+.card-head {
+  padding: 28px 32px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+.agency-monogram {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-left: auto;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  font-weight: 400;
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
 }
-
-.status-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text3);
-  background: var(--surface);
-  padding: 5px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-}
-.status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #34C759;
-  animation: pulse 2.5s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
-
-.btn {
-  padding: 7px 18px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all .15s;
-  font-family: var(--f);
-  border: 1px solid var(--border2);
-  background: var(--white);
+.head-main { flex: 1; min-width: 0; }
+.agency-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
   color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
-.btn:hover { background: var(--surface); }
-.btn-primary {
-  background: var(--text);
-  color: var(--white);
-  border-color: var(--text);
-}
-.btn-primary:hover { opacity: .85; }
-.btn-gold {
-  background: var(--gold-light);
-  color: var(--gold);
-  border-color: #D4B86A;
-}
-.btn-gold:hover { background: #EDE3C4; }
-
-/* ── LAYOUT ── */
-.layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  min-height: calc(100vh - 56px);
-}
-
-/* ── SIDEBAR ── */
-.sidebar {
-  background: var(--white);
-  border-right: 1px solid var(--border);
-  padding: 20px 0;
-  position: sticky;
-  top: 56px;
-  height: calc(100vh - 56px);
-  overflow-y: auto;
-}
-
-.sb-section {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--text3);
-  padding: 12px 18px 6px;
-}
-
-.sb-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 18px;
-  font-size: 13px;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all .12s;
-  border-left: 2px solid transparent;
-}
-.sb-item:hover { background: var(--off); color: var(--text); }
-.sb-item.active {
-  background: var(--gold-light);
-  color: var(--gold);
-  border-left-color: var(--gold-mid);
-  font-weight: 500;
-}
-
-.sb-count {
-  font-size: 11px;
-  padding: 1px 7px;
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text3);
-}
-.sb-item.active .sb-count { background: rgba(154,123,46,.15); color: var(--gold); }
-
-.sb-divider { height: 1px; background: var(--border); margin: 10px 0; }
-
-.sb-match {
-  padding: 6px 18px;
+.agency-sub {
   font-size: 12px;
-  color: var(--text3);
-  cursor: pointer;
-  transition: .12s;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  font-weight: 300;
+}
+.head-badges {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
-.sb-match:hover { background: var(--off); color: var(--text2); }
-.sb-match.peak { color: var(--gold); font-weight: 500; }
+.heat-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.heat-HOT { background: var(--red-bg); color: var(--red-text); }
+.heat-WARM { background: var(--amber-bg); color: var(--amber-text); }
+.heat-COLD { background: var(--blue-bg); color: var(--blue-text); }
+.region-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
 
-/* ── MAIN ── */
-.main { overflow-y: auto; }
-.view { display: none; padding: 32px 32px; }
-.view.active { display: block; }
-
-/* ── PAGE HEADER ── */
-.page-header { margin-bottom: 28px; }
-.page-title {
-  font-family: var(--fs);
-  font-size: 30px;
-  font-weight: 400;
-  color: var(--text);
-  letter-spacing: -.5px;
+/* Card meta strip */
+.card-meta {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg);
+}
+.meta-cell {
+  flex: 1;
+  padding: 14px 24px;
+  border-right: 1px solid var(--border-light);
+}
+.meta-cell:last-child { border-right: none; }
+.meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin-bottom: 4px;
 }
-.page-sub { font-size: 14px; color: var(--text3); font-weight: 300; }
-
-/* ── KPI STRIP ── */
-.kpi-strip {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  margin-bottom: 32px;
-  box-shadow: var(--shadow);
-}
-.kpi {
-  background: var(--white);
-  padding: 18px 20px;
-}
-.kpi-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; letter-spacing: .02em; }
-.kpi-value { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -.5px; line-height: 1; }
-.kpi-value.gold { color: var(--gold); }
-.kpi-value.green { color: var(--green); }
-.kpi-value.blue { color: var(--blue); }
-.kpi-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-/* ── SECTION HEADER ── */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-.section-title { font-size: 17px; font-weight: 500; color: var(--text); letter-spacing: -.2px; }
-.section-action { font-size: 13px; color: var(--blue); cursor: pointer; }
-.section-action:hover { text-decoration: underline; }
-
-/* ── MATCH GRID ── */
-.match-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 36px;
-}
-
-.match-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  cursor: pointer;
-  transition: all .2s;
-  box-shadow: var(--shadow);
-}
-.match-card:hover {
-  border-color: var(--border2);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
-}
-.match-card.final {
-  background: var(--gold-light);
-  border-color: #D4B86A;
-}
-.match-card.knockout { background: var(--blue-light); border-color: #B8C8E8; }
-
-.mc-date { font-size: 10px; color: var(--text3); margin-bottom: 6px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
-.mc-teams { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
-
-.mc-pill {
-  font-size: 10px;
-  padding: 2px 9px;
-  border-radius: 6px;
+.meta-value {
+  font-size: 13px;
   font-weight: 500;
-  display: inline-block;
-}
-.pill-group { background: var(--green-light); color: var(--green); }
-.pill-knockout { background: var(--blue-light); color: var(--blue); }
-.pill-final { background: var(--gold-light); color: var(--gold); border: 1px solid #D4B86A; }
-
-.mc-headline { font-size: 12px; color: var(--text2); margin-top: 10px; font-weight: 400; }
-.mc-headline strong { font-weight: 600; color: var(--text); }
-.mc-venue { font-size: 11px; color: var(--text3); margin-top: 3px; }
-.mc-cta {
-  width: 100%;
-  margin-top: 12px;
-  padding: 7px 0;
-  border-radius: 7px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text2);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: var(--f);
-  transition: .15s;
-}
-.mc-cta:hover { background: var(--surface); color: var(--text); }
-.match-card.final .mc-cta { border-color: #D4B86A; color: var(--gold); }
-.match-card.final .mc-cta:hover { background: rgba(201,168,76,.1); }
-
-/* ── ARTIST TABLE ── */
-.table-toolbar {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.search-input {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 14px;
   color: var(--text);
-  font-family: var(--f);
-  font-size: 13px;
-  outline: none;
-  width: 260px;
-  box-shadow: var(--shadow);
 }
-.search-input:focus { border-color: var(--border2); }
+.meta-value.gold { color: var(--gold); }
 
-.filter-select {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 7px 12px;
-  color: var(--text2);
-  font-family: var(--f);
-  font-size: 13px;
-  cursor: pointer;
-  outline: none;
-  box-shadow: var(--shadow);
+/* Players row */
+.players-row {
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
-.filter-select:focus { border-color: var(--border2); }
-
-.table-wrap {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-table { width: 100%; border-collapse: collapse; }
-thead th {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text3);
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  letter-spacing: .03em;
-  white-space: nowrap;
-}
-tbody td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border2);
-  font-size: 13px;
-  vertical-align: middle;
-}
-tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: var(--off); }
-
-.artist-name { font-weight: 500; color: var(--text); }
-.artist-genre { font-size: 11px; color: var(--text3); margin-top: 1px; }
-
-.tier-badge {
+.players-label {
   font-size: 10px;
-  padding: 3px 9px;
-  border-radius: 6px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-.tier-1 { background: var(--gold-light); color: var(--gold); }
-.tier-2 { background: var(--blue-light); color: var(--blue); }
-.tier-3 { background: var(--green-light); color: var(--green); }
-
-.status-badge-sm {
-  font-size: 10px;
-  padding: 3px 9px;
-  border-radius: 6px;
-  font-weight: 500;
-}
-.s-new { background: var(--surface); color: var(--text3); }
-.s-outreach { background: var(--orange-light); color: var(--orange); }
-.s-replied { background: var(--blue-light); color: var(--blue); }
-.s-negotiating { background: #F0E8FA; color: #5A2080; }
-.s-confirmed { background: var(--green-light); color: var(--green); }
-.s-dead { background: var(--red-light); color: var(--red); }
-
-.fee-text { font-size: 12px; font-weight: 500; color: var(--text2); }
-.agent-text { font-size: 11px; color: var(--text3); }
-
-.row-actions { display: flex; gap: 5px; }
-.row-btn {
-  font-size: 11px;
-  padding: 4px 11px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text2);
-  cursor: pointer;
-  font-family: var(--f);
-  font-weight: 500;
-  transition: .12s;
-  white-space: nowrap;
-}
-.row-btn:hover { background: var(--surface); color: var(--text); }
-.row-btn.primary { background: var(--text); color: var(--white); border-color: var(--text); }
-.row-btn.primary:hover { opacity: .85; }
-.row-btn.gold-btn { background: var(--gold-light); color: var(--gold); border-color: #D4B86A; }
-.row-btn.gold-btn:hover { background: #EDE3C4; }
-
-/* ── VENUE GRID ── */
-.venue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.venue-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  transition: .2s;
-}
-.venue-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
-.venue-card.restaurant { border-left: 3px solid var(--gold-mid); }
-.venue-card.nightclub { border-left: 3px solid var(--blue); }
-.venue-card.rooftop { border-left: 3px solid var(--green); }
-.venue-card.lounge { border-left: 3px solid var(--border2); }
-
-.vc-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-.vc-type { font-size: 11px; color: var(--text3); margin-bottom: 14px; }
-.vc-stat { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
-.vc-stat-label { color: var(--text3); }
-.vc-stat-value { font-weight: 500; color: var(--text); }
-.vc-divider { height: 1px; background: var(--border2); margin: 12px 0; }
-.vc-best { font-size: 12px; color: var(--text2); line-height: 1.55; }
-.vc-artists { font-size: 11px; color: var(--text3); margin-top: 8px; }
-
-/* ── PIPELINE ── */
-.pipeline-cols {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-}
-.pcol { }
-.pcol-header {
-  font-size: 11px;
   font-weight: 600;
-  color: var(--text3);
-  letter-spacing: .06em;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 8px 0;
-  margin-bottom: 10px;
-  border-bottom: 2px solid var(--border);
+  padding-top: 4px;
+  white-space: nowrap;
+  min-width: 100px;
+}
+.player-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.player-chip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.pcol-count {
+  gap: 5px;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 4px 10px 4px 8px;
   font-size: 12px;
+  color: var(--text);
+}
+.player-chip .flag { font-size: 14px; }
+.wc-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+/* ── CARD BODY: 2 COL LAYOUT ── */
+.card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border-light);
+}
+.body-left {
+  padding: 24px 32px;
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.body-right {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.intel-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+}
+.intel-text strong { color: var(--text); font-weight: 600; }
+
+/* Leagues */
+.league-wrap { display: flex; flex-wrap: wrap; gap: 5px; }
+.league-tag {
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── CONTACTS SECTION ── */
+.contacts-section {
+  padding: 24px 32px;
+  background: var(--bg);
+}
+.contacts-section .section-label { margin-bottom: 16px; }
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+.contact-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: border-color 0.15s;
+}
+.contact-card:hover { border-color: var(--border); }
+.contact-rank {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.rank-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.rank-1 { background: var(--gold-bg); color: var(--gold); }
+.rank-2 { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border-light); }
+.rank-3 { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border-light); }
+.rank-4 { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border-light); }
+.contact-loc-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+.loc-nyc { background: var(--green-bg); color: var(--green-text); }
+.loc-la { background: var(--blue-bg); color: var(--blue-text); }
+.loc-london { background: var(--purple-bg); color: var(--purple-text); }
+.loc-paris { background: #f8f0ff; color: #6b2d8a; }
+.loc-porto { background: #fff3e0; color: #8a4500; }
+.loc-monaco { background: #e8f4fd; color: #0a4b7c; }
+.loc-dubai { background: #fdf6ec; color: var(--gold); }
+.loc-saopaulobr { background: #f0fff4; color: #1a6b3a; }
+.contact-name {
+  font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  background: var(--surface);
-  padding: 1px 8px;
-  border-radius: 10px;
+  margin-bottom: 2px;
 }
-
-.pipeline-item {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: .15s;
-  box-shadow: var(--shadow);
-}
-.pipeline-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
-.pi-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-.pi-match { font-size: 11px; color: var(--text3); margin-bottom: 1px; }
-.pi-venue { font-size: 11px; color: var(--text3); }
-.pi-fee { font-size: 12px; font-weight: 500; color: var(--gold); margin-top: 6px; }
-
-/* ── INTELLIGENCE ── */
-.intel-layout {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 24px;
-}
-
-.intel-chat {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  height: 560px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-.chat-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  background: var(--surface);
-}
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.chat-msg {
-  padding: 12px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  max-width: 85%;
-}
-.chat-msg.system {
-  background: var(--surface);
-  color: var(--text2);
-  align-self: flex-start;
-}
-.chat-msg.user {
-  background: var(--text);
-  color: var(--white);
-  align-self: flex-end;
-}
-.chat-msg.response {
-  background: var(--white);
-  border: 1px solid var(--border);
-  color: var(--text);
-  align-self: flex-start;
-}
-.thinking {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text3);
-  padding: 4px 0;
-}
-.thinking.show { display: flex; }
-.dot-pulse span {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--text3); display: inline-block; margin: 0 1px;
-  animation: dp .6s infinite;
-}
-.dot-pulse span:nth-child(2){animation-delay:.1s}
-.dot-pulse span:nth-child(3){animation-delay:.2s}
-@keyframes dp{0%,80%,100%{opacity:.2}40%{opacity:1}}
-
-.chat-footer {
-  padding: 14px 16px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 8px;
-}
-.chat-input {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 9px 16px;
-  color: var(--text);
-  font-family: var(--f);
-  font-size: 13px;
-  outline: none;
-}
-.chat-input:focus { border-color: var(--border2); background: var(--white); }
-
-.intel-sidebar { display: flex; flex-direction: column; gap: 14px; }
-
-.quick-actions {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-}
-.qa-title { font-size: 12px; font-weight: 600; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
-.qa-btn {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text2);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: var(--f);
-  text-align: left;
-  margin-bottom: 6px;
-  transition: .15s;
+.contact-title {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 10px;
   line-height: 1.4;
 }
-.qa-btn:hover { background: var(--gold-light); color: var(--gold); border-color: #D4B86A; }
-.qa-btn:last-child { margin-bottom: 0; }
-
-.priority-list {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-}
-.pl-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border2);
-}
-.pl-item:last-child { border-bottom: none; padding-bottom: 0; }
-.pl-num {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--gold-light);
-  color: var(--gold);
-  font-size: 11px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-.pl-content { flex: 1; }
-.pl-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-.pl-reason { font-size: 11px; color: var(--text3); line-height: 1.4; }
-
-/* ── EMAIL MODAL ── */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.35);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-
-.modal {
-  background: var(--white);
-  border-radius: 14px;
-  width: 580px;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 40px rgba(0,0,0,.15), 0 2px 8px rgba(0,0,0,.08);
-}
-.modal-header {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-.modal-title { font-size: 17px; font-weight: 600; color: var(--text); }
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 22px;
-  color: var(--text3);
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-  margin-top: -2px;
-}
-.modal-close:hover { color: var(--text); }
-.modal-body { padding: 20px 24px; }
-
-.detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-.detail-item {
-  background: var(--surface);
-  border-radius: 8px;
-  padding: 10px 12px;
-}
-.detail-label { font-size: 10px; color: var(--text3); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 3px; }
-.detail-value { font-size: 12px; font-weight: 500; color: var(--text); }
-.detail-value.gold { color: var(--gold); }
-
-.agent-info {
-  background: var(--gold-light);
-  border: 1px solid #D4B86A;
-  border-radius: 8px;
-  padding: 14px;
-  margin-bottom: 16px;
-}
-.agent-info-title { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
-.agent-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
-.agent-row:last-child { margin-bottom: 0; }
-.agent-key { color: var(--text3); }
-.agent-val { font-weight: 500; color: var(--text); }
-.agent-val.email { color: var(--blue); }
-
-.form-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 6px; display: block; }
-.form-input {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 12px;
-  color: var(--text);
-  font-family: var(--f);
-  font-size: 13px;
-  outline: none;
-  margin-bottom: 12px;
-}
-.form-input:focus { border-color: var(--border2); background: var(--white); }
-textarea.form-input { resize: vertical; min-height: 160px; line-height: 1.6; }
-
-.modal-footer {
-  padding: 14px 24px 20px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.success-msg {
+.contact-why {
   font-size: 12px;
-  color: var(--green);
-  background: var(--green-light);
-  padding: 8px 12px;
-  border-radius: 6px;
-  display: none;
-  width: 100%;
-  margin-top: 8px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 300;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
 }
+.contact-why strong { color: var(--text); font-weight: 500; }
+.contact-reach {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reach-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.reach-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  min-width: 48px;
+  padding-top: 1px;
+}
+.reach-val {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 400;
+  word-break: break-all;
+}
+.reach-val.plain { color: var(--text-secondary); }
 
-/* ── TOAST ── */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--text);
-  color: var(--white);
-  padding: 11px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  z-index: 300;
-  display: none;
-  box-shadow: var(--shadow-lg);
-  animation: slideUp .2s ease;
-}
-.toast.show { display: block; }
-.toast.success { background: var(--green); }
-.toast.error { background: var(--red); }
-@keyframes slideUp { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)} }
+/* ── HIDDEN ── */
+.hidden { display: none !important; }
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .card-body { grid-template-columns: 1fr; }
+  .body-left { border-right: none; border-bottom: 1px solid var(--border-light); }
+  .grid-wrap, .page-header, .filter-bar { padding-left: 20px; padding-right: 20px; }
+  .card-head, .players-row, .body-left, .body-right, .contacts-section { padding-left: 20px; padding-right: 20px; }
+  .contacts-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-brand">Dream <span>Hospitality</span></div>
-  <div class="nav-links">
-    <button class="nav-link active" onclick="showView('calendar')">Calendar</button>
-    <button class="nav-link" onclick="showView('artists')">Artists</button>
-    <button class="nav-link" onclick="showView('pipeline')">Pipeline</button>
-    <button class="nav-link" onclick="showView('venues')">Venues</button>
-    <button class="nav-link" onclick="showView('intelligence')">Intelligence</button>
-  </div>
-  <div class="nav-right">
-    <div class="status-badge">
-      <div class="status-dot"></div>
-      System active
-    </div>
-    <button class="btn btn-primary" onclick="openAddArtist()">Add artist</button>
-  </div>
-</nav>
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sb-section">Overview</div>
-  <div class="sb-item active" onclick="showView('calendar')" id="sb-calendar">
-    Match calendar <span class="sb-count">8</span>
-  </div>
-  <div class="sb-item" onclick="showView('artists')" id="sb-artists">
-    All artists <span class="sb-count" id="nb-total">41</span>
-  </div>
-  <div class="sb-item" onclick="showView('pipeline')" id="sb-pipeline">
-    Booking pipeline
-  </div>
-  <div class="sb-item" onclick="showView('venues')" id="sb-venues">
-    Venues <span class="sb-count">10</span>
-  </div>
-  <div class="sb-item" onclick="showView('intelligence')" id="sb-intelligence">
-    Intelligence
-  </div>
-
-  <div class="sb-divider"></div>
-  <div class="sb-section">Match nights</div>
-  <div class="sb-match" onclick="filterMatch('Brazil')">🇧🇷 Jun 13 Brazil</div>
-  <div class="sb-match" onclick="filterMatch('France')">🇫🇷 Jun 16 France</div>
-  <div class="sb-match" onclick="filterMatch('Norway')">🇳🇴 Jun 22 Norway</div>
-  <div class="sb-match" onclick="filterMatch('Germany')">🇩🇪 Jun 25 Germany</div>
-  <div class="sb-match" onclick="filterMatch('England')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Jun 27 England</div>
-  <div class="sb-match" onclick="filterMatch('Round of 32')">⚽ Jun 30 R32</div>
-  <div class="sb-match" onclick="filterMatch('Round of 16')">⚽ Jul 5 R16</div>
-  <div class="sb-match peak" onclick="filterMatch('FINAL')">🏆 Jul 19 Final</div>
-
-  <div class="sb-divider"></div>
-  <div class="sb-section">Venues</div>
-  <div class="sb-match" onclick="filterVenue('Nebula')">Nebula</div>
-  <div class="sb-match" onclick="filterVenue('Harbor')">Harbor NYC</div>
-  <div class="sb-match" onclick="filterVenue('Musica')">Musica NYC</div>
-  <div class="sb-match" onclick="filterVenue('Sei Less')">Sei Less</div>
-  <div class="sb-match" onclick="filterVenue('PHD')">PHD Rooftop</div>
-</aside>
-
-<!-- MAIN -->
-<main class="main">
-
-<!-- ── CALENDAR VIEW ── -->
-<div class="view active" id="view-calendar">
-  <div class="page-header">
-    <div class="page-title">World Cup 2026</div>
-    <div class="page-sub">8 match nights at MetLife Stadium. June 13 through July 19.</div>
-  </div>
-
-  <div class="kpi-strip">
-    <div class="kpi">
-      <div class="kpi-label">Match nights</div>
-      <div class="kpi-value">8</div>
-      <div class="kpi-sub">at MetLife Stadium</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Artists in database</div>
-      <div class="kpi-value blue" id="k-total">41</div>
-      <div class="kpi-sub">across all nights</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Outreach sent</div>
-      <div class="kpi-value" id="k-outreach" style="color:var(--orange)">3</div>
-      <div class="kpi-sub">awaiting reply</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Confirmed</div>
-      <div class="kpi-value green" id="k-confirmed">2</div>
-      <div class="kpi-sub">bookings locked</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-label">Total fee est.</div>
-      <div class="kpi-value gold">$2.1M</div>
-      <div class="kpi-sub">all 8 nights base case</div>
-    </div>
-  </div>
-
-  <div class="section-header">
-    <div class="section-title">Match schedule</div>
-    <span class="section-action" onclick="showView('artists')">View all artists</span>
-  </div>
-
-  <div class="match-grid">
-    <div class="match-card" onclick="filterMatch('Brazil')">
-      <div class="mc-date">Sat Jun 13 · 6:00 PM ET</div>
-      <div class="mc-teams">🇧🇷 Brazil vs Morocco 🇲🇦</div>
-      <span class="mc-pill pill-group">Group C</span>
-      <div class="mc-headline"><strong>Anitta</strong> · Harbor NYC</div>
-      <div class="mc-venue">WME Latin · $175K-225K · Fan demand: Very High</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Brazil')">4 artists mapped</button>
-    </div>
-    <div class="match-card" onclick="filterMatch('France')">
-      <div class="mc-date">Tue Jun 16 · 3:00 PM ET</div>
-      <div class="mc-teams">🇫🇷 France vs Senegal 🇸🇳</div>
-      <span class="mc-pill pill-group">Group I</span>
-      <div class="mc-headline"><strong>David Guetta</strong> · Musica NYC</div>
-      <div class="mc-venue">CAA · $175K-225K · Fan demand: High</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('France')">4 artists mapped</button>
-    </div>
-    <div class="match-card" onclick="filterMatch('Norway')">
-      <div class="mc-date">Mon Jun 22 · 8:00 PM ET</div>
-      <div class="mc-teams">🇳🇴 Norway vs Senegal 🇸🇳</div>
-      <span class="mc-pill pill-group">Group I</span>
-      <div class="mc-headline"><strong>Alan Walker</strong> · Musica NYC</div>
-      <div class="mc-venue">CAA · $100K-150K · Fan demand: Medium</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Norway')">2 artists mapped</button>
-    </div>
-    <div class="match-card" onclick="filterMatch('Germany')">
-      <div class="mc-date">Thu Jun 25 · 4:00 PM ET</div>
-      <div class="mc-teams">🇪🇨 Ecuador vs Germany 🇩🇪</div>
-      <span class="mc-pill pill-group">Group E</span>
-      <div class="mc-headline"><strong>Bizarrap</strong> · Musica NYC</div>
-      <div class="mc-venue">Range Media · $120K-175K · Fan demand: Medium</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Germany')">3 artists mapped</button>
-    </div>
-    <div class="match-card" onclick="filterMatch('England')">
-      <div class="mc-date">Sat Jun 27 · 5:00 PM ET</div>
-      <div class="mc-teams">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Panama vs England 🇵🇦</div>
-      <span class="mc-pill pill-group">Group L</span>
-      <div class="mc-headline"><strong>Stormzy</strong> · Nebula</div>
-      <div class="mc-venue">CAA London · $150K-200K · Fan demand: Very High</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('England')">4 artists mapped</button>
-    </div>
-    <div class="match-card knockout" onclick="filterMatch('Round of 32')">
-      <div class="mc-date">Tue Jun 30 · 5:00 PM ET</div>
-      <div class="mc-teams">⚽ Round of 32</div>
-      <span class="mc-pill pill-knockout">Knockout</span>
-      <div class="mc-headline"><strong>DJ Khaled</strong> · Harbor NYC</div>
-      <div class="mc-venue">CAA · $150K-200K · Fan demand: High</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Round of 32')">2 artists mapped</button>
-    </div>
-    <div class="match-card knockout" onclick="filterMatch('Round of 16')">
-      <div class="mc-date">Sun Jul 5 · 4:00 PM ET</div>
-      <div class="mc-teams">⚽ Round of 16</div>
-      <span class="mc-pill pill-knockout">Knockout</span>
-      <div class="mc-headline"><strong>J Balvin</strong> · Nebula</div>
-      <div class="mc-venue">WME · $225K-275K · Fan demand: Very High</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('Round of 16')">2 artists mapped</button>
-    </div>
-    <div class="match-card final" onclick="filterMatch('FINAL')">
-      <div class="mc-date" style="color:var(--gold)">Sun Jul 19 · 3:00 PM ET</div>
-      <div class="mc-teams">🏆 World Cup Final</div>
-      <span class="mc-pill pill-final">The Final</span>
-      <div class="mc-headline"><strong>Bad Bunny</strong> · Nebula</div>
-      <div class="mc-venue" style="color:var(--gold)">WME · $400K-600K · Fan demand: Peak</div>
-      <button class="mc-cta" onclick="event.stopPropagation();filterMatch('FINAL')">5 artists mapped</button>
-    </div>
+<div class="page-header">
+  <div class="header-eyebrow">Dream Hospitality · WC2026 Intelligence</div>
+  <h1>Soccer Agent Power Map</h1>
+  <p>Every agency that controls a World Cup player coming through New York — their org charts, who sits below the top, how to reach them through US networks, and the exact people who pick up the phone.</p>
+  <div class="header-stats">
+    <div class="hstat"><span class="hstat-num">7</span><span class="hstat-label">Agencies</span></div>
+    <div class="hstat"><span class="hstat-num">34</span><span class="hstat-label">Named Contacts</span></div>
+    <div class="hstat"><span class="hstat-num">€8.5B+</span><span class="hstat-label">Combined Client Value</span></div>
+    <div class="hstat"><span class="hstat-num">3</span><span class="hstat-label">NYC-Based</span></div>
   </div>
 </div>
 
-<!-- ── ARTISTS VIEW ── -->
-<div class="view" id="view-artists">
-  <div class="page-header">
-    <div class="page-title">Artist database</div>
-    <div class="page-sub">41 artists mapped to all 8 NY/NJ match nights across all 10 venues.</div>
-  </div>
-
-  <div class="table-toolbar">
-    <input class="search-input" id="srch" placeholder="Search artist, genre, country..." oninput="renderTable()">
-    <select class="filter-select" id="fTier" onchange="renderTable()">
-      <option value="">All tiers</option>
-      <option value="1">Tier 1</option>
-      <option value="2">Tier 2</option>
-      <option value="3">Tier 3</option>
-    </select>
-    <select class="filter-select" id="fStatus" onchange="renderTable()">
-      <option value="">All statuses</option>
-      <option>New</option>
-      <option>Outreach Sent</option>
-      <option>Replied</option>
-      <option>Negotiating</option>
-      <option>Confirmed</option>
-      <option>Dead</option>
-    </select>
-    <select class="filter-select" id="fMatch" onchange="renderTable()">
-      <option value="">All match nights</option>
-      <option>Brazil</option>
-      <option>France</option>
-      <option>Norway</option>
-      <option>Germany</option>
-      <option>England</option>
-      <option>Round of 32</option>
-      <option>Round of 16</option>
-      <option>FINAL</option>
-    </select>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Artist</th>
-          <th>Match night</th>
-          <th>Venue</th>
-          <th>Slot</th>
-          <th>Tier</th>
-          <th>Fee range</th>
-          <th>Agent</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="artistRows"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ── PIPELINE VIEW ── -->
-<div class="view" id="view-pipeline">
-  <div class="page-header">
-    <div class="page-title">Booking pipeline</div>
-    <div class="page-sub">Track every artist from first outreach through confirmed booking.</div>
-  </div>
-  <div class="pipeline-cols" id="pipelineCols"></div>
-</div>
-
-<!-- ── VENUES VIEW ── -->
-<div class="view" id="view-venues">
-  <div class="page-header">
-    <div class="page-title">Venue programming</div>
-    <div class="page-sub">All 10 Dream Hospitality venues mapped to World Cup 2026.</div>
-  </div>
-  <div class="venue-grid" id="venueGrid"></div>
-</div>
-
-<!-- ── INTELLIGENCE VIEW ── -->
-<div class="view" id="view-intelligence">
-  <div class="page-header">
-    <div class="page-title">Booking intelligence</div>
-    <div class="page-sub">Research artists, draft outreach, and get recommendations.</div>
-  </div>
-  <div class="intel-layout">
-    <div class="intel-chat">
-      <div class="chat-header">Booking research and outreach drafting</div>
-      <div class="chat-messages" id="chatMsgs">
-        <div class="chat-msg system">Welcome to Dream Hospitality booking intelligence. I have full context on all 41 artists, every match night, agent contacts, fee ranges, and availability windows. What do you want to work on?</div>
-      </div>
-      <div class="thinking" id="chatThinking">
-        <span class="dot-pulse"><span></span><span></span><span></span></span>
-        Working on it...
-      </div>
-      <div class="chat-footer">
-        <input class="chat-input" id="chatInput" placeholder="Research an artist, draft a booking email, get a recommendation..." onkeydown="if(event.key==='Enter')sendChat()">
-        <button class="btn btn-primary" onclick="sendChat()">Send</button>
-      </div>
+<div class="filter-bar">
+  <button class="filter-tab active" onclick="setFilter('all',this)">All Agencies</button>
+  <div class="filter-divider"></div>
+  <button class="filter-tab" onclick="setFilter('us',this)">🇺🇸 US-Based</button>
+  <button class="filter-tab" onclick="setFilter('london',this)">🇬🇧 London</button>
+  <button class="filter-tab" onclick="setFilter('europe',this)">🌍 Europe</button>
+  <button class="filter-tab" onclick="setFilter('HOT',this)">🔴 Priority Now</button>
+  <div class="filter-right">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-box" type="text" placeholder="Search player, agency, person..." oninput="doSearch(this.value)"/>
     </div>
-    <div class="intel-sidebar">
-      <div class="quick-actions">
-        <div class="qa-title">Quick actions</div>
-        <button class="qa-btn" onclick="qa('Who should we book first before availability closes? Give me the top 3 with reasoning.')">Who to book first?</button>
-        <button class="qa-btn" onclick="qa('What is the best approach to reach WME about Bad Bunny for the Final night at Nebula?')">How to approach WME?</button>
-        <button class="qa-btn" onclick="qa('What is our total estimated budget if we book all Tier 1 artists across all 8 nights?')">Total Tier 1 budget?</button>
-        <button class="qa-btn" onclick="qa('Which match nights have programming gaps we need to fill urgently?')">Programming gaps?</button>
-        <button class="qa-btn" onclick="qa('Draft a booking inquiry email for Stormzy for the England match night at Nebula on June 27.')">Draft Stormzy email</button>
-        <button class="qa-btn" onclick="qa('What artists work for the Final weekend across all 10 venues simultaneously?')">Final weekend coverage?</button>
-      </div>
-      <div class="priority-list">
-        <div class="qa-title" style="margin-bottom:12px">Book immediately</div>
-        <div class="pl-item">
-          <div class="pl-num">1</div>
-          <div class="pl-content">
-            <div class="pl-name">Bad Bunny via WME</div>
-            <div class="pl-reason">Final night. Super Bowl 2026 performer. On world tour. This closes first.</div>
-          </div>
-        </div>
-        <div class="pl-item">
-          <div class="pl-num">2</div>
-          <div class="pl-content">
-            <div class="pl-name">Stormzy via CAA London</div>
-            <div class="pl-reason">England match Jun 27. Nebula sells out in hours. No alternative.</div>
-          </div>
-        </div>
-        <div class="pl-item">
-          <div class="pl-num">3</div>
-          <div class="pl-content">
-            <div class="pl-name">J Balvin via WME</div>
-            <div class="pl-reason">Already performed at MetLife FIFA 2025. Warmest relationship in the deck.</div>
-          </div>
-        </div>
-        <div class="pl-item">
-          <div class="pl-num">4</div>
-          <div class="pl-content">
-            <div class="pl-name">Anitta via WME Latin</div>
-            <div class="pl-reason">Brazil match Jun 13. 70M followers. On The Weeknd's 2026 tour.</div>
-          </div>
-        </div>
-        <div class="pl-item">
-          <div class="pl-num">5</div>
-          <div class="pl-content">
-            <div class="pl-name">Karol G via WME Latin</div>
-            <div class="pl-reason">Final weekend Harbor. Coachella headliner 2026. Closes fast.</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <span class="count-chip" id="count-chip">7 agencies</span>
   </div>
 </div>
 
-</main>
-</div>
-
-<!-- ARTIST MODAL -->
-<div class="modal-overlay" id="artistModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-title" id="modal-name">Artist Name</div>
-        <div style="font-size:12px;color:var(--text3);margin-top:2px" id="modal-genre">Genre</div>
-      </div>
-      <button class="modal-close" onclick="closeModal()">x</button>
-    </div>
-    <div class="modal-body">
-      <div class="detail-grid">
-        <div class="detail-item">
-          <div class="detail-label">Match night</div>
-          <div class="detail-value" id="modal-match" style="font-size:11px"></div>
-        </div>
-        <div class="detail-item">
-          <div class="detail-label">Venue</div>
-          <div class="detail-value" id="modal-venue"></div>
-        </div>
-        <div class="detail-item">
-          <div class="detail-label">Fee range</div>
-          <div class="detail-value gold" id="modal-fee"></div>
-        </div>
-      </div>
-
-      <div class="detail-item" style="margin-bottom:16px;padding:12px">
-        <div class="detail-label">Why this artist</div>
-        <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-top:4px" id="modal-why"></div>
-      </div>
-
-      <div class="agent-info">
-        <div class="agent-info-title">Agent / Management</div>
-        <div class="agent-row"><span class="agent-key">Agency</span><span class="agent-val" id="modal-agent"></span></div>
-        <div class="agent-row"><span class="agent-key">Email</span><span class="agent-val email" id="modal-email"></span></div>
-        <div class="agent-row"><span class="agent-key">Phone</span><span class="agent-val" id="modal-phone"></span></div>
-      </div>
-
-      <div style="margin-bottom:12px">
-        <label class="form-label">Status</label>
-        <select class="form-input" id="modal-status" style="margin-bottom:0" onchange="updateArtistStatus()">
-          <option>New</option>
-          <option>Outreach Sent</option>
-          <option>Replied</option>
-          <option>Negotiating</option>
-          <option>Confirmed</option>
-          <option>Dead</option>
-        </select>
-      </div>
-
-      <div style="margin-bottom:12px">
-        <label class="form-label">Notes</label>
-        <textarea class="form-input" id="modal-notes" rows="2" placeholder="Add notes..."></textarea>
-      </div>
-
-      <div>
-        <label class="form-label">Booking email draft</label>
-        <input class="form-input" id="draft-subject" placeholder="Subject line will appear here..." style="font-weight:500">
-        <textarea class="form-input" id="draft-body" rows="8" placeholder="Click 'Draft email' to generate a personalized booking inquiry..."></textarea>
-      </div>
-
-      <div class="success-msg" id="modal-success"></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-gold" onclick="draftEmail()" id="draft-btn">Draft email</button>
-      <button class="btn btn-primary" onclick="sendEmail()" id="send-btn">Send to agent</button>
-      <button class="btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
+<div class="grid-wrap" id="grid"></div>
 
 <script>
-const API = window.location.hostname === 'localhost'
-  ? 'http://localhost:3001/.netlify/functions'
-  : '/.netlify/functions';
+const AGENCIES = [
 
-let ARTISTS = [
-  {id:1,name:"Anitta",genre:"Brazilian Funk / Pop",match:"Jun 13 - Brazil vs Morocco",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:175,feeMax:225,status:"Confirmed",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Brazilian icon. 70M Instagram. On The Weeknd 2026 world tour. NYC Brazilian community is 300K+. This is her night.",notes:"Confirmed for Jun 13. Contract sent."},
-  {id:2,name:"Alok",genre:"Brazilian EDM / House",match:"Jun 13 - Brazil vs Morocco",venue:"PHD Rooftop",slot:"5PM Pre-Game",tier:2,feeMin:80,feeMax:120,status:"Outreach Sent",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Brazil's biggest DJ. Rooftop pre-game energy. Brazilian crowd buys bottles early.",notes:"Email sent to WME Latin 3 days ago. Follow up needed."},
-  {id:3,name:"Ludmilla",genre:"Brazilian Funk",match:"Jun 13 - Brazil vs Morocco",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:40,feeMax:65,status:"New",agent:"Traffic Sports Brazil",agentEmail:"contato@trafficbrasil.com.br",agentPhone:"+55 11 3094 5000",why:"Brazil's female funk queen. Huge NYC following. Works as Anitta support or standalone 5PM slot.",notes:""},
-  {id:4,name:"Vintage Culture",genre:"Brazilian House",match:"Jun 13 - Brazil vs Morocco",venue:"Musica NYC",slot:"2AM Late Night",tier:2,feeMin:40,feeMax:75,status:"New",agent:"Direct",agentEmail:"booking@vintageculture.com.br",agentPhone:"",why:"Brazilian house export. Late set bridges Anitta headline crowd into an after-party at Musica.",notes:""},
-  {id:5,name:"David Guetta",genre:"French EDM / House",match:"Jun 16 - France vs Senegal",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:175,feeMax:225,status:"Outreach Sent",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"French EDM legend. France is his country. Musica NYC is built for his sound. Automatic sell-out.",notes:"Contacted CAA NYC office. Awaiting response."},
-  {id:6,name:"Burna Boy",genre:"Afrobeats / Afro-fusion",match:"Jun 16 - France vs Senegal",venue:"Harbor NYC",slot:"10PM Headline Alt",tier:1,feeMin:200,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"African Giant. Bridges Senegal and West African diaspora in NYC. Cultural power for this match night.",notes:""},
-  {id:7,name:"DJ Snake",genre:"French EDM / Trap",match:"Jun 16 - France vs Senegal",venue:"Nebula",slot:"5PM Pre-Game",tier:2,feeMin:100,feeMax:150,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"French-Algerian producer. North African bridge to Senegal crowd. Pre-game Nebula set.",notes:""},
-  {id:8,name:"Tems",genre:"Afrobeats / R&B",match:"Jun 16 - France vs Senegal",venue:"Sei Less",slot:"Private Dinner",tier:2,feeMin:80,feeMax:120,status:"Outreach Sent",agent:"UTA",agentEmail:"music@unitedtalent.com",agentPhone:"+1 310 273 6700",why:"Already performed FIFA Club WC Final at MetLife 2025. Sei Less private dinner activation.",notes:"UTA contacted. Positive initial response."},
-  {id:9,name:"Alan Walker",genre:"EDM / Electronic",match:"Jun 22 - Norway vs Senegal",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:150,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"Norwegian producer. Norway match night is made for him. Musica NYC is the perfect electronic room.",notes:""},
-  {id:10,name:"Bizarrap",genre:"Latin Electronic / Trap",match:"Jun 25 - Ecuador vs Germany",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:120,feeMax:175,status:"New",agent:"Range Media Partners",agentEmail:"info@rangemediapartners.com",agentPhone:"+1 310 954 9333",why:"Argentina producer with global Latin electronic sound. Bridges Ecuador fans and broader Latin crowd.",notes:""},
-  {id:11,name:"Boris Brejcha",genre:"High-Tech Minimal / Techno",match:"Jun 25 - Ecuador vs Germany",venue:"Musica NYC",slot:"10PM Alt",tier:2,feeMin:80,feeMax:120,status:"New",agent:"FCKNG SERIOUS",agentEmail:"booking@fckngserious.com",agentPhone:"+49 30 12345678",why:"Germany's biggest underground DJ. NYC German expat community for this match night.",notes:""},
-  {id:12,name:"Nicki Nicole",genre:"Trap Latino / Urban",match:"Jun 25 - Ecuador vs Germany",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:3,feeMin:40,feeMax:70,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Argentine-Ecuadorian crossover. Pre-game slot Harbor pulls the Latin crowd before Germany fans arrive.",notes:""},
-  {id:13,name:"Stormzy",genre:"UK Grime / Hip-Hop",match:"Jun 27 - Panama vs England",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"Confirmed",agent:"CAA London",agentEmail:"london.music@caa.com",agentPhone:"+44 20 3214 0800",why:"UK's biggest artist. England match night. Nebula 1,500 cap sells out in hours. Must-book for Jun 27.",notes:"Confirmed. Deposit received. Contract signed."},
-  {id:14,name:"Central Cee",genre:"UK Rap / Drill",match:"Jun 27 - Panama vs England",venue:"Stafford Room",slot:"2PM Build-Up",tier:2,feeMin:60,feeMax:90,status:"New",agent:"CAA London",agentEmail:"london.music@caa.com",agentPhone:"+44 20 3214 0800",why:"Younger UK crowd. Afternoon build-up. Cheaper than Stormzy, same cultural energy.",notes:""},
-  {id:15,name:"Headie One",genre:"UK Drill",match:"Jun 27 - Panama vs England",venue:"Whisper Room",slot:"2PM Build-Up",tier:3,feeMin:25,feeMax:45,status:"New",agent:"0207 Def Jam",agentEmail:"booking@0207defjam.com",agentPhone:"+44 20 7432 1000",why:"UK drill pioneer. Cost effective option for the 2PM Whisper Room slot on England night.",notes:""},
-  {id:16,name:"Jorja Smith",genre:"UK R&B / Soul",match:"Jun 27 - Panama vs England",venue:"Sei Less",slot:"Private Dinner",tier:2,feeMin:60,feeMax:100,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"English soul. Sei Less private dining performance for corporate England night. Intimate and premium.",notes:""},
-  {id:17,name:"DJ Khaled",genre:"Hip-Hop / Open Format",match:"Jun 30 - Round of 32",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"NYC native. Works any knockout night regardless of teams. Widest possible audience. Another one.",notes:""},
-  {id:18,name:"Diplo",genre:"Electronic / Open Format",match:"Jun 30 - Round of 32",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:150,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Global sound. Works every country. Knockout nights need a universal artist.",notes:""},
-  {id:19,name:"J Balvin",genre:"Reggaeton / Urban Latino",match:"Jul 5 - Round of 16",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:225,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Already performed FIFA Club WC Final at MetLife July 2025. Warmest FIFA relationship of any artist.",notes:""},
-  {id:20,name:"Maluma",genre:"Reggaeton / Latin Pop",match:"Jul 5 - Round of 16",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:100,feeMax:150,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Colombian reggaeton. Round of 16 pre-game. Harbor fills before J Balvin at Nebula.",notes:""},
-  {id:21,name:"Bad Bunny",genre:"Reggaeton / Trap Latino",match:"Jul 19 - WORLD CUP FINAL",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:400,feeMax:600,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Super Bowl halftime 2026. Biggest Latin artist alive. On world tour. Final night at Nebula. Non-negotiable.",notes:""},
-  {id:22,name:"Karol G",genre:"Reggaeton / Urban Latina",match:"Jul 19 - WORLD CUP FINAL",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:250,feeMax:350,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Coachella headliner 2026. Final weekend Harbor runs simultaneously with Bad Bunny at Nebula.",notes:""},
-  {id:23,name:"Peso Pluma",genre:"Regional Mexican / Corridos",match:"Jul 19 - WORLD CUP FINAL",venue:"PHD Rooftop",slot:"5PM Pre-Game",tier:1,feeMin:175,feeMax:250,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Mexico has 1M+ fans in NYC metro. PHD Rooftop pre-game Final night is the setup.",notes:""},
-  {id:24,name:"Shakira",genre:"Latin Pop / Dance",match:"Jul 19 - WORLD CUP FINAL",venue:"Sei Less",slot:"Private VIP Dinner",tier:1,feeMin:400,feeMax:600,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Copa America Final 2024 performer. World Cup royalty. Private Sei Less dinner on Final night.",notes:""},
-  {id:25,name:"Doja Cat",genre:"Pop / Hip-Hop / R&B",match:"Jul 19 - WORLD CUP FINAL",venue:"Nebula",slot:"10PM Alt",tier:1,feeMin:250,feeMax:350,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Already performed FIFA Club WC Final at MetLife 2025. Warm FIFA relationship. Final weekend option.",notes:""},
-  {id:26,name:"Martin Garrix",genre:"Progressive House / EDM",match:"Any knockout night",venue:"Musica NYC",slot:"10PM Headline",tier:1,feeMin:150,feeMax:200,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"Dutch producer. Netherlands has passionate NYC fans. Musica is perfect. Works any knockout night.",notes:""},
-  {id:27,name:"Lil Baby",genre:"Hip-Hop / Trap",match:"Any USA match night",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:175,feeMax:250,status:"New",agent:"CAA",agentEmail:"music@caa.com",agentPhone:"+1 424 288 2000",why:"USA match nights need a hip-hop anchor. Lil Baby pulls the NYC audience that does not follow soccer.",notes:""},
-  {id:28,name:"Cardi B",genre:"Hip-Hop / Trap",match:"Any USA match or Final weekend",venue:"Nebula",slot:"10PM Headline",tier:1,feeMin:200,feeMax:300,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Bronx native. Dominican roots. Crossover for Latin and hip-hop crowds. Page Six the next morning.",notes:""},
-  {id:29,name:"Fisher",genre:"Tech House",match:"Any night backup headliner",venue:"Musica NYC",slot:"10PM Headline",tier:2,feeMin:80,feeMax:130,status:"New",agent:"Paradigm Agency",agentEmail:"booking@paradigmagency.com",agentPhone:"+1 310 288 8000",why:"Tech house. Universal crowd. If any Tier 1 booking falls through Fisher fills Musica immediately.",notes:""},
-  {id:30,name:"Chris Lake",genre:"House / Tech House",match:"Any night",venue:"Musica NYC",slot:"10PM or 2AM",tier:2,feeMin:50,feeMax:90,status:"New",agent:"Paradigm Agency",agentEmail:"booking@paradigmagency.com",agentPhone:"+1 310 288 8000",why:"LA-based British house DJ. Huge in NYC. Cost-effective for mid-week nights.",notes:""},
-  {id:31,name:"Feid",genre:"Urbano / Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"10PM Headline",tier:2,feeMin:80,feeMax:130,status:"New",agent:"Universal Music Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Colombian urbano. Massive following. Harbor headline for any Latin match night.",notes:""},
-  {id:32,name:"Ozuna",genre:"Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"10PM Headline",tier:2,feeMin:100,feeMax:175,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"One of the most-streamed Latin artists ever. Flexible booking for any Latin match night.",notes:""},
-  {id:33,name:"Farruko",genre:"Reggaeton",match:"Any Latin match night",venue:"Harbor NYC",slot:"5PM Pre-Game",tier:2,feeMin:60,feeMax:100,status:"New",agent:"WME Latin",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Puerto Rican reggaeton. Bridges Bad Bunny crowd for pre-game slots on any Latin night.",notes:""},
-  {id:34,name:"Jhayco",genre:"Latin R&B / Reggaeton",match:"Any Latin match night",venue:"Stafford Room",slot:"10PM Headline",tier:2,feeMin:50,feeMax:85,status:"New",agent:"Republic / WME",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Romantic urban. Stafford Room intimate vibe for Latin match nights.",notes:""},
-  {id:35,name:"Sech",genre:"Reggaeton / Dancehall",match:"Jun 27 - Panama vs England",venue:"Whisper Room",slot:"5PM Pre-Game",tier:3,feeMin:25,feeMax:50,status:"New",agent:"Sony Latin / WME",agentEmail:"latinmusic@wmeagency.com",agentPhone:"+1 310 285 9000",why:"Panamanian star. Panama vs England night. Whisper Room pre-game for the Panamanian fan community.",notes:""},
-  {id:36,name:"Fivio Foreign",genre:"NYC Drill",match:"Any USA match night",venue:"Stafford Room",slot:"10PM Headline",tier:3,feeMin:30,feeMax:60,status:"New",agent:"Columbia Records",agentEmail:"contact@fivioforeign.com",agentPhone:"",why:"Brooklyn native. NYC drill. Cost effective headline for Stafford Room on USA match nights.",notes:""},
-  {id:37,name:"WC No Beat",genre:"Baile Funk / Electronic",match:"Jun 13 - Brazil vs Morocco",venue:"Musica NYC",slot:"2PM Build-Up",tier:3,feeMin:15,feeMax:30,status:"New",agent:"Direct",agentEmail:"booking@wcnobeat.com",agentPhone:"",why:"Baile funk build-up. Sets the Brazilian cultural tone before the main show.",notes:""},
-  {id:38,name:"Jazz Quartet",genre:"Jazz / Bossa Nova",match:"Jun 13 - Brazil vs Morocco",venue:"Sei Less",slot:"Dinner 7-10PM",tier:3,feeMin:3,feeMax:8,status:"New",agent:"Local NYC",agentEmail:"info@jazznewyork.com",agentPhone:"+1 212 555 0100",why:"Live bossa nova during Brazil match night dinner. Sei Less premium dining atmosphere.",notes:""},
-  {id:39,name:"Flamenco Guitar",genre:"Flamenco / Spanish Guitar",match:"Spain match nights",venue:"Tucci NYC",slot:"Dinner 7-10PM",tier:3,feeMin:2,feeMax:5,status:"New",agent:"Local NYC",agentEmail:"info@tuccinyc.com",agentPhone:"",why:"When Italy or Spain play, Tucci activates with Spanish guitar. Cultural touch for prix fixe premium.",notes:""},
-  {id:40,name:"Bouzouki Live",genre:"Greek Traditional",match:"Greek cultural nights",venue:"Pappas NY",slot:"Dinner 7-10PM",tier:3,feeMin:2,feeMax:5,status:"New",agent:"Local NYC",agentEmail:"info@pappasny.com",agentPhone:"",why:"Pappas is Greek-owned. Live bouzouki authenticity drives repeat traffic.",notes:""},
-  {id:41,name:"Burna Boy",genre:"Afrobeats",match:"Jun 22 - Norway vs Senegal",venue:"Harbor NYC",slot:"10PM Headline",tier:1,feeMin:200,feeMax:275,status:"New",agent:"WME",agentEmail:"music@wmeagency.com",agentPhone:"+1 310 285 9000",why:"West African diaspora night. Senegal match. Bridges the entire West African NYC community.",notes:""},
+  // ─────────────────────────────────────────────
+  // 1. ROC NATION SPORTS INTERNATIONAL
+  // ─────────────────────────────────────────────
+  {
+    id: 'rocnation', region: 'us', heat: 'HOT',
+    name: 'Roc Nation Sports International',
+    sub: '540 W 26th St, New York, NY · London EC1M · São Paulo, Brazil',
+    monogram: 'RN', monoBg: '#1d1d1f', monoColor: '#f5d98b',
+    hq: '540 W 26th St, Chelsea, NYC', clientVal: '€685m', roster: '129 active, 58 top-tier',
+    leagues: ['Premier League','La Liga','Serie A','Eredivisie','MLS'],
+    players: [
+      {name:'Vinicius Jr.', flag:'🇧🇷', wc:true},{name:'Gabriel Martinelli', flag:'🇧🇷', wc:true},
+      {name:'Endrick', flag:'🇧🇷', wc:true},{name:'Kevin De Bruyne', flag:'🇧🇪', wc:true},
+      {name:'Federico Dimarco', flag:'🇮🇹', wc:true},{name:'Chris Richards', flag:'🇺🇸', wc:true},
+      {name:'Lucas Paquetá', flag:'🇧🇷', wc:true},
+    ],
+    why: `<strong>Jay-Z's agency. Headquartered in Chelsea, NYC — literally down the street from Dream's world.</strong> They launched their football division in London in 2019, acquired Brazilian agency TFM in 2023 to land Vinicius Jr., Martinelli, and Endrick, and are now actively expanding in the US market ahead of WC2026. Michael Yormark has said publicly that his #1 objective is making Vinicius Jr. more culturally relevant in America before the tournament. They think in culture, brand, and access — Dream's exact language. This is the one meeting George can get on his calendar inside two weeks.`,
+    approach: `Don't pitch an appearance fee. Pitch access. The framing: "We run the rooms where your players want to be when the cameras are off." RNSI's brand DNA is built on elite-athlete-meets-culture — they want their clients photographed at the right tables. Dream is that table.`,
+    contacts: [
+      {
+        rank:1, name:'Michael Yormark', loc:'nyc', locLabel:'NYC',
+        title:'President, Roc Nation Sports International · Co-CEO, Roc Nation Unified',
+        why:`Yormark runs all of RNSI from the Chelsea office and is the decision-maker for any partnership at this level. He has said publicly that Vinicius Jr.'s US brand-building ahead of WC2026 is a priority. He's reachable via <strong>LinkedIn</strong> (active, responds to warm messages) and has been on the NYC sports-entertainment circuit for years. A warm intro from any Yankees, Florida Panthers, or sports media contact in George's orbit lands you in his inbox with credibility.`,
+        reach:[{t:'LI',v:'Michael R. Yormark — linkedin.com/in/myormark'},{t:'IG',v:'@myormark'},{t:'OFFICE',v:'540 W 26th St, New York, NY 10001'}]
+      },
+      {
+        rank:2, name:'Juan Perez', loc:'nyc', locLabel:'NYC',
+        title:'President & Co-Founder, Roc Nation Sports · Co-founder of Roc Nation',
+        why:`Perez co-founded Roc Nation with Jay-Z in 2008. He's a senior stakeholder and connector — his relationships span the entire Jay-Z entertainment ecosystem: music, film, tech, boxing, and now football. Any music industry relationship at Roc Nation (Atlantic, Empire, Roc Nation Records) flows through Perez's network and gets you in the same room.`,
+        reach:[{t:'ORG',v:'540 W 26th St, New York, NY 10001'},{t:'PR',v:'press@rocnation.com'}]
+      },
+      {
+        rank:3, name:'Alan Redmond', loc:'london', locLabel:'London',
+        title:'EVP & Head of Global Football, RNSI · FA-Licensed Agent',
+        why:`Redmond joined RNSI in 2020, bringing his R10 Sports roster. He runs the European football operation from London's 30 St John Street office and oversees De Bruyne, Dimarco, and the broader European client base. He's the gatekeeper for player hospitality conversations in Europe — before a player like De Bruyne agrees to a NYC dinner, Redmond signs off. Reachable via LinkedIn.`,
+        reach:[{t:'IG',v:'@rocnationsi'},{t:'LI',v:'Alan Redmond'},{t:'OFFICE',v:'30 St John Street, London EC1M 4AY'}]
+      },
+      {
+        rank:4, name:'Frederico Pena', loc:'saopaulobr', locLabel:'São Paulo / NYC (during WC)',
+        title:'President, Roc Nation Sports Brazil · Ex-TFM Founder · Vinicius Jr. & Martinelli handler',
+        why:`Pena is the TFM founder who now runs Roc Nation Brazil. His team of VPs — <strong>Marcos Casseb, Lucas Mineiro, Renato Martinez, Octavio Rigoni, Thiago Freitas</strong> — are the actual people around Vinicius and Martinelli during tournaments. Pena will travel to New York for WC2026. He's your direct line to the Brazilian contingent's off-pitch schedule.`,
+        reach:[{t:'EMAIL',v:'brazil@rocnation.com'},{t:'IG',v:'@rocnationsportsbrazil'},{t:'LI',v:'Frederico Pena'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 2. THE·TEAM (Formerly Wasserman)
+  // ─────────────────────────────────────────────
+  {
+    id: 'theteam', region: 'us', heat: 'HOT',
+    name: 'The·Team (formerly Wasserman)',
+    sub: 'Los Angeles, CA (HQ) · New York · London · 28 countries · rebranded March 2026',
+    monogram: 'TT', monoBg: '#f5f5f7', monoColor: '#1d1d1f',
+    hq: 'LA HQ + NYC office · teamwass.com → the.team', clientVal: '€2.23bn', roster: '~1,240 players',
+    leagues: ['Premier League','La Liga','Bundesliga','Serie A','Ligue 1','MLS'],
+    players: [
+      {name:'Federico Valverde', flag:'🇺🇾', wc:true},{name:'Weston McKennie', flag:'🇺🇸', wc:true},
+      {name:'John Stones', flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', wc:true},{name:'Teun Koopmeiners', flag:'🇳🇱', wc:true},
+      {name:'Antonee Robinson', flag:'🇺🇸', wc:true},{name:'Mikel Arteta', flag:'🇪🇸', wc:false},
+      {name:'Malo Gusto', flag:'🇫🇷', wc:true},{name:'Harvey Barnes', flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', wc:true},
+    ],
+    why: `<strong>The largest agency in global football by combined client value — €2.23bn — and critically, the most US-wired agency in the game.</strong> Rich Motzkin started his career as US Soccer's first in-house general counsel and ran the legal architecture of the 1994 World Cup. He then founded SportsNet, represented the USMNT's entire 1994 generation, and built Wasserman Soccer into the dominant force it is. The March 2026 rebrand to The·Team is creating internal turbulence — key agents are being approached by competitors. That's a window for anyone building a relationship now. They have over 70 agents across 15+ leagues. The NYC office is your geographic entry.`,
+    approach: `Motzkin is the big shot but Wadsworth is the call to make. Newer, hungrier, building his own book. Frame it as a WC2026 infrastructure play: "Every player on your roster playing in New York needs somewhere to go at night. We want to be that place for all of them, from group stage through the final."`,
+    contacts: [
+      {
+        rank:1, name:'Spencer Wadsworth', loc:'nyc', locLabel:'NYC/LA',
+        title:'VP Global Football, The·Team · SBJ Forty Under 40 honoree',
+        why:`Wadsworth is Motzkin's operational number-two in the soccer division and is building his own client relationships. He's younger, more approachable, and is described as "redefining standards in global football." He's the day-to-day relationship for a WC2026 hospitality conversation and won't need to escalate it to Motzkin. LinkedIn is the right first touch.`,
+        reach:[{t:'EMAIL',v:'infofootball@teamwass.com'},{t:'LI',v:'Spencer Wadsworth'},{t:'IG',v:'@wassermansoccer'}]
+      },
+      {
+        rank:2, name:'Richard "Rich" Motzkin', loc:'la', locLabel:'Los Angeles',
+        title:'EVP & Managing Executive, Global Soccer · The·Team · FIFA Lic: FARA1364',
+        why:`Former US Soccer general counsel, 1994 World Cup architect, founder of SportsNet. The most connected American in global football. He knows the NYNJ Host Committee, MLS power structure, US Soccer Federation, and every major Premier League club director. He's harder to reach cold, but George's sports, hotel, or luxury brand connections almost certainly contain a Motzkin-adjacent relationship.`,
+        reach:[{t:'EMAIL',v:'infofootball@teamwass.com'},{t:'PHONE',v:'+1 310 407 0200 (LA HQ)'},{t:'LI',v:'Richard Motzkin'}]
+      },
+      {
+        rank:3, name:'Michael Jansen', loc:'london', locLabel:'London (Europe)',
+        title:'EVP & Managing Executive, Global Football — Europe · The·Team',
+        why:`Jansen runs the European side of The·Team's football operation. For English, Dutch, German, and French players in the WC2026 pool — Stones, Koopmeiners, Gusto, Barnes — Jansen's team manages the day-to-day client relationship. He's the European counterpart to Motzkin. Approaching via The·Team's London office email routes to his desk.`,
+        reach:[{t:'EMAIL',v:'infofootball@teamwass.com'},{t:'LI',v:'Michael Jansen The Team'},{t:'IG',v:'@wassermansoccer'}]
+      },
+      {
+        rank:4, name:'Lee Charnley', loc:'london', locLabel:'London',
+        title:'VP International Operations (Football) · The·Team · Ex-Newcastle United MD',
+        why:`Charnley was Managing Director at Newcastle United for years before joining Wasserman/The·Team. He brings deep Premier League club-side relationships, which means he knows the player operations and travel teams that accompany PL players to tournaments. He's a back-channel into player camp logistics — who handles the private dinner requests when Stones or Koopmeiners wants a table in NYC.`,
+        reach:[{t:'LI',v:'Lee Charnley'},{t:'OFFICE',v:'The·Team London — infofootball@teamwass.com'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 3. GESTIFUTE / POLARIS SPORTS (Jorge Mendes)
+  // ─────────────────────────────────────────────
+  {
+    id: 'gestifute', region: 'europe', heat: 'HOT',
+    name: 'Gestifute + Polaris Sports',
+    sub: 'Porto (HQ) · Lisbon · Madrid · Paris · São Paulo · Dublin (Irish entity)',
+    monogram: 'GM', monoBg: '#fdf6ec', monoColor: '#b5893a',
+    hq: 'Avenida da Boavista 1837, Floor 17, Porto 4100-133 · Irish entity: Dublin', clientVal: '€1.70bn', roster: '155 clients, 90 top-tier',
+    leagues: ['Premier League','La Liga','Bundesliga','Ligue 1','Liga Portugal','Primeira Liga'],
+    players: [
+      {name:'Lamine Yamal', flag:'🇪🇸', wc:true},{name:'Rúben Dias', flag:'🇵🇹', wc:true},
+      {name:'Bernardo Silva', flag:'🇵🇹', wc:true},{name:'Darwin Núñez', flag:'🇺🇾', wc:true},
+      {name:'João Félix', flag:'🇵🇹', wc:true},{name:'Pedro Neto', flag:'🇵🇹', wc:true},
+      {name:'Leny Yoro', flag:'🇫🇷', wc:true},{name:'Warren Zaïre-Emery', flag:'🇫🇷', wc:true},
+    ],
+    why: `Jorge Mendes is the most powerful agent in football history. Gestifute runs transfers and contracts; its sister company <strong>Polaris Sports</strong> (co-founded with Luís Correia) handles all commercial rights, image deals, and brand activations — including the 15-year partnership with CAA Sports in New York. Polaris Sports is the correct entity for Dream to approach — not Gestifute proper. Polaris manages commercial relationships for Yamal, Rúben Dias, Darwin Núñez, and their full portfolio of ~600M combined social followers. Mendes visited Sei Less on a prior NYC trip. That's your opening line.`,
+    approach: `Call Polaris Sports, not Gestifute. Polaris is in the business of creating commercial moments for their athletes — Dream is a commercial moment. The pitch: "World Cup-era NYC. Your clients are playing MetLife. We are the room they'll want to be in. Let's build something together that makes Lamine Yamal's New York week unforgettable." Correia responds to serious approaches.`,
+    contacts: [
+      {
+        rank:1, name:'Luís Correia', loc:'porto', locLabel:'Porto / Lisbon',
+        title:'CEO & Co-Founder, Polaris Sports · Director, Gestifute International (Dublin)',
+        why:`Correia joined Gestifute in 2000 and co-founded Polaris Sports with Mendes in 2005. He is a director of the Gestifute Dublin entity (alongside Andy Quinn and Michael Mullins). <strong>He is the commercial gatekeeper</strong> — all brand, activation, and hospitality proposals for Gestifute/Polaris clients go through Correia. He is active on LinkedIn and publicly visible at conferences (spoke at ICON 2025). He responds to substantive commercial approaches.`,
+        reach:[{t:'EMAIL',v:'info@polarissports.pt'},{t:'LI',v:'Luís Correia · Polaris Sports'},{t:'IG',v:'@polarissports'}]
+      },
+      {
+        rank:2, name:'Michael Levine', loc:'nyc', locLabel:'NYC',
+        title:'Co-Head, CAA Sports · Polaris/Gestifute US commercial partner since 2008',
+        why:`Levine is the CAA Sports executive who manages the long-standing Polaris partnership. He is quoted by name in the CAA-Polaris partnership announcement: "partnerships are rarely as smooth, seamless, and mutually beneficial." CAA Sports sits at <strong>162 Fifth Avenue, NYC</strong> — same building as CAA's music/entertainment division. Levine's team co-represents Gestifute clients for all US commercial activities. He is Dream's fastest domestic path into the Gestifute/Polaris world.`,
+        reach:[{t:'ADDRESS',v:'162 Fifth Avenue, New York, NY 10010'},{t:'ORG',v:'caa.com/sports'},{t:'LI',v:'Michael Levine CAA Sports'}]
+      },
+      {
+        rank:3, name:'Andy Quinn', loc:'london', locLabel:'Dublin / London',
+        title:'Director, Gestifute International (Dublin entity) · Principal, Andrew P Quinn & Associates',
+        why:`Quinn is one of three directors of Gestifute's Irish operating entity and runs his own consulting firm (Andrew P Quinn and Associates, which billed Gestifute €21K in 2024). He's a back-channel into Gestifute's operational layer — less visible than Correia but traceable via Irish company filings. LinkedIn reachable.`,
+        reach:[{t:'LI',v:'Andy Quinn'},{t:'ORG',v:'Gestifute International Ltd, Dublin'}]
+      },
+      {
+        rank:4, name:'Jorge Mendes', loc:'porto', locLabel:'Porto / Lisbon / NYC (travel)',
+        title:'Founder, Gestifute · CEO, Polaris Sports · FIFA Reg: 202310-4590',
+        why:`Mendes travels to New York multiple times per year. He visited Sei Less. That documented prior visit is your calling card — George can open with it directly. For a direct approach: gestifute@gestifute.com addressed to Mendes will reach his PA. The correct meeting ask is not about a single player — it's about Dream becoming Gestifute's NYC hospitality partner for the entire WC2026 period.`,
+        reach:[{t:'EMAIL',v:'gestifute@gestifute.com'},{t:'MEDIA',v:'media@gestifute.com'},{t:'ADDRESS',v:'Av. da Boavista 1837, Floor 17, Porto'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 4. RAFAELA PIMENTA / PSC
+  // ─────────────────────────────────────────────
+  {
+    id: 'pimenta', region: 'europe', heat: 'HOT',
+    name: 'Rafaela Pimenta — PSC Agency',
+    sub: 'Monaco (HQ) · Boutique · Successor to Mino Raiola\'s empire',
+    monogram: 'RP', monoBg: '#f8f2fc', monoColor: '#6b2d8a',
+    hq: 'Monaco (no US office)', clientVal: '€321m', roster: '32 clients, 15 top-tier',
+    leagues: ['Premier League','Bundesliga','Serie A','Eredivisie','Ligue 1'],
+    players: [
+      {name:'Erling Haaland', flag:'🇳🇴', wc:true},{name:'Matthijs de Ligt', flag:'🇳🇱', wc:true},
+      {name:'Noussair Mazraoui', flag:'🇲🇦', wc:true},{name:'Santiago Giménez', flag:'🇲🇽', wc:true},
+      {name:'Gianluigi Donnarumma', flag:'🇮🇹', wc:true},{name:'Arne Slot', flag:'🇳🇱', wc:false},
+      {name:'Rafael Leão', flag:'🇵🇹', wc:true},
+    ],
+    why: `Brazilian-born lawyer who inherited Mino Raiola's agency in 2022. <strong>Haaland's Norway plays June 22 at MetLife — Dream has Musica NYC and PHD Rooftop on that match night.</strong> Mazraoui's Morocco plays June 13. De Ligt's Netherlands play through the tournament. Pimenta operates on trust and personal relationships — she specifically rejected the industry norm of formal agency processes in favor of deep client bonds. She's Brazilian, understands luxury dining and VIP culture, and is publicly active. She has been described as "the most important person in football that nobody knows" by a Premier League director. That's changing fast.`,
+    approach: `Pimenta's entry is not via cold email. It is via (1) the Norway Football Federation WC2026 NYC liaison for Haaland — fastest door; (2) Roc Nation London, whose Alan Redmond overlaps with the former Raiola client ecosystem; (3) direct Instagram/LinkedIn if the approach is peer-level and specific. She appreciates people who understand the game.`,
+    contacts: [
+      {
+        rank:1, name:'Norway Football Federation (NFF) NYC Liaison',
+        loc:'nyc', locLabel:'NYC (during tournament)',
+        title:'Commercial & Media Liaison · NFF WC2026 delegation · June 22 MetLife',
+        why:`Norway's national team travels with a commercial and media delegation for the tournament. The NFF Commercial Director is <strong>Morten Siljehaug</strong>. His team deploys a NYC-based liaison during match weeks. This is the fastest legitimate path to Haaland's camp — the NFF controls player access, not Pimenta, for tournament-week activities. Contact: commercial@fotball.no or via nff.no's commercial page.`,
+        reach:[{t:'EMAIL',v:'commercial@fotball.no'},{t:'WEB',v:'fotball.no'},{t:'LI',v:'Morten Siljehaug NFF'}]
+      },
+      {
+        rank:2, name:'Rafaela Pimenta', loc:'monaco', locLabel:'Monaco',
+        title:'Founder & CEO, PSC (formerly One Agency) · UEFA-licensed agent',
+        why:`Pimenta is active on Instagram (@rafaelavitalepimenta, 98K followers) and LinkedIn and does engage with peer-level approaches. The correct framing: Dream as "the NYC venue partner for your players' time off" — not a commercial request. She has said she operates on personal trust. A message that references Sei Less, Haaland's June 22 match, and Dream's specific offer to handle the Norway team's NYC dining reservations is the right level of specificity.`,
+        reach:[{t:'IG',v:'@rafaelavitalepimenta'},{t:'LI',v:'Rafaela Pimenta'},{t:'X',v:'@RafaelaPimenta'}]
+      },
+      {
+        rank:3, name:'Alan Redmond (bridge)', loc:'london', locLabel:'London',
+        title:'EVP & Head of Football, Roc Nation Sports International · Former Raiola-network adjacent',
+        why:`Redmond runs Roc Nation's football desk from London and has overlapping relationships with the former Raiola/Pimenta client network. The former Raiola business partner Vincenzo Raiola took some clients with him in the agency split, and Redmond has navigated those same circles. A call to Roc Nation asking Redmond for an introduction to Pimenta's Monaco office is one warm handshake.`,
+        reach:[{t:'VIA',v:'Roc Nation Sports International · 30 St John Street, London'},{t:'IG',v:'@rocnationsi'}]
+      },
+      {
+        rank:4, name:'Haaland family camp — Alfie Haaland',
+        loc:'nyc', locLabel:'NYC (during tournament)',
+        title:'Erling Haaland\'s father · Former Manchester City pro · Travels with team',
+        why:`Alfie Haaland (Erling's father, former Manchester City and Leeds midfielder) is deeply involved in his son's career and travels with the Norway team during major tournaments. He's approachable in the player camp environment and has been publicly described as the relationship-holder alongside Pimenta. During the June 22 MetLife week, he will be in New York. Any connection to Manchester City's corporate or ex-player network is a warm path.`,
+        reach:[{t:'VIA',v:'Manchester City FC corporate/alumni network'},{t:'VIA',v:'NFF delegation contact'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 5. CAA STELLAR (CAA Base)
+  // ─────────────────────────────────────────────
+  {
+    id: 'caastellar', region: 'us', heat: 'WARM',
+    name: 'CAA Stellar (CAA Base)',
+    sub: '162 Fifth Avenue, New York, NY · London · Global · 896 clients',
+    monogram: 'CAA', monoBg: '#f0f7ff', monoColor: '#004b99',
+    hq: '162 Fifth Avenue, NYC (sports + entertainment shared) · caastellar.com', clientVal: '€2bn+', roster: '896 clients all tiers',
+    leagues: ['Premier League','La Liga','Bundesliga','Ligue 1','Eredivisie','MLS'],
+    players: [
+      {name:'Omar Marmoush', flag:'🇪🇬', wc:true},{name:'Eduardo Camavinga', flag:'🇫🇷', wc:true},
+      {name:'Ibrahima Konaté', flag:'🇫🇷', wc:true},{name:'Cole Palmer', flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', wc:true},
+      {name:'Eberechi Eze', flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', wc:true},{name:'Carlo Ancelotti', flag:'🇮🇹', wc:false},
+      {name:'Rayan Aït-Nouri', flag:'🇩🇿', wc:true},
+    ],
+    why: `CAA Stellar is the product of CAA Sports acquiring Base Soccer Agency. It operates from <strong>162 Fifth Avenue in New York's Flatiron district</strong>, where CAA's music/entertainment and sports divisions share floors. That building is Dream's single most important address in this document. The music/entertainment agents who already touch Dream's world — anyone who's booked Stormzy, David Guetta, or Tems — sit in the same building as the soccer agents. That's not a cold call; that's a lateral introduction across a hallway. CAA Stellar also has the standing Polaris/Gestifute US commercial partnership, meaning they jointly manage Gestifute clients' US rights.`,
+    approach: `The entry is through CAA's existing music relationship. If Dream has ever worked with CAA on an artist booking, that agent walks you to the sports floor. If not: CAA Stellar's IG (@caastellar) and the caabase.com contact form are public entry points. The pitch to Leon Angel's team: "We want to be CAA Stellar's preferred NYC hospitality partner for WC2026."`,
+    contacts: [
+      {
+        rank:1, name:'CAA Sports NYC — Flatiron desk',
+        loc:'nyc', locLabel:'NYC (162 Fifth Ave)',
+        title:'North America sports division · shared building with CAA music/entertainment',
+        why:`<strong>The most important physical address for Dream on this page.</strong> CAA's music agents — who have booked artists into Dream's venues — and CAA's soccer agents share 162 Fifth Avenue. Walk-in credibility from a music relationship turns into a soccer introduction without a single cold email. Ask your CAA music contact: "Can you introduce me to whoever handles your soccer division?"`,
+        reach:[{t:'ADDRESS',v:'162 Fifth Avenue, New York, NY 10010'},{t:'WEB',v:'caa.com/sports'}]
+      },
+      {
+        rank:2, name:'Leon Angel', loc:'london', locLabel:'London',
+        title:'Head of Football, CAA Stellar · Founder of Base Soccer Agency (1997) · FA Licensed',
+        why:`Angel built Base Soccer from scratch in 1997, grew it to 300+ clients and 60 employees, then sold to CAA Sports. He is the operational head of the football division and the most senior soccer-specific relationship at CAA Stellar. His client list for WC2026 includes Camavinga, Konaté, Palmer, and Eze. Contact via caabase.com — info@caabase.com routes to his team.`,
+        reach:[{t:'EMAIL',v:'info@caabase.com'},{t:'WEB',v:'caabase.com'},{t:'LI',v:'Leon Angel CAA'}]
+      },
+      {
+        rank:3, name:'Frank Trimboli', loc:'london', locLabel:'London',
+        title:'Agent & Co-Head, CAA Stellar · FA Licensed · Handles large portion of international roster',
+        why:`Trimboli co-leads the football division with Angel and manages a significant share of the international player book. He's the operational agent for mid-tier international players — the realistic Dream hospitality targets, players who want an exceptional evening in NYC but don't require Mendes-level white-glove treatment. More accessible than Angel for a first conversation.`,
+        reach:[{t:'EMAIL',v:'info@caabase.com'},{t:'WEB',v:'caastellar.com'},{t:'LI',v:'Frank Trimboli'}]
+      },
+      {
+        rank:4, name:'Michael Levine (Polaris bridge)', loc:'nyc', locLabel:'NYC',
+        title:'Co-Head, CAA Sports · Manages Polaris/Gestifute US commercial partnership',
+        why:`Levine co-heads CAA Sports and is the named executive in the CAA-Polaris renewal announcement. He manages the US commercial activities of Gestifute's entire roster — Lamine Yamal, Rúben Dias, Darwin Núñez, Bernardo Silva. Approaching Levine at 162 Fifth Avenue about Dream's WC2026 hospitality proposal simultaneously reaches CAA Stellar's football clients AND Gestifute's US-represented stars.`,
+        reach:[{t:'ADDRESS',v:'162 Fifth Avenue, New York, NY 10010'},{t:'LI',v:'Michael Levine CAA Sports'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 6. FLA AGENCY — FAYZA LAMARI (MBAPPÉ)
+  // ─────────────────────────────────────────────
+  {
+    id: 'fla', region: 'europe', heat: 'HOT',
+    name: 'FLA Agency — Fayza Lamari',
+    sub: 'Bondy / Paris, France · Family-operated · No public office',
+    monogram: 'FL', monoBg: '#f0f7ff', monoColor: '#004b99',
+    hq: 'Paris / Bondy, France (no US office) · Operations via Interconnected Ventures holding', clientVal: 'Mbappé alone: €1bn release clause', roster: '2 primary: Kylian + Ethan Mbappé',
+    leagues: ['La Liga','Ligue 1'],
+    players: [
+      {name:'Kylian Mbappé', flag:'🇫🇷', wc:true},{name:'Ethan Mbappé', flag:'🇫🇷', wc:false},
+    ],
+    why: `Fayza Lamari is Mbappé's mother, UEFA-licensed agent, and the founder of FLA Agency and Interconnected Ventures (the holding structure that owns stakes in Alan Health, Sorare, SM Caen football club, SailGP, and Loewe Electronics). She negotiated Mbappé's Real Madrid free transfer including <strong>80% image rights retention</strong> — a clause no previous Madrid player had secured. France plays June 16 at MetLife. Dream has Sei Less and Musica NYC on that match night. Mbappé visited Sei Less previously. That is the most important single fact for opening this relationship — use it explicitly and immediately.`,
+    approach: `FLA has no public email. Approaches go via three channels: (1) Dior US at 21 E 57th St NYC — Mbappé's global ambassador since December 2021; Dior's brand team works with Fayza weekly. (2) Zebra Valley, a Hollywood agency with a French branch that manages Mbappé's commercial co-management. (3) Coalition Capital — the investment vehicle Fayza directs — which has US institutional investor relationships. Any of these is a legitimate warm entry for George.`,
+    contacts: [
+      {
+        rank:1, name:'Dior US Brand Partnerships', loc:'nyc', locLabel:'NYC (57th St)',
+        title:'Christian Dior North America · Mbappé Global Ambassador since Dec 2021',
+        why:`Mbappé is Dior's global face. Dior's creative director Jonathan Anderson specifically named Mbappé as "the voice of a generation" in 2025 Summer collection communications. Dior US's brand partnerships team at <strong>21 E 57th Street, NYC</strong> works directly with FLA/Fayza Lamari on US activations. A proposal from Dream framed as "Dior × Dream Hospitality: a private WC2026 experience for Kylian's New York week" puts George in the same conversation as the people who have Fayza's personal number.`,
+        reach:[{t:'ADDRESS',v:'21 E 57th Street, New York, NY 10022'},{t:'WEB',v:'dior.com/en_us'},{t:'PHONE',v:'+1 212 931 2950'}]
+      },
+      {
+        rank:2, name:'Fayza Lamari — FLA Agency', loc:'paris', locLabel:'Paris / Bondy',
+        title:'Founder, FLA Agency · Director, Interconnected Ventures · UEFA-Licensed agent',
+        why:`Fayza co-manages Mbappé's commercial portfolio with lawyer <strong>Delphine Verheyden</strong> (Brussels-based). She oversees the KEWJF family company (Kylian, Ethan, Wilfrid, Jires, Fayza) and is involved in Coalition Capital's portfolio decisions. She's personally active on social media and has begun taking media interviews. A direct outreach via Interconnected Ventures' LinkedIn page is a legitimate entry. The Sei Less reference is the opening line — it's specific, verifiable, and positions Dream above cold outreach.`,
+        reach:[{t:'LI',v:'Fayza Lamari'},{t:'VIA',v:'Interconnected Ventures holding company'}]
+      },
+      {
+        rank:3, name:'Delphine Verheyden', loc:'london', locLabel:'Brussels / London',
+        title:'Legal Counsel & Commercial Advisor to Fayza Lamari and Kylian Mbappé',
+        why:`Verheyden is Fayza's lawyer and commercial negotiation partner — she "explains everything" to Fayza and then Fayza "sets the strategy," per reporting. She handles the formal side of every deal. A legal or commercial introduction to Verheyden (via the Brussels bar or any sports law network) is a back-channel into the FLA commercial operation that does not require approaching Fayza cold.`,
+        reach:[{t:'VIA',v:'Brussels sports law bar / formal legal introduction'},{t:'LI',v:'Delphine Verheyden'}]
+      },
+      {
+        rank:4, name:'Zebra Valley France / US', loc:'la', locLabel:'Los Angeles / Paris',
+        title:'Commercial co-management for Mbappé · Hollywood agency with French branch',
+        why:`Fayza's broader commercial portfolio is co-managed via Zebra Valley's French branch, described in reporting as a Hollywood agency. Zebra Valley's Los Angeles office is reachable through standard Hollywood agency channels — they are not a closed shop. A US-native entry into the FLA structure: approach Zebra Valley LA about a WC2026 NYC hospitality partnership for their French clients.`,
+        reach:[{t:'VIA',v:'Hollywood talent agency channels'},{t:'LI',v:'Zebra Valley'}]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // 7. HCM SPORTS MANAGEMENT
+  // ─────────────────────────────────────────────
+  {
+    id: 'hcm', region: 'europe', heat: 'WARM',
+    name: 'HCM Sports Management',
+    sub: 'Dubai (HQ) · Sweden · Netherlands · "Nordic & Arabic talent gateway"',
+    monogram: 'HCM', monoBg: '#f0fbf3', monoColor: '#1a7a34',
+    hq: 'Dubai, UAE (media hub) · Operational: Sweden + Netherlands', clientVal: '€640m', roster: '~200 clients, 130 top-tier',
+    leagues: ['Premier League','La Liga','Bundesliga','Eredivisie','Serie A'],
+    players: [
+      {name:'Viktor Gyökeres', flag:'🇸🇪', wc:true},{name:'Frenkie de Jong', flag:'🇳🇱', wc:true},
+      {name:'Victor Lindelöf', flag:'🇸🇪', wc:true},{name:'Antonio Rüdiger', flag:'🇩🇪', wc:true},
+      {name:'Noa Lang', flag:'🇳🇱', wc:true},{name:'Emil Forsberg', flag:'🇸🇪', wc:true},
+      {name:'Martin Braithwaite', flag:'🇩🇰', wc:true},
+    ],
+    why: `HCM is the Nordic and Dutch pipeline — Gyökeres (Arsenal's €63m striker, just moved from Sporting), de Jong (Barcelona), Lindelöf (Man Utd), Rüdiger (Real Madrid), Noa Lang (Napoli). Founded by Hasan Çetinkaya, a former Swedish U-21 midfielder. <strong>HCM has zero US infrastructure and no NYC network.</strong> That is the opportunity — their clients are coming to New York for WC2026 (Sweden, Netherlands, Germany, Denmark all in the tournament) and no one is handling the off-pitch experience. Dream fills that gap. This is the least competitive outreach on this page.`,
+    approach: `Çetinkaya posts on LinkedIn regularly and responds to substantive, specific approaches. The pitch: "We run the best restaurants and clubs in New York. Your clients — Gyökeres, de Jong, Lindelöf — are going to be in the city for the World Cup. We want to make their time in New York extraordinary. No ask, no fee. Let us host them." Ali Dursun handles the Dutch players specifically.`,
+    contacts: [
+      {
+        rank:1, name:'Hasan Çetinkaya', loc:'dubai', locLabel:'Dubai / Sweden',
+        title:'CEO & Founder, HCM Sports Management · Former Sweden U-21 midfielder · FIFA licensed',
+        why:`Çetinkaya founded HCM after his playing career, initially representing Scandinavian talent, then expanding to the Benelux and beyond. He has navigated some of football's highest-stakes transfers: Rüdiger to Real Madrid (free), de Jong to Barcelona (€75m), Gyökeres to Arsenal (~€63m). He's active on LinkedIn and is approachable — HCM is a boutique with a big roster, not a bureaucracy. A direct LinkedIn message with a specific, knowledgeable offer is the correct first contact.`,
+        reach:[{t:'EMAIL',v:'hcmsports@mail.com'},{t:'PHONE',v:'+44 7508 208298'},{t:'LI',v:'Hasan Çetinkaya HCM'}]
+      },
+      {
+        rank:2, name:'Ali Dursun', loc:'london', locLabel:'Netherlands',
+        title:'FIFA-Licensed Agent, HCM Sports · Dutch player specialist · de Jong, van de Beek, Lang',
+        why:`Dursun is the HCM agent specifically handling the Dutch contingent — de Jong, Donny van de Beek, and others. Netherlands is a strong WC2026 contender with a deep MetLife-area run possible. Dursun is HCM's European operations contact and is the person managing de Jong's Barcelona contract renewals. He's listed as a licensed agent under HCM and is reachable via the main HCM email.`,
+        reach:[{t:'EMAIL',v:'hcmsports@mail.com'},{t:'LI',v:'Ali Dursun HCM'},{t:'IG',v:'@hcmmediaofficial'}]
+      },
+      {
+        rank:3, name:'Swedish Chamber of Commerce USA — NYC Chapter',
+        loc:'nyc', locLabel:'NYC',
+        title:'800+ NYC members · Connects Swedish business community · Sport & culture bridge',
+        why:`The Swedish Chamber has 800+ New York-based members and runs annual events connecting Swedish athletes, executives, and cultural figures to NYC. They have relationships with the Swedish FA's commercial office and with Scandinavian athletes during US appearances. A call through the Swedish Chamber to the Swedish FA's NYC WC2026 liaison gets you one step from HCM's Swedish clients — and it's a George-level call.`,
+        reach:[{t:'WEB',v:'swedishchamber.com'},{t:'EMAIL',v:'info@swedishchamber.com'},{t:'ADDRESS',v:'570 Lexington Ave, New York, NY'}]
+      },
+      {
+        rank:4, name:'KNVB (Royal Dutch Football Association) WC2026 delegation',
+        loc:'nyc', locLabel:'NYC (during tournament)',
+        title:'Netherlands national team commercial & media liaison · June-July 2026',
+        why:`The KNVB deploys a commercial and media team during WC2026. They coordinate all off-pitch activities for the Dutch squad including dining reservations and private events. For access to de Jong, Mazraoui, and the Netherlands core while they're in New York, the KNVB liaison is faster than going through HCM directly during tournament week. Contact: info@knvb.nl.`,
+        reach:[{t:'EMAIL',v:'info@knvb.nl'},{t:'WEB',v:'knvb.nl'},{t:'LI',v:'KNVB commercial'}]
+      }
+    ]
+  }
 ];
 
-const VENUES_DATA = [
-  {name:"Nebula",type:"nightclub",location:"Times Square",cap:1500,tableMin:"$4,000",nights:8,best:"Biggest headline acts. Final night. England, Brazil, and Latin match nights.",artists:["Bad Bunny","Stormzy","J Balvin","DJ Khaled","Cardi B","Lil Baby"]},
-  {name:"Harbor NYC",type:"nightclub",location:"Midtown West",cap:1000,tableMin:"$3,500",nights:8,best:"Brazil, USA, Afrobeats nights. Corporate buyouts. Rooftop connection.",artists:["Anitta","Burna Boy","DJ Khaled","Maluma","Karol G"]},
-  {name:"Musica NYC",type:"nightclub",location:"Hell's Kitchen",cap:1000,tableMin:"$3,000",nights:8,best:"EDM, house, electronic. France, Germany, Norway match nights.",artists:["David Guetta","Bizarrap","Alan Walker","Martin Garrix","Fisher","Chris Lake"]},
-  {name:"PHD Rooftop",type:"rooftop",location:"Dream Midtown Hotel",cap:500,tableMin:"$2,500",nights:6,best:"Afternoon 2PM sets. Pre-game DJ programming. Brazil and Mexico crowds.",artists:["Alok","Peso Pluma","Vintage Culture"]},
-  {name:"Stafford Room",type:"lounge",location:"Midtown",cap:400,tableMin:"$2,000",nights:5,best:"UK rap, drill, afternoon build-up sets. England match nights.",artists:["Central Cee","Fivio Foreign","Jhayco"]},
-  {name:"Whisper Room",type:"lounge",location:"Midtown",cap:300,tableMin:"$1,800",nights:4,best:"Intimate headline. 5PM pre-game. Private events.",artists:["Headie One","Sech","Nicki Nicole"]},
-  {name:"Petite",type:"lounge",location:"Midtown",cap:200,tableMin:"$1,500",nights:3,best:"Ultra VIP private. Agent dinners. Athlete after-parties.",artists:["Flex for any night"]},
-  {name:"Sei Less",type:"restaurant",location:"Midtown East",cap:200,tableMin:"$175/head",nights:8,best:"Athlete dinners. Celebrity VIP. Mbappe already visited.",artists:["Tems","Jorja Smith","Shakira","Jazz Quartet"]},
-  {name:"Tucci NYC",type:"restaurant",location:"NoHo",cap:180,tableMin:"$145/head",nights:6,best:"Italy and Spain match nights. Pre-theater to Musica.",artists:["Flamenco Guitar","Italian Wine Events"]},
-  {name:"Pappas NY",type:"restaurant",location:"Greenwich Village",cap:160,tableMin:"$95/head",nights:5,best:"Greek cultural nights. Mediterranean match programming.",artists:["Bouzouki Live","Mediterranean DJ"]},
-];
+// ── STATE ──
+let activeFilter = 'all';
+let searchTerm = '';
 
-const STATUSES = ['New','Outreach Sent','Replied','Negotiating','Confirmed','Dead'];
-const SC = {'New':'s-new','Outreach Sent':'s-outreach','Replied':'s-replied','Negotiating':'s-negotiating','Confirmed':'s-confirmed','Dead':'s-dead'};
-const TC = {1:'tier-1',2:'tier-2',3:'tier-3'};
-
-let activeId = null;
-
-// ── RENDER TABLE ──
-function renderTable() {
-  const q = (document.getElementById('srch')?.value || '').toLowerCase();
-  const tier = document.getElementById('fTier')?.value || '';
-  const status = document.getElementById('fStatus')?.value || '';
-  const match = document.getElementById('fMatch')?.value || '';
-
-  let list = ARTISTS.filter(a => {
-    const matchQ = !q || a.name.toLowerCase().includes(q) || a.genre.toLowerCase().includes(q) || a.match.toLowerCase().includes(q) || a.venue.toLowerCase().includes(q);
-    const matchTier = !tier || a.tier === parseInt(tier);
-    const matchStatus = !status || a.status === status;
-    const matchMatch = !match || a.match.toLowerCase().includes(match.toLowerCase());
-    return matchQ && matchTier && matchStatus && matchMatch;
+// ── RENDER ──
+function render() {
+  const grid = document.getElementById('grid');
+  let filtered = AGENCIES.filter(a => {
+    const fMatch = activeFilter === 'all' ? true
+      : activeFilter === 'HOT' ? a.heat === 'HOT'
+      : a.region === activeFilter;
+    if (!fMatch) return false;
+    if (!searchTerm) return true;
+    const s = searchTerm.toLowerCase();
+    const blob = [
+      a.name, a.sub, a.why, a.approach,
+      ...a.players.map(p => p.name + ' ' + p.flag),
+      ...a.leagues,
+      ...a.contacts.map(c => c.name + ' ' + c.title + ' ' + c.why)
+    ].join(' ').toLowerCase();
+    return blob.includes(s);
   });
 
-  document.getElementById('artistRows').innerHTML = list.map(a => `
-    <tr>
-      <td>
-        <div class="artist-name">${a.name}</div>
-        <div class="artist-genre">${a.genre}</div>
-      </td>
-      <td style="font-size:12px;color:var(--text2);max-width:140px">${a.match}</td>
-      <td style="font-size:12px;color:var(--text2)">${a.venue}</td>
-      <td style="font-size:11px;color:var(--text3)">${a.slot}</td>
-      <td><span class="tier-badge ${TC[a.tier]||'tier-3'}">Tier ${a.tier}</span></td>
-      <td><span class="fee-text">$${a.feeMin}K - $${a.feeMax}K</span></td>
-      <td><span class="agent-text">${a.agent}</span></td>
-      <td><span class="status-badge-sm ${SC[a.status]||'s-new'}">${a.status}</span></td>
-      <td>
-        <div class="row-actions">
-          <button class="row-btn" onclick="openArtist(${a.id})">View</button>
-          <button class="row-btn primary" onclick="openAndDraft(${a.id})">Email agent</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
+  document.getElementById('count-chip').textContent = `${filtered.length} agenc${filtered.length===1?'y':'ies'}`;
 
-  updateKPIs();
-}
+  grid.innerHTML = filtered.map(a => `
+    <div class="agency-card">
 
-// ── RENDER PIPELINE ──
-function renderPipeline() {
-  const cols = document.getElementById('pipelineCols');
-  if (!cols) return;
-  cols.innerHTML = STATUSES.map(st => {
-    const items = ARTISTS.filter(a => a.status === st);
-    return `
-      <div class="pcol">
-        <div class="pcol-header">
-          ${st}
-          <span class="pcol-count">${items.length}</span>
+      <div class="card-head">
+        <div class="agency-monogram" style="background:${a.monoBg};color:${a.monoColor}">${a.monogram}</div>
+        <div class="head-main">
+          <div class="agency-name">${a.name}</div>
+          <div class="agency-sub">${a.sub}</div>
         </div>
-        ${items.length === 0
-          ? `<div style="font-size:12px;color:var(--text3);padding:12px 0">None yet</div>`
-          : items.map(a => `
-            <div class="pipeline-item" onclick="openArtist(${a.id})">
-              <div class="pi-name">${a.name}</div>
-              <div class="pi-match">${a.match.substring(0,20)}...</div>
-              <div class="pi-venue">${a.venue}</div>
-              <div class="pi-fee">$${a.feeMin}K - $${a.feeMax}K</div>
+        <div class="head-badges">
+          <span class="heat-pill heat-${a.heat}">${a.heat === 'HOT' ? '🔴 Priority' : a.heat === 'WARM' ? '🟡 Warm' : '🔵 Cold'}</span>
+          <span class="region-pill">${a.region === 'us' ? '🇺🇸 US-Based' : a.region === 'london' ? '🇬🇧 London' : '🌍 International'}</span>
+        </div>
+      </div>
+
+      <div class="card-meta">
+        <div class="meta-cell">
+          <div class="meta-label">Headquarters</div>
+          <div class="meta-value">${a.hq}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Combined Client Value</div>
+          <div class="meta-value gold">${a.clientVal}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Roster</div>
+          <div class="meta-value">${a.roster}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Leagues</div>
+          <div class="league-wrap">${a.leagues.map(l=>`<span class="league-tag">${l}</span>`).join('')}</div>
+        </div>
+      </div>
+
+      <div class="players-row">
+        <div class="players-label">WC2026 Players</div>
+        <div class="player-chips">
+          ${a.players.map(p=>`
+            <div class="player-chip">
+              <span class="flag">${p.flag}</span>
+              ${p.name}
+              ${p.wc ? '<span class="wc-dot" title="WC2026"></span>' : ''}
             </div>
-          `).join('')
-        }
+          `).join('')}
+        </div>
       </div>
-    `;
-  }).join('');
-}
 
-// ── RENDER VENUES ──
-function renderVenues() {
-  const grid = document.getElementById('venueGrid');
-  if (!grid) return;
-  grid.innerHTML = VENUES_DATA.map(v => {
-    const typeClass = {nightclub:'nightclub',rooftop:'rooftop',lounge:'lounge',restaurant:'restaurant'}[v.type] || 'lounge';
-    return `
-      <div class="venue-card ${typeClass}">
-        <div class="vc-name">${v.name}</div>
-        <div class="vc-type">${v.type.charAt(0).toUpperCase()+v.type.slice(1)} · ${v.location}</div>
-        <div class="vc-stat"><span class="vc-stat-label">Capacity</span><span class="vc-stat-value">${v.cap.toLocaleString()}</span></div>
-        <div class="vc-stat"><span class="vc-stat-label">Min spend</span><span class="vc-stat-value">${v.tableMin}</span></div>
-        <div class="vc-stat"><span class="vc-stat-label">Active nights</span><span class="vc-stat-value">${v.nights}</span></div>
-        <div class="vc-divider"></div>
-        <div class="vc-best">${v.best}</div>
-        <div class="vc-artists">Artists: ${v.artists.slice(0,3).join(', ')}${v.artists.length > 3 ? ` +${v.artists.length-3} more` : ''}</div>
+      <div class="card-body">
+        <div class="body-left">
+          <div>
+            <div class="section-label">Why they matter</div>
+            <div class="intel-text">${a.why}</div>
+          </div>
+          <div>
+            <div class="section-label">How to approach</div>
+            <div class="intel-text">${a.approach}</div>
+          </div>
+        </div>
+        <div class="body-right">
+          <div class="section-label">Org structure & entry points</div>
+          <div style="font-size:12px;color:var(--text-secondary);font-weight:300;margin-bottom:4px;">Contact order = priority. Green dot = WC2026 player access.</div>
+        </div>
       </div>
-    `;
-  }).join('');
+
+      <div class="contacts-section">
+        <div class="section-label">Contacts — ${a.contacts.length} named people, ranked by accessibility</div>
+        <div class="contacts-grid">
+          ${a.contacts.map(c => `
+            <div class="contact-card">
+              <div class="contact-rank">
+                <div class="rank-num rank-${c.rank}">${c.rank}</div>
+                <span class="contact-loc-badge loc-${c.loc}">${c.locLabel}</span>
+              </div>
+              <div class="contact-name">${c.name}</div>
+              <div class="contact-title">${c.title}</div>
+              <div class="contact-why">${c.why}</div>
+              <div class="contact-reach">
+                ${c.reach.map(r=>`
+                  <div class="reach-row">
+                    <span class="reach-type">${r.t}</span>
+                    <span class="reach-val ${r.t==='VIA'||r.t==='OFFICE'||r.t==='ADDRESS'?'plain':''}">${r.v}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+    </div>
+  `).join('');
 }
 
-// ── KPIs ──
-function updateKPIs() {
-  const confirmed = ARTISTS.filter(a => a.status === 'Confirmed').length;
-  const outreach = ARTISTS.filter(a => a.status === 'Outreach Sent').length;
-  if (document.getElementById('k-total')) document.getElementById('k-total').textContent = ARTISTS.length;
-  if (document.getElementById('k-confirmed')) document.getElementById('k-confirmed').textContent = confirmed;
-  if (document.getElementById('k-outreach')) document.getElementById('k-outreach').textContent = outreach;
-  if (document.getElementById('nb-total')) document.getElementById('nb-total').textContent = ARTISTS.length;
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
 }
 
-// ── NAVIGATION ──
-function showView(name) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
-
-  const view = document.getElementById('view-' + name);
-  if (view) view.classList.add('active');
-
-  const navMap = {calendar:'Calendar',artists:'Artists',pipeline:'Pipeline',venues:'Venues',intelligence:'Intelligence'};
-  document.querySelectorAll('.nav-link').forEach(n => { if(n.textContent === navMap[name]) n.classList.add('active'); });
-
-  const sb = document.getElementById('sb-' + name);
-  if (sb) sb.classList.add('active');
-
-  if (name === 'artists') renderTable();
-  if (name === 'pipeline') renderPipeline();
-  if (name === 'venues') renderVenues();
+function doSearch(v) {
+  searchTerm = v.trim();
+  render();
 }
 
-function filterMatch(keyword) {
-  showView('artists');
-  document.getElementById('fMatch').value = keyword;
-  renderTable();
-}
-
-function filterVenue(keyword) {
-  showView('artists');
-  document.getElementById('srch').value = keyword;
-  renderTable();
-}
-
-// ── ARTIST MODAL ──
-function openArtist(id) {
-  const a = ARTISTS.find(x => x.id === id);
-  if (!a) return;
-  activeId = id;
-
-  document.getElementById('modal-name').textContent = a.name;
-  document.getElementById('modal-genre').textContent = a.genre;
-  document.getElementById('modal-match').textContent = a.match;
-  document.getElementById('modal-venue').textContent = a.venue;
-  document.getElementById('modal-fee').textContent = `$${a.feeMin}K - $${a.feeMax}K`;
-  document.getElementById('modal-why').textContent = a.why;
-  document.getElementById('modal-agent').textContent = a.agent;
-  document.getElementById('modal-email').textContent = a.agentEmail;
-  document.getElementById('modal-phone').textContent = a.agentPhone || 'Not listed';
-  document.getElementById('modal-status').value = a.status;
-  document.getElementById('modal-notes').value = a.notes || '';
-  document.getElementById('draft-subject').value = '';
-  document.getElementById('draft-body').value = '';
-  document.getElementById('modal-success').style.display = 'none';
-  document.getElementById('artistModal').classList.add('open');
-}
-
-async function openAndDraft(id) {
-  openArtist(id);
-  setTimeout(() => draftEmail(), 300);
-}
-
-function closeModal() {
-  document.getElementById('artistModal').classList.remove('open');
-}
-
-function updateArtistStatus() {
-  if (!activeId) return;
-  const a = ARTISTS.find(x => x.id === activeId);
-  if (a) {
-    a.status = document.getElementById('modal-status').value;
-    a.notes = document.getElementById('modal-notes').value;
-  }
-  renderPipeline();
-  updateKPIs();
-}
-
-async function draftEmail() {
-  if (!activeId) return;
-  const btn = document.getElementById('draft-btn');
-  btn.textContent = 'Drafting...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(`${API}/ai`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'draft-email', artistId: activeId })
-    });
-    const data = await res.json();
-    if (data.subject) document.getElementById('draft-subject').value = data.subject;
-    if (data.body) document.getElementById('draft-body').value = data.body;
-    toast('Email draft ready', 'success');
-  } catch (e) {
-    toast('Unable to connect. Check deployment settings.', 'error');
-  }
-
-  btn.textContent = 'Draft email';
-  btn.disabled = false;
-}
-
-async function sendEmail() {
-  const a = ARTISTS.find(x => x.id === activeId);
-  if (!a) return;
-  const subject = document.getElementById('draft-subject').value;
-  const body = document.getElementById('draft-body').value;
-  if (!subject || !body) { toast('Draft the email first', 'error'); return; }
-
-  const btn = document.getElementById('send-btn');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(`${API}/send-email`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ to: a.agentEmail, subject, body, artistName: a.name })
-    });
-    const data = await res.json();
-    if (data.ok) {
-      a.status = 'Outreach Sent';
-      document.getElementById('modal-status').value = 'Outreach Sent';
-      const msg = document.getElementById('modal-success');
-      msg.textContent = `Email sent to ${a.agentEmail}`;
-      msg.style.display = 'block';
-      toast(`Sent to ${a.agent}`, 'success');
-      renderPipeline();
-      updateKPIs();
-    } else {
-      toast(data.error || 'Send failed', 'error');
-    }
-  } catch (e) {
-    toast('Send failed. Check email configuration.', 'error');
-  }
-
-  btn.textContent = 'Send to agent';
-  btn.disabled = false;
-}
-
-function openAddArtist() {
-  showView('artists');
-  toast('Use the table to manage artists. Add new via the artist modal.', '');
-}
-
-// ── INTELLIGENCE / CHAT ──
-async function sendChat() {
-  const el = document.getElementById('chatInput');
-  const q = el.value.trim();
-  if (!q) return;
-
-  const msgs = document.getElementById('chatMsgs');
-  const userMsg = document.createElement('div');
-  userMsg.className = 'chat-msg user';
-  userMsg.textContent = q;
-  msgs.appendChild(userMsg);
-  el.value = '';
-
-  document.getElementById('chatThinking').classList.add('show');
-
-  try {
-    const res = await fetch(`${API}/ai`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'chat', message: q })
-    });
-    const data = await res.json();
-    const botMsg = document.createElement('div');
-    botMsg.className = 'chat-msg response';
-    botMsg.textContent = data.reply || data.error || 'No response received.';
-    msgs.appendChild(botMsg);
-    msgs.scrollTop = msgs.scrollHeight;
-  } catch (e) {
-    const botMsg = document.createElement('div');
-    botMsg.className = 'chat-msg response';
-    botMsg.textContent = 'Unable to connect to the backend. Ensure your Netlify deployment is live with all environment variables set.';
-    msgs.appendChild(botMsg);
-  }
-
-  document.getElementById('chatThinking').classList.remove('show');
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function qa(q) {
-  document.getElementById('chatInput').value = q;
-  sendChat();
-}
-
-// ── TOAST ──
-function toast(msg, type = '') {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `toast show ${type}`;
-  setTimeout(() => el.className = 'toast', 3000);
-}
-
-// ── INIT ──
-updateKPIs();
+render();
 </script>
 </body>
 </html>
